@@ -1,0 +1,26 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdReportTotalRecord
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_report_total_record
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields: ~
+      list:    ~
+      filter:
+        class: AdReportTotalRecordFilter
+        display: [category_id, date_time]
+        fields:
+          category_id: {label: Chuyên mục}
+          date_time: {label: Ngày tháng *}
+      form:    ~
+      edit:    ~
+      new:     ~

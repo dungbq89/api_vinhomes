@@ -1,0 +1,10 @@
+_productCategoryHome:
+  enabled: true  
+  
+_productItem:
+  enabled: true
+  
+_productNew:
+  enabled: true
+_partner:
+  enabled: true

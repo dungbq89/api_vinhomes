@@ -1,0 +1,35 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdLocation
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_location
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên quận/huyện"}
+        code: {label: "Mã trực thuộc"}
+        priority: {label: "Thứ tự"}
+        is_active: {label: "Trạng thái"}
+      list:
+        display: [name, code, priority, is_active]
+        title: Quản lý quận huyện
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        display: [name, code, priority, is_active]
+        class: adLocationFormAdmin
+      edit:
+        title: Chỉnh sửa quận huyện
+      new:
+        title: Thêm mới quận huyện

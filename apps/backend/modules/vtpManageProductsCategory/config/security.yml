@@ -1,0 +1,5 @@
+## YAML Template.
+---
+all:
+  is_secure:   true
+  credentials: [[admin,service_editor,service_approved,service_public, product]]

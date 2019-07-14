@@ -1,0 +1,48 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VtpProducts
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vtp_products
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        image_path: { label: Ảnh minh họa}
+        product_code: { label: Mã sản phẩm}
+        product_name: { label: Tên sản phẩm}
+        price: { label: Giá}
+        price_promotion: { label: Giá khuyến mại}
+        priority: { label: Thứ tự hiển thị}
+        link: { label: Đường dẫn}
+        description: { label: Mô tả}
+        content: { label: Nội dung}
+        manufacturer: { label: Nước sản xuất}
+        accessories: { label: Phụ kiện}
+        is_active: { label: Trạng thái}
+        is_home: { label: Mới nhất}
+        is_hot: { label: Sản phẩm nổi bật}
+        category_id: { label: Chuyên mục sản phẩm}
+        meta: {label: Nội dung thẻ Description}
+        keywords: {label: Nội dung thẻ Keyword}
+      list:
+        title: Danh sách sản phẩm
+        display: [image_path, product_name, price, priority, link]
+      filter:
+       display: [product_name]
+      form:
+        class: vtManageProductsFormAdmin
+        display: [product_name, category_id, image_path, price,price_promotion, description, content, priority, is_hot, is_home, is_active]
+        fields:
+          product_name: { label: Tên sản phẩm *}
+          category_id: { label: Chuyên mục *}
+      edit:
+        title: Chỉnh sửa sản phẩm
+      new:
+        title: Thêm mới sản phẩm

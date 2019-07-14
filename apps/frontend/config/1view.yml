@@ -1,0 +1,36 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:
+    - jquery-ui.css
+    - font-awesome-4.2.0/css/font-awesome.min.css
+    - lato/css/lato.min.css
+    - swiper.css
+    - jquery.mmenu.all.css
+    - style.css
+    - a.css
+    - grid.css
+    - flexslider.css
+  javascripts:
+    - jquery-1.10.1.min.js
+    - jquery.form.min.js
+    - jquery-ui-1.10.3.custom.min.js
+    - jquery.mmenu.min.all.js
+    - script.js
+    - swiper.js
+    - jquery.flexslider.js
+#    - library.js
+
+  has_layout:     true
+  layout:         layout

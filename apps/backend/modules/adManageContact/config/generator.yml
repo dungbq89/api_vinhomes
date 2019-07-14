@@ -1,0 +1,39 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdContact
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_contact
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+
+    config:
+      actions: ~
+      fields:
+        title: { label: Tên liên hệ }
+        content: { label: Nội dung }
+        lat: { label: Tọa độ X }
+        lng: { label: Tọa độ Y }
+      list:
+        title: Quản lý trang liên hệ
+        display: [ title, content ,lat ,lng ]
+        object_actions:
+          _edit: ~
+          _delete: ~
+      filter:
+        display: [ title ]
+      form:
+        fields:
+          title: { label: Tên liên hệ* }
+          content: { label: Nội dung* }
+        class: adManageContactFormAdmin
+      edit:
+        title: Chỉnh sửa liên hệ
+      new:
+        title: Thêm mới liên hệ
+

@@ -1,0 +1,33 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:
+    - /massage/style/css/semantic.min.css
+    - /massage/style/css/vendor.min.css
+    - /massage/style/css/styles.min.css
+    - /massage/style/css/customizer.min.css
+    - /massage/style/css/iziToast.min.css
+    - /massage/style/css/cssBundle.css
+    - /massage/style/css/css_update.css
+  javascripts:
+#    - /massage/style/bundle.js
+    - /massage/style/js/jquery.min.js
+    - /massage/style/js/vendor.min.js
+#    - /massage/style/js/scripts.min.js
+#    - /massage/style/js/customizer.min.js
+    - /massage/style/js/iziToast.min.js
+    - /massage/style/js/js_update.js
+
+  has_layout:     true
+  layout:         layout

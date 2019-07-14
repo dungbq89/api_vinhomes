@@ -1,0 +1,17 @@
+advertise_template:
+  topone: {value: topone, alias: "Quảng cáo Slide"}
+  special: {value: special, alias: "Quảng  cáo sản phẩm hot"}
+  image: {value: image, alias: "Ảnh quảng cáo"}
+  banneritem: {value: banneritem, alias: "Banner từng trang"}
+view_page:
+  homepage: {value: homepage, alias: "Trang chủ"}
+  introduction: {value: introduction, alias: "Khóa huấn luyện"}
+  news_detail: {value: news_detail, alias: "Trang chi tiết tin tức"}
+  category_new: {value: category_new, alias: "Trang danh sách tin tức"}
+  videopage: {value: videopage, alias: "Trang danh sách video"}
+  videoDetail: {value: videoDetail, alias: "Trang chi tiết video"}
+  introduction: {value: introduction, alias: "Trang khóa huấn luyện"}
+  listStudent: {value: listStudent, alias: "Trang cảm nhận học viên"}
+  listDocument: {value: listDocument, alias: "Trang kho tài liệu"}
+promotion_attributes:
+  new: {value: 1, alias: "Tin mới"}

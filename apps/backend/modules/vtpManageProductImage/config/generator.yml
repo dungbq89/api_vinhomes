@@ -1,0 +1,34 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VtpProductImage
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vtp_product_image
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  
+        file_path: {label: Ảnh minh họa}
+        product_id: {label: Sản phẩm}
+        priority: {label: Thứ tự hiển thị}
+      list:    
+        title: Danh sách ảnh sản phẩm
+        display: [file_path, product_id, priority]
+      filter:  
+        display: [product_id]
+      form:    
+        class: VtpManageProductImageFormAdmin
+        display: [file_path, product_id, priority]
+        fields:
+          file_path: {label: Ảnh minh họa *}
+          product_id: {label: Sản phẩm *}
+      edit:    
+        title: Chỉnh sửa ảnh sản phẩm
+      new:    
+        title: Tạo mới ảnh sản phẩm

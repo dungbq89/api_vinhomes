@@ -1,0 +1,36 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdGiangVien
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_giang_vien
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên giảng viên"}
+        description: {label: "Mô tả"}
+        image: {label: "Ảnh đại diện"}
+        priority: {label: "Thứ tự ưu tiên"}
+        is_active: {label: "Trạng thái"}
+      list:
+        display: [image, name, priority, is_active]
+        title: Danh sách giảng viên
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        display: [name, image, description, priority, is_active]
+        class: adGiangVienFormAdmin
+      edit:
+        title: Chỉnh sửa giảng viên
+      new:
+        title: Chỉnh sửa học viên

@@ -1,0 +1,60 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdArticle
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_article
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+
+    config:
+      actions: ~
+      fields:
+        title: {label: Tiêu đề}
+        alttitle: {label: Tiêu đề rút gọn}
+        header: {label: Mô tả}
+        body: {label: Nội dung}
+        image_path: {label: Hình ảnh}
+        is_hot: {label: Trang chủ}
+        priority: {label: Thứ tự}
+        is_active: {label: Trạng thái}
+        category_id: {label: Chuyên mục}
+        attributes: {label: Thuộc tính}
+        published_time: {label: Ngày đăng}
+        expiredate_time: {label: Ngày kết thúc}
+        author: {label: Tác giả}
+        other_link: {label: Link liên quan}
+        created_by: {label: Người tạo}
+        meta: {label: Meta Description}
+        keywords: {label: Meta Keywords}
+        slug: {label: alias}
+
+      list:
+        title: Danh sách bài viết đợi duyệt
+        display: [image_path, title, is_hot, priority, created_by, is_active]
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [title, category_id]
+        class: adArticlesEditorFiltersAdmin
+      form:
+        fields:
+          title: {label: Tiêu đề *}
+          category_id: {label: Chuyên mục *}
+          priority: {label: Thứ tự}
+          header: {label: Tóm tắt *}
+
+          published_time: {label: Ngày đăng}
+          expiredate_time: {label: Ngày kết thúc}
+        display: [title, category_id, header, body, image_path, is_hot, priority, keywords, meta, item_list, slug, is_active, published_time, expiredate_time]
+        class: adArticlesEditorFormAdmin
+      edit:
+        title: Chỉnh sửa bài viết tin tức
+      new:
+        title: Thêm mới bài viết tin tức

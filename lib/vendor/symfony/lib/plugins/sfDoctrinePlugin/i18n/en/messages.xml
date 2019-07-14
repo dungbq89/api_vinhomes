@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="en" datatype="plaintext" original="messages" date="2017-07-23T20:50:21Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Tin nổi bật</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Văn bản pháp quy</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Trụ sở</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Địa chỉ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Trang chủ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Về chúng tôi</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Căn hộ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Dịch vụ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Bộ sưu tập</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Tin tức</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Liên kết website</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Xem chi tiết</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Chi tiết</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Mua hàng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Xem toàn bộ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Thông số kỹ thuật</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Sản phẩm mới</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="18">
+        <source> vnđ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Tính năng thường dùng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Video Clip</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Phòng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Tất cả phòng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Phòng khác</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>vnđ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>ngày</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>tháng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Book</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Loại phòng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Danh sách phòng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>Chi tiết văn bản</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Từ ngày</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>Mã bảo mật không chính xác.</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Yêu cầu mã bảo mật.</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="34">
+        <source>Chọn tòa nhà</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="35">
+        <source>Chọn loại phòng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="36">
+        <source>Đặt phòng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="37">
+        <source>Họ tên</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="38">
+        <source>Số điện thoại</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="39">
+        <source>Email</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="40">
+        <source>Số lượng người</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="41">
+        <source>Số lượng phòng</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="42">
+        <source>Phòng nổi bật</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="43">
+        <source>Phòng được thuê nhiều</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="44">
+        <source>Nội dung</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="45">
+        <source>Captcha</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="46">
+        <source>Hình ảnh</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="47">
+        <source>Bạn phải tải lên file hình ảnh.</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="48">
+        <source>Tối đa 5MB</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="49">
+        <source>Tìm kiếm</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="50">
+        <source>Liên hệ</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="51">
+        <source>Gửi liên hệ thành công.</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="52">
+        <source>Gửi phản hồi của bạn</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="53">
+        <source>Tiêu đề</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="54">
+        <source>Mã bảo mật</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="55">
+        <source>Gửi liên hệ</source>
+        <target/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

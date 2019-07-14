@@ -1,0 +1,41 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdHtml
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_html
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: { label: Tiêu đề}
+        content: { label: Nội dung}
+        prefix_path: { label: Trang hiển thị}
+        slug: { label: Slug}
+        is_active: { label: Trạng thái}
+        created_at: { label: Ngày tạo}
+        created_by: { label: Người tạo}
+      list:
+        title: Danh sách Nội dung
+        display: [name, slug, is_active, created_at, created_by]
+        object_actions:
+          _edit: ~
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        class: adManageHtmlFormAdmin
+        display: [prefix_path, name, content, is_active]
+        fields:
+          prefix_path: { label: Trang hiển thị *}
+          name: { label: Tiêu đề *}
+      edit:
+        title: Chỉnh sửa nội dung
+      new:
+        title: Thêm mới nội dung

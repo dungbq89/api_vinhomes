@@ -1,0 +1,11 @@
+## YAML Template.
+---
+indexSuccess:
+  metas:
+    title: Danh sách Video
+newSuccess:
+  metas:
+    title: Thêm mới Video
+editSuccess:
+  metas:
+    title: Chỉnh sửa Video

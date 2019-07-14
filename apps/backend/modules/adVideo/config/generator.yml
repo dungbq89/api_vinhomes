@@ -1,0 +1,48 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdVideo
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_video
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: Tên sự kiện}
+        event_date: {label: Ngày sự kiện}
+        extension: {label: Kiểu file}
+        priority: {label: Thứ tự hiển thị}
+        is_active: {label: Trạng thái}
+        is_default: {label: Video mặc định}
+        file_path: {label: File video}
+        image_path: {label: Ảnh đại diện}
+      list:
+        title: Danh sách Video
+        display: [name, event_date, extension, priority, is_active]
+        actions:
+          _new: {label: Thêm mới}
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        class: adVideoFormAdmin
+        fields:
+          name: {label: Tên sự kiện*}
+          event_date: {label: Ngày sự kiện*}
+          description: {label: Mô tả}
+      edit:
+        fields:
+          jwplayer: {label: Xem thử}
+        title: Chỉnh sửa Video
+        display: [jwplayer, name, description, event_date, priority, file_path, image_path, is_active, is_default]
+      new:
+        title: Thêm mới Video
+        display: [name, description, event_date, priority, file_path, image_path, is_active, is_default]

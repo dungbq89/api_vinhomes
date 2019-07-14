@@ -1,0 +1,47 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdMassage
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_massage
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên cơ sở"}
+        address: {label: "Địa chỉ"}
+        time_open: {label: "Thời gian mở cửa"}
+        time_close: {label: "Thời gian đóng cửa"}
+        keywords: {label: "Từ khóa"}
+        phone: {label: "SĐT"}
+        description: {label: "Mô tả"}
+        location_id: {label: "Quận huyện"}
+        rate: {label: "Đánh giá"}
+        total_view: {label: "Số lượt xem"}
+        lat: {label: "Tọa độ Latitude"}
+        lng: {label: "Tọa độ Langtitude"}
+        content: {label: "Nội dung"}
+        priority: {label: "Thứ tự"}
+        is_active: {label: "Trạng thái"}
+        image: {label: "Ảnh đại diện"}
+      list:
+        display: [name, address, location_id, total_view, is_active]
+        title: Danh sách cơ sở massage
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        display: [name, address, description, image, content, location_id, time_open, time_close, keywords, phone, rate, total_view, lat, lng, priority, is_active]
+        class: adMassageFormAdmin
+      edit:
+        title: Chỉnh sửa cơ sở
+      new:
+        title: Thêm mới cơ sở

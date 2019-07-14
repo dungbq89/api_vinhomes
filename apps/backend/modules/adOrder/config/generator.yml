@@ -1,0 +1,39 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdOrder
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_order
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:
+        _delete: {label: Xóa}
+        _edit: {label: Chi tiết}
+      fields:
+        title: { label: Tên sản phẩm}
+        price: { label: Giá}
+        customer_name: { label: Tên khách hàng}
+        customer_phone: { label: SĐT}
+        customer_address: { label: Địa chỉ}
+        body: { label: Nội dung}
+        status: { label: Trạng thái}
+        created_at: { label: Thời gian}
+      list:
+        title: Danh sách đơn hàng
+        display: [title, price, customer_name, customer_phone, customer_address, status,created_at]
+        object_actions:
+          _edit: ~
+          _delete: ~
+      filter:
+        display: [title, customer_name, customer_phone]
+      form:
+        display: [title, price, customer_name, customer_phone, customer_address, body, status]
+        class: adOrderFormAdmin
+      edit:    ~
+      new:     ~

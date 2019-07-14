@@ -1,0 +1,6 @@
+footer:
+  enabled: true
+  lifetime: 3000
+header:
+  enabled: true
+  lifetime: 600

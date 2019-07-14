@@ -1,0 +1,8 @@
+_listProductCategory:
+  enabled: true  
+  
+_listProduct:
+  enabled: true
+  
+_productDetail:
+  enabled: true

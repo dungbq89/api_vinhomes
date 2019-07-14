@@ -1,0 +1,5 @@
+## YAML Template.
+---
+all:
+  is_secure:   true
+  credentials: [[admin,news_editor,news_approved,news_public]]

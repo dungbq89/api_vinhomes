@@ -1,0 +1,38 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdChainImage
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_chain_image
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        file_path: {label: "Ảnh"}
+        is_active: {label: "Trạng thái"}
+        priority: {label: "Sắp sếp"}
+        product: {label: "Phòng"}
+      list:
+        display: [file_path, product, is_active, priority]
+        title: Danh sánh ảnh căn hộ
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [product, is_active]
+        class: AdChainImageFormFilterAdmin
+      form:
+        display: [file_path, product, is_active, priority]
+        class: AdChainImageFormAdmin
+      edit:
+        title: Sửa ảnh căn hộ
+      new:
+        title: Thêm mới ảnh căn hộ
+      show:    ~
+      revert:  ~

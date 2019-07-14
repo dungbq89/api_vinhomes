@@ -1,0 +1,35 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           adPhoto
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_photo
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: Tên ảnh}
+        file_path: {label: Ảnh minh họa}
+        album_id: {label: Album}
+        priority: {label: Thứ tự hiển thị}
+        is_active: {label: Trạng thái}
+      list:    
+        title: Danh sách ảnh
+        display: [name, file_path, album_id, priority, is_active]
+      filter:  
+        display: [name]
+      form:    
+        class: adPhotoFormAdmin
+        display: [name, file_path, album_id, priority, is_active]
+        fields:
+          name: {label: Tên ảnh *}
+      edit:    
+        title: Sửa thông tin ảnh
+      new:    
+        title: Thêm mới ảnh

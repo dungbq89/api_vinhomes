@@ -1,0 +1,142 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+contact_us:
+  url: /contact-us
+  param: {module: pageContact, action: index}
+booking:
+  url: /booking/:id
+  param: {module: pageOrder, action: index}
+get_product_by_catid:
+  url: /getProductByCatId
+  param: {module: pageHome, action: getProductByCatId}
+chain:
+  url: /chain
+  param: {module: pageChain, action: index}
+chain_detail:
+  url: /chain/:slug
+  param: {module: pageChain, action: chainDetail}
+room_detail:
+  url: /room/:slug
+  param: {module: pageChain, action: roomDetail}
+room:
+  url: /room
+  param: {module: pageChain, action: room}
+#về chúng tôi
+about_us:
+  url: /about-us
+  param: {module: pageAboutUs, action: index}
+#giói thiệu dịch vụ
+services:
+  url: /services
+  param: {module: pageServices, action: index}
+#trang hiển thị chi tiết tin tức
+article_detail:
+  url: /bai-viet/:slug
+  param: {module: pageNewsDetails, action: index}
+
+products:
+  url: /chuyen-muc/:slug/:page
+  param: {module: pageProduct, action: index, page:''}
+  
+product_all:
+  url: /all/:page
+  param: {module: pageProduct, action: list, page:''}
+#trang hiển thị chi tiết tin tức
+news:
+  url: /news
+  param: {module: pageNews, action: index}
+category_new:
+  url: /news/:slug/:page
+  param: {module: pageNews, action: categoryNews, page: 1}
+news_detail:
+  url: /news-detail/:slug
+  param: {module: pageNews, action: newDetail}
+article_search:
+  url: /tim-kiem
+  param: {module: pageNews, action: searchArticle}
+
+products:
+  url: /chuyen-muc/:slug/:page
+  param: {module: pageProduct, action: index, page:''}
+
+product_detail:
+  url: /sam-pham/:slug
+  param: {module: pageProduct, action: detail}
+
+pageError:
+  url:  /error.:sf_format
+  param: { module:  default, action: error404, sf_format: html}
+  requirements: {sf_method: get }
+#trang album
+page_register:
+  url: /dang-ky
+  param: {module: pageRegister, action: index}
+#trang album
+page_album:
+  url: /album/:slug
+  param: {module: pageAlbum, action: index, slug: ''}
+#trang gioi thieu
+videopage:
+  url: /video/:page
+  param: {module: pageVideo, action: index, page: 1}
+videoDetail:
+  url: /video-detail/:slug
+  param: {module: pageVideo, action: videoDetail}
+#trang gioi thieu
+introduction:
+  url: /khoa-huan-luyen/:slug
+  param: {module: pageIntroduction, action: index}
+#trang tim kiem tin tuc
+page_search:
+  url:  /tim-kiem
+  param: { module: pageSearch, action: index}
+# trang document
+listDocument:
+  url:  /kho-tai-lieu/:page
+  param: { module: pageDocument, action: listDocument, page: 1}
+# cam nhan hoc vien
+listStudent:
+  url:  /cam-nhan-hoc-vien/:page
+  param: { module: pageDocument, action: listStudent, page: 1}
+# cam nhan hoc vien
+detailStudent:
+  url:  /chi-tiet-hoc-vien/:id
+  param: { module: pageDocument, action: detailStudent, id: ''}
+#trang danh ba hoi vien
+contact:
+  url: /content/:slug
+  param: {module: pageContact, action: index, slug: ''}
+personnal:
+  url: /danh-ba-hoi-vien
+  param: {module: pagePersonal, action: index}
+
+#trang hiển thị chi tiết photos
+photo:
+  url: /photo
+  param: {module: pagePhoto, action: index}
+category_photo:
+  url: /photo/:slug
+  param: {module: pagePhoto, action: categoryPhoto}
+photo_detail:
+  url: /photo-detail/:slug
+  param: {module: pagePhoto, action: photoDetail}
+#ajax load video
+ajax_load_video:
+  url: /load-video
+  param: {module: ajax, action: ajaxLoadVideo}
+
+# default rules
+homepage:
+  url:   /
+#  param: { module: pageHome, action: index }
+  param: { module: pageHome, action: index}
+  requirements: { sf_method: get }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

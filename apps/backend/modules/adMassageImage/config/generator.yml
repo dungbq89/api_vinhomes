@@ -1,0 +1,37 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdMassageImage
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_massage_image
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        file_path: {label: Ảnh minh họa}
+        massage_id: {label: Cơ sở}
+        priority: {label: Thứ tự hiển thị}
+        is_active: {label: Trạng thái}
+      list:
+        title: Danh sách ảnh cơ sở massage
+        display: [file_path, massage_id, priority, is_active]
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [massage_id]
+      form:
+        class: AdMassageImageFormAdmin
+        display: [file_path, massage_id, priority, is_active]
+        fields:
+          file_path: {label: Ảnh minh họa *}
+      edit:
+        title: Chỉnh sửa ảnh
+      new:
+        title: Tạo mới ảnh

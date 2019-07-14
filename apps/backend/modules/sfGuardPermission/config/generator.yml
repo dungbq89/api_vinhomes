@@ -1,0 +1,48 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           sfGuardPermission
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sf_guard_permission
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    css:                   admin/sfGuardPermission
+
+    config:
+
+      fields:
+        name: {label: Quyền }
+        description: {label: Mô tả}
+        types: {label: Nhóm chuyên mục}
+        created_at: {label: Ngày tạo}
+        updated_at: {label: Cập nhật ngày}
+      list:
+        max_per_page: 10
+        title: Quản lý quyền
+        display: [=name, description, types, created_at, updated_at]
+#        sort: username #not working
+#        table_method: getSortUsernameAscList
+        actions:
+          _new: {label: Thêm mới}
+        object_actions:
+          _edit: ~
+      edit:
+        title: Chỉnh sửa quyền
+
+      new:
+        title: Thêm mới quyền
+
+      form:
+        class: sfGuardPermissionAdminForm
+        display: [name, description, types, users_list]
+        fields:
+          name: {label: Quyền *}
+          groups_list: {label: Nhóm}
+          users_list: {label: Tài khoản}
+      filter:
+        class: sfGuardCustomPermissionFormFilter
+        display: [name]

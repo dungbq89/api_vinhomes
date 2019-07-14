@@ -1,0 +1,31 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdComment
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_comment
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title: { label: Tiêu đề }
+        full_name: {label: Họ tên}
+        phone_number: {label: Số điện thoại}
+        email: {label: Email}
+        description: {label: Nội dung}
+        create_date: {label: Ngày tạo}
+      list:
+        title: Quản lý thông tin phản hồi
+        display: [ title, full_name ,phone_number ,email,create_date, description ]
+      filter:
+        display: [title, phone_number ,email]
+        class: adManageCommentFilter
+      form:    ~
+      edit:    ~
+      new:     ~

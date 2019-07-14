@@ -1,0 +1,37 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdActivity
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_activity
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên"}
+        description: {label: "Mô tả"}
+        image: {label: "Ảnh đại diện"}
+        type: {label: "Loại"}
+        priority: {label: "Thứ tự"}
+        is_active: {label: "Trạng thái"}
+      list:
+        display: [image, name, type, priority, is_active]
+        title: Danh sách hoạt động
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        display: [name, image, type, description, priority, is_active]
+        class: adActivityFormAdmin
+      edit:
+        title: Chỉnh sửa
+      new:
+        title: Thêm mới

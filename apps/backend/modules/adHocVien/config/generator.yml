@@ -1,0 +1,37 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdHocVien
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_hoc_vien
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên học viên"}
+        description: {label: "Mô tả"}
+        image: {label: "Ảnh đại diện"}
+        priority: {label: "Thứ tự ưu tiên"}
+        is_active: {label: "Trạng thái"}
+        body: {label: "Nội dung"}
+      list:
+        display: [image, name, priority, is_active]
+        title: Danh sách học viên
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        display: [name, image, description, body, priority, is_active]
+        class: adHocVienFormAdmin
+      edit:
+        title: Chỉnh sửa học viên
+      new:
+        title: Chỉnh sửa học viên

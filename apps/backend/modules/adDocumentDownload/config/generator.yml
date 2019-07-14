@@ -1,0 +1,39 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdDocumentDownload
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_document_download
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên tài liệu"}
+        description: {label: "Mô tả tài liệu"}
+        body: {label: "Nội dung tài liệu"}
+        link: {label: "Đường dẫn tài liệu"}
+        image: {label: "Ảnh đại diện"}
+        priority: {label: "Thứ tự ưu tiên"}
+        is_active: {label: "Trạng thái"}
+        category_id: {label: Chuyên mục văn bản}
+      list:
+        display: [image, name,category_id, priority, is_active]
+        title: Danh sách tài liệu
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name, category_id]
+      form:
+        display: [name, category_id, image, link, description, body, priority, is_active]
+        class: adDocumentDownloadFormAdmin
+      edit:
+        title: Chỉnh sửa tài liệu
+      new:
+        title: Thêm mới tài liệu

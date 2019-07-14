@@ -1,0 +1,53 @@
+all:
+  sf_captchagd:
+     image_width:                90 # image width in pixels
+     image_height:               30 # image height in pixels
+     chars:                      "2345678abcdefhjkmnprsuxyz" # possible chars in captcha
+     length:                     2 # length of captcha
+     font_size:                  20 # font size
+     force_new_captcha:          true # if true - captcha regenerated EVERY request, even if user input true value before
+     fonts: ["akbar/vavobi.ttf"]
+
+  image_maxsize: 52428800
+  upload_max_size:   104857600
+  image_upload_max_size: 52428800
+  upload_video_max_size: 50485760
+  upload_max_size:   104857600
+  excel_max_row: 1000
+  category_images: category_images
+  article_images: article
+  service_images: service
+  advertise_images: advertise
+  product_images: products
+  import_max_size: 1048576
+  album_images: album
+  video_images: video
+  document: document
+  member_images: member
+  image_default: 'http://vinhanoi.com/images/default.jpg'
+  image_default_video_default: 'http://vinhanoi.com/images/default.jpg'
+  upload_media_file: "/root/apps/project/vinhomesriverside/web/uploads"
+  url_media_file: http://vinhanoi.com/uploads
+  url_media_default_file: http://vinhanoi.com/images/default-image.jpg
+  image_default: http://vinhanoi.com/images/default-image.jpg
+  #upload_media_file: /uploads
+
+  url_media_file: /uploads
+  
+  ckeditor:
+    basePath: /js/ckeditor
+  ckfinder:
+    active: true
+    basePath: /js/ckfinder
+  addcslashes_charlist: "%_-\'"  # Danh sach cac ky tu dac biet can xu ly truoc khi su dung search query
+  domain: 'http://vinhanoi.com'
+  seo:
+    title: 'CLB YÊU XUẤT NHẬP KHẨU HÀ NỘI - Đào tạo và Huấn luyện Nghiệp vụ Xuất nhập khẩu- Logistics chuyên sâu tại Hà Nội.'
+    description: 'Tự hào là nơi được các học viên đánh giá là chất lượng hàng đầu tại Hà Nội. Giảng viên tận tình cầm tay chỉ việc, giới thiệu việc làm sau khi học. Sau khi kết thúc khóa học, học viên sẽ có tương đương với 1-2 năm kinh nghiệm.'
+    keywords: 'tự học xuất nhập khẩu, học xuất nhập khẩu tại Hà Nội, khóa học xuất nhập khẩu, tài liệu xuất nhập khẩu, thực tập xuất nhập khẩu, gia sư xuất nhập khẩu, thủ tục hải quan, tiếng anh xuất nhập khẩu, Han Exim Club, báo cáo xuất nhập khẩu, chứng từ xuất nhập khẩu, quy trình xuất nhập khẩu, lớp học xuất nhập khẩu, việc làm xuất nhập khẩu'
+    ogImage: 'http://tuhocxuatnhapkhau.com/images/BANNER.png'
+    url: 'http://tuhocxuatnhapkhau.com'
+  ManageAdChainImage:
+    maxsize: 999999
+    prefix: 'chain'
+    type: 'image/jpeg|image/jpg|image/png|image/gif'

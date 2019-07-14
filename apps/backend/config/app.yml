@@ -1,0 +1,98 @@
+all:
+  # Change these if you'd like to move/modify CSS & JS files
+  tmcTwitterBootstrapPlugin:
+    bootstrap_path:              /tmcTwitterBootstrapPlugin/css/bootstrap.min.css
+    responsive_bootstrap_path:   /tmcTwitterBootstrapPlugin/css/bootstrap-responsive.min.css
+    admin_styles_path:           /tmcTwitterBootstrapPlugin/css/styles.css
+    jquery_path:                 /tmcTwitterBootstrapPlugin/js/jquery.min.js
+    bootstrap_js_path:           /tmcTwitterBootstrapPlugin/js/bootstrap.min.js
+    admin_js_path:               /tmcTwitterBootstrapPlugin/js/global.js
+
+#    # The route/URI to use for the nav bar's "brand" link
+#    profile_route: @homepage?username=
+#    # The link next for the nav bar's "brand" link
+#    dashboard_name: Administration
+    header:
+      menu:
+        Phân hệ Tin tức:
+          credentials: [[admin,news_editor,news_approved,news_public, ctv]]
+          dropdown:
+            Quản lý tin đợi duyệt:
+              credentials: [[admin,news_editor,news_approved,news_public, ctv]]
+              route: ad_article
+              icon: text.png
+            Quản lý tin đợi đăng:
+              credentials: [[admin,news_editor,news_approved,news_public, ctv]]
+              route: ad_article_adArticlesAproved
+              icon: text.png
+            Quản lý tin đã đăng:
+              credentials: [[admin,news_editor,news_approved,news_public, ctv]]
+              route: ad_article_adArticlesPublish
+              icon: text.png
+        Phân hệ khác:
+          credentials: [[admin,subAdmin, ctv]]
+          dropdown:
+            Quản lý chuyên mục tin tức:
+              credentials: [[admin]]
+              route: vtp_category
+              icon: squares36.png
+            Quản lý menu:
+              credentials: [[admin]]
+              route: vtp_menu
+              icon: squares36.png
+            Quản lý nội dung:
+              credentials: [[admin,subAdmin]]
+              route: ad_html
+              icon: text.png
+            Vị trí quảng cáo:
+              credentials: [[admin,subAdmin]]
+              route: ad_advertise_location
+              icon: computer.png
+            Quản lý Banner - quảng cáo:
+              credentials: [[admin,subAdmin]]
+              route: ad_advertise
+              icon: computer.png
+            Quản lý đơn hàng:
+              credentials: [[admin]]
+              route: ad_order
+              icon: text.png
+            Quản lý chuyên mục sản phẩm:
+              credentials: [[admin]]
+              route: vtp_products_category
+              icon: users6.png
+            Quản lý sản phẩm:
+              credentials: [[admin]]
+              route: vtp_products
+              icon: users6.png
+        Quản trị hệ thống:
+          credentials: [admin]
+          dropdown:
+            Danh sách người dùng:
+              route: sf_guard_user
+              icon: users6.png
+            Danh sách quyền hạn:
+              route: sf_guard_permission
+              icon: users6.png
+            Quản lý cấu hình:
+              route: ad_config
+              icon: users6.png
+        Ngôn ngữ:
+          dropdown:
+            Tiếng Việt:
+              route: pageVI
+              icon: users6.png
+            Tiếng Anh:
+              route: pageEN
+              icon: users6.png
+            Tiếng Hàn:
+              route: pageKO
+              icon: users6.png
+
+  sf_captchagd:
+     image_width:                180 # image width in pixels
+     image_height:               27 # image height in pixels
+     chars:                      "123456789abcdefghijklmnopqrstuvwxyz" # possible chars in captcha
+     length:                     2 # length of captcha
+     font_size:                  14 # font size
+     force_new_captcha:          true # if true - captcha regenerated EVERY request, even if user input true value before
+     fonts: ["akbar/vavobi.ttf"]

@@ -1,0 +1,37 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdDocumentCategory
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_document_category
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: Tên chuyên mục}
+        image_path: {label: Ảnh đại diện}
+        description: {label: Mô tả}
+        keywords: {label: Keywords}
+        priority: {label: Thứ tự}
+        is_home: {label: Trang chủ}
+        is_active: {label: Hiển thị}
+      list:
+        title: Danh sách chuyên mục văn bản
+        display: [name, description, priority]
+      filter:
+        display: [name]
+      form:
+        class: AdDocumentCategoryAdminForm
+        display: [name, image_path, description, keywords, priority, is_home, is_active]
+        fields:
+          name: {label: Tên chuyên mục *}
+      edit:
+        title: Chỉnh sửa chuyên mục văn bản
+      new:
+        title: Thêm mới chuyên mục văn bản

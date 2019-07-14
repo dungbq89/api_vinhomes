@@ -1,0 +1,35 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdAdvertiseLocation
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_advertise_location
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: { label: Tên vị trí *}
+        page: { label: Trang hiển thị *}
+        template: { label: Mẫu hiển thị *}
+        priority: { label: Thứ tự hiển thị}
+        advertise_id: {label: Banner quảng cáo}
+      list:
+        title: Danh sách vị trí quảng cáo
+        display: [name, page, template, priority]
+        sort: [priority, 'desc']
+        object_actions:
+          _edit: ~
+          _delete: ~
+      filter:  ~
+      form:
+        class: adManageLocationForm
+      edit:
+        title: Chỉnh sửa vị trí quảng cáo
+      new:
+        title: Thêm mới vị trí quảng cáo

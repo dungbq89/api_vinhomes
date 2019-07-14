@@ -1,0 +1,38 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdDocument
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_document
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: Tên văn bản}
+        description: {label: Trích yếu}
+        file_path: {label: Văn bản}
+        document_number: {label: Số văn bản}
+        document_date: {label: Ngày ban hành}
+        priority: {label: Thứ tự}
+        category_id: {label: Chuyên mục văn bản}
+        is_home: {label: Trang chủ}
+        is_active: {label: Hiển thị}
+      list:
+        title: Danh sách văn bản
+        display: [name, category_id, document_number, priority]
+      filter:
+        display: [name]
+      form:
+        class: AdDocumentAdminForm
+        display: [name, category_id, file_path, document_number, document_date, description, priority, is_home, is_active]
+        fields:
+          name: {label: Tên văn bản *}
+          category_id: {label: Chuyên mục tài liệu*}
+      edit:    ~
+      new:     ~

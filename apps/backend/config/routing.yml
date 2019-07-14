@@ -1,0 +1,440 @@
+ad_order:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdOrder
+    module:               adOrder
+    prefix_path:          /adOrder
+    column:               id
+    with_wildcard_routes: true
+
+ad_massage_image:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdMassageImage
+    module:               adMassageImage
+    prefix_path:          /adMassageImage
+    column:               id
+    with_wildcard_routes: true
+
+ad_massage:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdMassage
+    module:               adMassage
+    prefix_path:          /adMassage
+    column:               id
+    with_wildcard_routes: true
+
+ad_location:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdLocation
+    module:               adLocation
+    prefix_path:          /adLocation
+    column:               id
+    with_wildcard_routes: true
+
+ad_config:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdConfig
+    module:               adConfig
+    prefix_path:          /adConfig
+    column:               id
+    with_wildcard_routes: true
+
+ad_activity:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdActivity
+    module:               adActivity
+    prefix_path:          /adActivity
+    column:               id
+    with_wildcard_routes: true
+
+ad_giang_vien:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdGiangVien
+    module:               adGiangVien
+    prefix_path:          /adGiangVien
+    column:               id
+    with_wildcard_routes: true
+
+ad_hoc_vien:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdHocVien
+    module:               adHocVien
+    prefix_path:          /adHocVien
+    column:               id
+    with_wildcard_routes: true
+
+ad_document_download:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdDocumentDownload
+    module:               adDocumentDownload
+    prefix_path:          /adDocumentDownload
+    column:               id
+    with_wildcard_routes: true
+
+ad_youtube:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdYoutube
+    module:               adYoutube
+    prefix_path:          /adYoutube
+    column:               id
+    with_wildcard_routes: true
+
+ad_feed_back:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdFeedBack
+    module:               adFeedBack
+    prefix_path:          /adFeedBack
+    column:               id
+    with_wildcard_routes: true
+
+booking:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Booking
+    module:               booking
+    prefix_path:          /booking
+    column:               id
+    with_wildcard_routes: true
+
+ad_chain_image:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdChainImage
+    module:               ManageAdChainImage
+    prefix_path:          /ManageAdChainImage
+    column:               id
+    with_wildcard_routes: true
+
+parameter:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Parameter
+    module:               ManageParameter
+    prefix_path:          /ManageParameter
+    column:               id
+    with_wildcard_routes: true
+
+parameter_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ParameterCategory
+    module:               ManageParameterCategory
+    prefix_path:          /ManageParameterCategory
+    column:               id
+    with_wildcard_routes: true
+
+vtp_product_image:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VtpProductImage
+    module:               vtpManageProductImage
+    prefix_path:          /vtpManageProductImage
+    column:               id
+    with_wildcard_routes: true
+
+vtp_products_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VtpProductsCategory
+    module:               vtpManageProductsCategory
+    prefix_path:          /vtpManageProductsCategory
+    column:               id
+    with_wildcard_routes: true
+
+vtp_products:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VtpProducts
+    module:               vtManageProducts
+    prefix_path:          /vtManageProducts
+    column:               id
+    with_wildcard_routes: true
+
+load_article_by_cat:
+  url:   /load-article
+  param: { module: ajax, action: loadFilter }
+
+load_article_editor:
+  url:   /load-article-editor
+  param: { module: ajax, action: loadFilterEditor }
+
+load_article_approved:
+  url:   /load-article-approved
+  param: { module: ajax, action: loadFilterApproved }
+
+ad_report_hicounter:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdReportHicounter
+    module:               adReportHicounter
+    prefix_path:          /adReportHicounter
+    column:               id
+    with_wildcard_routes: true
+
+ad_report_total_record:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdReportTotalRecord
+    module:               adReportTotalRecord
+    prefix_path:          /adReportTotalRecord
+    column:               id
+    with_wildcard_routes: true
+
+ad_link:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdLink
+    module:               adLink
+    prefix_path:          /adLink
+    column:               id
+    with_wildcard_routes: true
+
+ad_document:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdDocument
+    module:               adDocument
+    prefix_path:          /adDocument
+    column:               id
+    with_wildcard_routes: true
+
+ad_document_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdDocumentCategory
+    module:               adDocumentCategory
+    prefix_path:          /adDocumentCategory
+    column:               id
+    with_wildcard_routes: true
+ad_personal_import:
+  url:   /adManagePersonal/import
+  param: { module: adManagePersonal, action: import }
+ad_comment:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdComment
+    module:               adManageComment
+    prefix_path:          /adManageComment
+    column:               id
+    with_wildcard_routes: true
+
+ad_advertise_image:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdAdvertiseImage
+    module:               adManageAdvertiseImage
+    prefix_path:          /adManageAdvertiseImage
+    column:               id
+    with_wildcard_routes: true
+
+ad_advertise:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdAdvertise
+    module:               adManageAdvertise
+    prefix_path:          /adManageAdvertise
+    column:               id
+    with_wildcard_routes: true
+
+ad_advertise_location:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdAdvertiseLocation
+    module:               adManageLocation
+    prefix_path:          /adManageLocation
+    column:               id
+    with_wildcard_routes: true
+
+ad_personal:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdPersonal
+    module:               adManagePersonal
+    prefix_path:          /adManagePersonal
+    column:               id
+    with_wildcard_routes: true
+
+ad_html:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdHtml
+    module:               adManageHtml
+    prefix_path:          /adManageHtml
+    column:               id
+    with_wildcard_routes: true
+
+
+ad_contact:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdContact
+    module:               adManageContact
+    prefix_path:          /adManageContact
+    column:               id
+    with_wildcard_routes: true
+
+ad_article_adArticlesPublish:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdArticle
+    module:               adArticlesPublish
+    prefix_path:          /adArticlesPublish
+    column:               id
+    with_wildcard_routes: true
+
+ad_article_adArticlesAproved:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdArticle
+    module:               adArticlesAproved
+    prefix_path:          /adArticlesAproved
+    column:               id
+    with_wildcard_routes: true
+
+ad_article:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdArticle
+    module:               adArticlesEditor
+    prefix_path:          /adArticlesEditor
+    column:               id
+    with_wildcard_routes: true
+
+ad_photo:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdPhoto
+    module:               adPhoto
+    prefix_path:          /adPhoto
+    column:               id
+    with_wildcard_routes: true
+
+ad_album:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdAlbum
+    module:               adAlbum
+    prefix_path:          /adAlbum
+    column:               id
+    with_wildcard_routes: true
+
+
+ad_video:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdVideo
+    module:               adVideo
+    prefix_path:          /adVideo
+    column:               id
+    with_wildcard_routes: true
+ad_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AdCategory
+    module:               adManageCategory
+    prefix_path:          /adManageCategory
+    column:               id
+    with_wildcard_routes: true
+
+vtp_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VtpCategory
+    module:               vtpCategory
+    prefix_path:          /vtpCategory
+    column:               id
+    with_wildcard_routes: true
+
+
+sf_guard_change_password:
+  url:   /guard/change_password
+  param: { module: sfGuardAuth, action: changePassword }
+
+sf_guard_group:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardGroup
+    module:               sfGuardGroup
+    prefix_path:          /sfGuardGroup
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               sfGuardUser
+    prefix_path:          /sfGuardUser
+    column:               id
+    with_wildcard_routes: true
+ 
+sf_guard_permission:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardPermission
+    module:               sfGuardPermission
+    prefix_path:          /sfGuardPermission
+    column:               id
+    with_wildcard_routes: true
+
+vtp_search_ajax_loadarticle:
+  url:   /ajax/LoadArticle
+  param: { module: ajax, action: loadArticle }
+
+
+vtp_menu:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VtpMenu
+    module:               vtManageMenu
+    prefix_path:          /vtManageMenu
+    column:               id
+    with_wildcard_routes: true
+ajax_load_category_news:
+  url:   /ajax/AjaxLoadCategoryNews
+  param: { module: ajax, action: ajaxLoadCategoryNews }
+
+ajax_load_category_service:
+  url:   /ajax/AjaxLoadCategoryService
+  param: { module: ajax, action: ajaxLoadCategoryService }
+
+ajax_load_article_detail:
+  url:   /ajax/AjaxLoadArticleDetail
+  param: { module: ajax, action: ajaxLoadArticleDetail }
+
+ajax_load_service_detail:
+  url:   /ajax/AjaxLoadServiceDetail
+  param: { module: ajax, action: ajaxLoadServiceDetail }
+# default rules
+homepage:
+  url:   /
+  param: { module: homePage, action: index }
+pageEN:
+  url: /?lang=en
+  param: {  module: homePage, action: index }
+
+pageVI:
+  url: /?lang=vi
+  param: {  module: homePage, action: index }
+pageKO:
+  url: /?lang=ko
+  param: {  module: homePage, action: index }
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+  

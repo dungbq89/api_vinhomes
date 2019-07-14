@@ -1,0 +1,11 @@
+## YAML Template.
+---
+indexSuccess:
+  metas:
+    title: Danh sách chuyên mục tin tức
+newSuccess:
+  metas:
+    title: Thêm mới chuyên mục
+editSuccess:
+  metas:
+    title: Chỉnh sửa chuyên mục

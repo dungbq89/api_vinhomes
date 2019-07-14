@@ -1,0 +1,622 @@
+connection: doctrine
+#chuyên mục tin tức - dịch vụ
+VtpCategory:
+  #connection: doctrine
+  tableName: vtp_category
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên chuyên mục" }
+    description: { type: clob, comment: "Mô tả chuyên mục" }
+    image_path: { type: string(255),  comment: "File ảnh đại diện chuyên mục" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: ko hiển thị, 1: hiển thị)" }
+    lang: {  type: string(10), comment: "Đa ngôn ngữ"}
+    parent_id: { type: integer(5), comment: "Danh mục cha"}
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    link: { type: string(255), comment: "Đường dẫn của chuyên mục (nếu có)"}
+    level: { type: integer, default: 0, comment: "phân cấp chuyên mục"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    type: { type: string(20), comment: "N=Tin tức, S=Dịch vụ"}
+    is_detail: { type: boolean, notnull: true, default: false, comment: "có xem bài chi tiết hay không"}
+    portal_id: { type: integer, comment: "Portal cần hiển thị nội dung, được quy ước trong file cấu hình (Khách hàng cá nhân / Khách hàng doanh nghiệp)"}
+  relations:
+    VtpParentCategory: { class: VtpCategory, local: parent_id, type: one, foreignAlias: ParentCategory }
+#Phân quyền truy cập chuyên mục
+VtpCategoryPermission:
+  #connection: doctrine
+  tableName: vtp_category_permission
+  columns:
+    category_id: { type: integer(8), comment: "Id của danh mục tin tức" }
+    permission_id: { type: integer(8), comment: "Id quyền" }
+AdCategory:
+  #connection: doctrine
+  tableName: ad_category
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên chuyên mục" }
+    description: { type: clob, comment: "Mô tả chuyên mục" }
+    image_path: { type: string(255),  comment: "File ảnh đại diện chuyên mục" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: ko hiển thị, 1: hiển thị)" }
+    lang: {  type: string(10), comment: "Đa ngôn ngữ"}
+    parent_id: { type: integer(5), comment: "Danh mục cha"}
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    link: { type: string(255), comment: "Đường dẫn của chuyên mục (nếu có)"}
+    level: { type: integer, default: 0, comment: "phân cấp chuyên mục"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_category: { type: boolean, notnull: true, default: false, comment: "có xem bài chi tiết hay không"}
+    is_hot: { type: boolean, notnull: true, default: false, comment: "Hiển thị cột phải (0: không hiển thị, 1: hiển thị)" }
+  relations:
+    AdParentCategory: { class: AdCategory, local: parent_id, type: one, foreignAlias: ParentCategory }
+    AdCatPermission: { class: AdCategoryPermission, local: category_id, type: one, foreignAlias: CategoryPermission }
+#Phân quyền truy cập chuyên mục
+AdCategoryPermission:
+  #connection: doctrine
+  tableName: ad_category_permission
+  columns:
+    category_id: { type: integer(8), comment: "Id của danh mục tin tức" }
+    permission_id: { type: integer(8), comment: "Id quyền" }
+#Bang tin tức
+AdArticle:
+  #connection: doctrine
+  tableName: ad_article
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    title: { type: string(512), notnull: true, comment: "Tiêu đề bài viết" }
+    alttitle: { type: string(255), comment: "Tiêu đề rút gọn" }
+    header: { type: clob, comment: "Trích yếu" }
+    body: { type: clob, comment: "Nội dung bài viết trên web" }
+    image_path: { type: string(255), comment: "Đường dẫn ảnh đại diện" }
+    attributes: { type: integer(8), comment: "Thuộc tính của bài viết: khuyến mại, " }
+    hit_count: { type: integer(8), comment: "Số lượt truy cập" }
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    published_time: { type: timestamp(25), comment: "Thời gian xuất bản" }
+    expiredate_time: { type: timestamp(25), comment: "Thời gian kết thúc bản tin"}
+    meta: { type: string(255), comment: "Nội dung meta" }
+    keywords: { type: string(255), comment: "Nội dung keywords"}
+    author: { type: string(255), comment: "Tác giả" }
+    other_link: { type: clob, comment: "Các link liên quan" }
+    is_active: { type: integer(5), notnull: true, default: 0, comment: "Trạng thái hiển thị (-1: Bản nháp, 0- Chờ duyệt, 1- Đã duyệt, 2- Đã đăng)" }
+    is_hot: { type: boolean, notnull: true, default: false, comment: "Hiển thị trên trang chủ (0- ko hiển thị, 1- hiển thị)" }
+    lang: {  type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    category_id: { type: integer(8), comment: "Id của danh mục tin tức" }
+  relations:
+    AdArticleCategory: { class: AdCategory, local: category_id, type: one, foreignAlias: ArticleCategory }
+    ArticlesRelated:
+      class: AdArticle
+      foreignAlias: RelatedArticles
+      refClass: AdArticlesRelated
+      local: id
+      foreign: article_id
+#Bảng  tin tức liên quan
+AdArticlesRelated:
+  #connection: doctrine
+  tableName: ad_article_related
+
+  columns:
+    article_id: { type: integer, comment: "Id của bài tin tức"}
+    related_article_id: { type: integer, comment: "Id của bài viết liên quan"}
+#Bảng comment tin tuc
+AdArticlesComment:
+  tableName: ad_article_comment
+  actAs:
+    Timestampable: ~
+  columns:
+    article_id: { type: integer, comment: "Id của bài tin tức"}
+    fullname: { type: string(255), comment: "ho ten" }
+    email: { type: string(255), comment: "Email" }
+    content: { type: string(1000), comment: "Noi dung comment" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái duyệt bài viết"}
+#Module Html dành cho các trang chỉ có nội dung chi tiết: Giới thiệu, Điều kiện sử dụng, thủ thục hòa mạng, ...
+AdHtml:
+  #connection: doctrine
+  tableName: ad_html
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên bài viết"}
+    image_path: { type: string(255), comment: "Đường dẫn ảnh đại diện" }
+    content: { type: clob, comment: "Nội dung bài viết"}
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái duyệt bài viết"}
+    lang: { type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    prefix_path: { type: string(255), notnull: true, comment: "Đường dẫn trang hiển thị vd: /gioi-thieu/:slug"}
+
+#Bảng Quản lý hình ảnh quảng cáo
+AdAdvertise:
+  #connection: doctrine
+  tableName: ad_advertise
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên banner"}
+    description: { type: string(500), comment: "Mô tả"}
+    location: { type: string(255), comment: "Trang hiển thị"}
+    view_type: { type: string(10), comment: "Kiểu hiển thị S=Slide, F=Flash, I=Ảnh"}
+    amount: { type: integer, comment: "Số lượng ảnh hiển thị", default: 0}
+    width: { type: integer, comment: "Chiều rộng", default: 0}
+    height: { type: integer, comment: "Chiều cao", default: 0}
+    lang: { type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=chưa sử dụng, 1= sử dụng"}
+
+#Hình ảnh slide
+AdAdvertiseImage:
+  #connection: doctrine
+  tableName: ad_advertise_image
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    file_path: { type: string(255), notnull: true, comment: "Đường dẫn file"}
+    advertise_id: { type: integer, comment: "banner quảng cáo"}
+    extension: { type: string(200), comment: "phần mở rộng của file"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=chưa sử dụng, 1= sử dụng"}
+    link: { type: string(255), comment: "Đường dẫn chi tiết (nếu có)"}
+  relations:
+    AdAdvertiseImage: { class: AdAdvertise, local: advertise_id, type: one, foreignAlias: AdvertiseImage }
+
+AdAdvertiseLocation:
+  #connection: doctrine
+  tableName: ad_advertise_location
+  columns:
+    name: { type: string(200), notnull: true, comment: 'Ten vi tri quang cao'}
+    page: { type: string(200), comment: "Trang hiển thị"}
+    template: {type: string(200), notnull: false, comment: 'Duong dan toi file template quang cao'}
+    advertise_id: { type: integer, comment: "banner quảng cáo"}
+    priority: { type: integer(5), notnull: true, comment: "Thứ tự hiển thị" }
+  relations:
+    AdAdvertiseLocation: { class: AdAdvertise, local: advertise_id, type: many, foreignAlias: AdvertiseLocation }
+#Module quản lý Album
+AdAlbum:
+  tableName: ad_album
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên Album" }
+    description: { type: string(1000), notnull: true, comment: "Giới thiệu album" }
+    event_date: { type: timestamp(25), notnull: true, comment: "Ngày diễn ra sự kiện"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: Chưa kích hoạt, 1: đã kích hoạt)" }
+    is_default: { type: boolean, notnull: true, default: false, comment: "Trạng thái mặc định để hiển thị, 1: hiển thị, 0: không hiển thị." }
+    image_path: { type: string(255), comment: "Đường dẫn ảnh đại diện" }
+    lang: { type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+AdPhoto:
+  #connection: doctrine
+  tableName: ad_album_photo
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên photo" }
+    file_path: { type: string(255), notnull: true, comment: "Đường dẫn file"}
+    album_id: { type: integer, comment: "banner quảng cáo"}
+    extension: { type: string(200), comment: "phần mở rộng của file"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=chưa sử dụng, 1= sử dụng"}
+    is_default: { type: boolean, notnull: true, default: false, comment: "Ảnh đại diện cho Album" }
+  relations:
+    AdAlbumPhoto: { class: AdAlbum, local: album_id, type: one, foreignAlias: AlbumPhoto }
+#Module quản lý video
+AdVideo:
+  tableName: ad_video
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên video", unique: true }
+    description: { type: string(1000), notnull: true, comment: "Giới thiệu video" }
+    event_date: { type: timestamp(25), notnull: true, comment: "Ngày diễn ra sự kiện"}
+    file_path: { type: string(255), notnull: true, comment: "Đường dẫn file"}
+    image_path: { type: string(255), notnull: true, comment: "Ảnh đại diện"}
+    extension: { type: string(200), comment: "phần mở rộng của file"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: Chưa kích hoạt, 1: đã kích hoạt)" }
+    is_default: { type: boolean, notnull: true, default: false, comment: "Trạng thái mặc định để hiển thị, 1: hiển thị, 0: không hiển thị. 1 là duy nhất" }
+    lang: { type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    image_path: { type: string(255),  comment: "File ảnh đại diện video" }
+#luu thong tin gop y nguoi dung
+AdComment:
+  tableName: ad_comment
+  columns:
+    title: {type: string(255), notnull: true, comment: "Tiêu đề"}
+    full_name: {type: string(255), notnull: true, comment: "Ho ten nguoi gop y"}
+    phone_number: {type: string(25), notnull: false, default: null}
+    email: {type: string(255), notnull: false, default: null}
+    description: {type: string(500), notnull: false, default: null}
+    create_date: { type: timestamp(25), notnull: false, comment: "Ngày tạo"}
+#Thông tin lu tru hoi vien
+AdPersonal:
+  tableName: ad_personal
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    full_name: {type: string(255), notnull: true, comment: "Ho ten nguoi gop y"}
+    birthday: { type: timestamp(25), notnull: false, default: null, comment: "Ngày sinh"}
+    sex: {type: string(25), notnull: false, default: null, comment: "Giới tính"}
+    phone_number: {type: string(25), notnull: false, default: null}
+    email: {type: string(255), notnull: false, default: null}
+    address: {type: string(255), notnull: false, default: null}
+    introduction: {type: string(1000), notnull: false, default: null}
+#Quan ly linh vuc van ban
+AdDocumentCategory:
+  tableName: ad_document_category
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: {type: string(255), notnull: true, comment: "Ho ten nguoi gop y"}
+    image_path: {type: string(255), notnull: false, default: null}
+    description: {type: string(500), notnull: false, default: null}
+    keywords: {type: string(500), notnull: false, default: null}
+    priority: {type: integer(5), notnull: false, default: null}
+    is_home: { type: boolean, notnull: true, default: false, comment: "Trang chủ (0: không hiển thị, 1: hiển thị)" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: Chưa kích hoạt, 1: đã kích hoạt)" }
+#Quan ly van ban
+AdDocument:
+  tableName: ad_document
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: {type: string(255), notnull: true, comment: "Ho ten nguoi gop y"}
+    description: {type: string(1000), notnull: false, default: null}
+    file_path: {type: string(255), notnull: true}
+    extension: {type: string(25), notnull: false, default: null}
+    document_number: {type: string(150), notnull: false, default: null}
+    document_date: {type: timestamp(25), notnull: false, default: null}
+    priority: {type: integer(5), notnull: false, default: null}
+    category_id: {type: integer(8), notnull: false, default: null}
+    is_home: { type: boolean, notnull: true, default: false, comment: "Hiển thị trang chủ (0: không hiển thị, 1: hiển thị)" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: Chưa kích hoạt, 1: đã kích hoạt)" }
+  relations:
+    AdDocCategory: { class: AdDocumentCategory, local: category_id, type: one, foreignAlias: DocumentCategory }
+#luu thong tin gop y nguoi dung
+AdContact:
+  tableName: ad_contact
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    title: {type: string(255), notnull: true, comment: "Tiêu đề"}
+    content: {type: string(500), notnull: false, default: null}
+    lat: {type: string(50), notnull: false, default: null}
+    lng: {type: string(50), notnull: false, default: null}
+    zoom: {type: string(5), notnull: false, default: null}
+    maptypeid: {type: string(255), notnull: false, default: null}
+
+AdUserSigninLock:
+  columns:
+    user_name: {type: string(255)}
+    created_time: {type: integer}
+
+#BANG SESSION DANG NHAP cho BACKEND
+SessionsAdmin:
+  columns:
+    sess_id: {type: string(64), primary: true}
+    sess_data: {type: clob, notnull: true}
+    sess_time: {type: integer(11), notnull: true}
+    sess_userid: {type: integer(20), default: null}
+
+AdLink:
+  #connection: doctrine
+  tableName: ad_link
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên link"}
+    link: { type: string(255), comment: "Đường dẫn" }
+    priority: {type: integer(5), default: null}
+    type: {type: integer(5), default: 1, comment: "1: kiểu link cột bên phải, 2 là link footer"}
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái duyệt bài viết"}
+
+
+#Bảng Quản lý Sản phẩm
+VtpProductsCategory:
+  tableName: vtp_products_category
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), comment: "Tên chuyên mục"}
+    address: { type: string(255), comment: "dia chi"}
+    image_path: { type: string(255), comment: "Đường dẫn file"}
+    link: { type: string(255), comment: "Đường dẫn chi tiết trên viettel shop"}
+    priority: { type: integer(8), default: 0, comment: "Thứ tự hiển thị"}
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=chưa sử dụng, 1= sử dụng"}
+    is_home: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0= Không hiện thị trang chu, 1= Hiện thị trang chủ"}
+    lang: {  type: string(10), comment: "Đa ngôn ngữ"}
+    description: { type: string,  comment: "Mô tả về sản phẩm"}
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    portal_id: { type: integer, comment: "Portal cần hiển thị nội dung, được quy ước trong file cấu hình (Khách hàng cá nhân / Khách hàng doanh nghiệp)"}
+    meta: { type: string(255), comment: "Nội dung meta" }
+    keywords: { type: string(255), comment: "Nội dung keywords"}
+    parent_id: { type: integer(5), comment: "Danh mục cha"}
+    level: { type: integer, default: 0, comment: "phân cấp chuyên mục"}
+    lat: { type: string(255), comment: "tọa độ latitude"}
+    log: { type: string(255), comment: "tọa dộ longtidude"}
+    parameter_ids: { type: string(255), comment: "Danh sách parameter"}
+    list_image: { type: string(255), comment: "Danh sách anh"}
+    email: { type: string(255), comment: "Email"}
+    msisdn: { type: string(255), comment: "sdt"}
+
+VtpProducts:
+  tableName: vtp_products
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    product_name: { type: string(255), notnull: true, unique: true, comment: "Tên sản phẩm"}
+    product_code: { type: string(100), notnull: true, unique: true, comment: "Mã sản phẩm"}
+    category_id: { type: integer, comment: "Chuyên mục sản phẩm"}
+    price: { type: integer(8), comment: "Giá sản phẩm"}
+    price_promotion: { type: integer(8), comment: "Giá sản phẩm"}
+    image_path: { type: string(255), comment: "Đường dẫn file ảnh đại diện"}
+    link: { type: string(255), comment: "Đường dẫn chi tiết trên viettel shop"}
+    priority: { type: integer(8), default: 0, comment: "Thứ tự hiển thị"}
+    description: { type: string(512),  comment: "Mô tả về sản phẩm"}
+    content: {type: clob, comment: "Nội dung bài viết"}
+    comment: {type: clob, comment: "Nội dung đánh giá sản phẩm bài viết"}
+    warranty_information: {type: clob, comment: "Thông tin bảo hành"}
+    manufacturer: {type: string(255), comment: "Nước sản xuất"}
+    do_day: {type: string(255), comment: "Độ dày"}
+    trong_luong: {type: string(255), comment: "Trọng lượng"}
+    duong_kinh_trong: {type: string(255), comment: "Đường kính trong"}
+    duong_kinh_ngoai: {type: string(255), comment: "Đường kính ngoài"}
+    chung_loai: {type: string(255), comment: "Chủng loại"}
+    accessories: {type: string(255), comment: "Phụ kiện"}
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=chưa sử dụng, 1= sử dụng"}
+    is_home: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=không hiển thị trang chủ, 1= Hiển thị trang chủ"}
+    is_hot: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=không hiển thị trang chủ, 1= Hiển thị trang chủ"}
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    portal_id: { type: integer, comment: "Portal cần hiển thị nội dung, được quy ước trong file cấu hình (Khách hàng cá nhân / Khách hàng doanh nghiệp)"}
+    lang: {  type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+    meta: { type: string(255), comment: "Nội dung meta" }
+    keywords: { type: string(255), comment: "Nội dung keywords"}
+  relations:
+    VtpProducts: { class: VtpProductsCategory, local: category_id, type: one, foreignAlias: ProductCategory }
+VtpProductImage:
+  #connection: doctrine
+  tableName: vtp_products_image
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    file_path: { type: string(255), notnull: true, comment: "Đường dẫn file"}
+    product_id: { type: integer, comment: "sản phẩm thiết bị"}
+    extension: { type: string(200), comment: "phần mở rộng của file"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+  relations:
+    VtpProductImage: { class: VtpProducts, local: product_id, type: one, foreignAlias: ProductImage }
+#menu
+VtpMenu:
+  tableName: vtp_menu
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên menu" }
+    description: { type: clob, comment: "Mô tả menu" }
+    image_path: { type: string(255),  comment: "File ảnh đại diện menu" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: ko hiển thị, 1: hiển thị)" }
+    lang: {  type: string(10), comment: "Đa ngôn ngữ"}
+    parent_id: { type: integer(5), comment: "Menu cấp cha"}
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    link: { type: string(255), comment: "Đường dẫn của Menu (nếu có)"}
+    level: { type: integer, default: 0, comment: "phân cấp Menu"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_detail: { type: boolean, notnull: true, default: false, comment: "có xem bài chi tiết hay không"}
+    type: { type: integer, default: 0, comment: "0-menu chính, 1-Menu footer"}
+  relations:
+    VtpParentMenu: { class: VtpMenu, local: parent_id, type: one, foreignAlias: ParentMenu }
+
+#Bang tin tức
+AdNews:
+  #connection: doctrine
+  tableName: ad_news
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    title: { type: string(512), notnull: true, comment: "Tiêu đề bài viết" }
+    alttitle: { type: string(255), comment: "Tiêu đề rút gọn" }
+    header: { type: clob, comment: "Trích yếu" }
+    body: { type: clob, comment: "Nội dung bài viết trên web" }
+    image_path: { type: string(255), comment: "Đường dẫn ảnh đại diện" }
+    attributes: { type: integer(8), comment: "Thuộc tính của bài viết: khuyến mại, " }
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    published_time: { type: timestamp(25), comment: "Thời gian xuất bản" }
+    expiredate_time: { type: timestamp(25), comment: "Thời gian kết thúc bản tin"}
+    meta: { type: string(255), comment: "Nội dung meta" }
+    keywords: { type: string(255), comment: "Nội dung keywords"}
+    author: { type: string(255), comment: "Tác giả" }
+    is_active: { type: integer(5), notnull: true, default: 0, comment: "0 ẩn, 1 hiện" }
+    is_hot: { type: boolean, notnull: true, default: false, comment: "Hiển thị trên trang chủ (0- ko hiển thị, 1- hiển thị)" }
+    lang: {  type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+    slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
+    category_id: { type: integer(8), comment: "Id của danh mục tin tức" }
+#bang book phong
+
+AdFeedBack:
+  #connection: doctrine
+  tableName: ad_feed_back
+  actAs:
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên"}
+    email: { type: string(255), notnull: true,  comment: "email"}
+    title: { type: string(255), notnull: true,  comment: "tieu de"}
+    phone: { type: string(255), notnull: true,  comment: "sdt"}
+    message: { type: string(255), notnull: true,  comment: "tin nhan"}
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+    lang: {  type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+SendMail:
+  #connection: doctrine
+  tableName: send_mail
+  actAs:
+    Timestampable: ~
+  columns:
+    email: { type: string(255), notnull: true,  comment: "email"}
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+    lang: {  type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+AdConfig:
+  #connection: doctrine
+  tableName: ad_config
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    config_key: { type: string(255), notnull: true,  comment: "config_key"}
+    config_val: { type: string, notnull: true,  comment: "config_val"}
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+    lang: {  type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
+AdYoutube:
+  #connection: doctrine
+  tableName: ad_youtube
+  actAs:
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên video"}
+    description: { type: string(1000), notnull: true,  comment: "mô tả"}
+    body: { type: clob, comment: "Nội dung bài viết trên web" }
+    link: { type: string(255), notnull: true,  comment: "link youtube"}
+    image: { type: string(255), notnull: true,  comment: "ảnh đại diện"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+AdDocumentDownload:
+  #connection: doctrine
+  tableName: ad_document_download
+  actAs:
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên video"}
+    description: { type: string(1000), notnull: true,  comment: "mô tả"}
+    body: { type: clob, comment: "Nội dung bài viết trên web" }
+    link: { type: string(255), notnull: true,  comment: "link google driver"}
+    image: { type: string(255), notnull: true,  comment: "ảnh đại diện"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+    category_id: {type: integer(8), notnull: false, default: null}
+  relations:
+    AdDocCategory: { class: AdDocumentCategory, local: category_id, type: one, foreignAlias: DocumentCategory }
+AdHocVien:
+  #connection: doctrine
+  tableName: ad_hoc_vien
+  actAs:
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên học viên"}
+    description: { type: string(1000), notnull: true,  comment: "mô tả"}
+    body: { type: clob, comment: "Nội dung bài viết trên web" }
+    image: { type: string(255), notnull: true,  comment: "ảnh đại diện"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+AdGiangVien:
+  #connection: doctrine
+  tableName: ad_giang_vien
+  actAs:
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên giảng viên"}
+    description: { type: string(1000), notnull: true,  comment: "mô tả"}
+    body: { type: clob, comment: "Nội dung bài viết trên web" }
+    image: { type: string(255), notnull: true,  comment: "ảnh đại diện"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+AdActivity:
+  #connection: doctrine
+  tableName: ad_activity
+  actAs:
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true,  comment: "Tên giảng viên"}
+    description: { type: string(1000), notnull: true,  comment: "mô tả"}
+    image: { type: string(255), notnull: true,  comment: "ảnh đại diện"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    type: { type: integer(5), notnull: true, comment: "Loại chuyên mục" }
+    is_active: { type: boolean, notnull: false, default: false, comment: "Trạng thái"}
+
+adLocation:
+  #connection: doctrine
+  tableName: ad_location
+  actAs:
+    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên tỉnh thành" }
+    code: { type: string(255), notnull: true, comment: "Mã tỉnh thành" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: ko hiển thị, 1: hiển thị)" }
+    parent_id: { type: integer(5), comment: "Danh mục cha"}
+    level: { type: integer, default: 0, comment: "phân cấp chuyên mục"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+
+adMassage:
+  #connection: doctrine
+  tableName: ad_massage
+  actAs:
+    Timestampable: ~
+  columns:
+    name: { type: string(255), notnull: true, comment: "Tên cơ sở" }
+    image: { type: string(255), comment: "ảnh đại diện"}
+    address: { type: string(255), comment: "Địa chỉ" }
+    time_open: { type: string(255), comment: "Thời gian mở cửa" }
+    time_close: { type: string(255), comment: "Thời gian đóng cửa" }
+    keywords: { type: string(255), comment: "keywords" }
+    phone: { type: string(255), comment: "Số điện thoại" }
+    slug: { type: string(255), comment: "link" }
+    description: { type: string(2000), notnull: true,  comment: "mô tả"}
+    location_id: { type: integer(5), comment: "Quận, huyện"}
+    rate: { type: integer(5), comment: "rate"}
+    total_view: { type: integer(5), comment: "Số lượt xem"}
+    lat: { type: string(255), comment: "tọa độ latitude"}
+    lng: { type: string(255), comment: "tọa dộ longtidude"}
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: ko hiển thị, 1: hiển thị)" }
+    is_home: { type: boolean, notnull: true, default: false, comment: "Hiển thị trang chủ" }
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    content: { type: clob, comment: "Nội dung bài viết"}
+adMassageImage:
+  #connection: doctrine
+  tableName: ad_massage_image
+  actAs:
+    Timestampable: ~
+  columns:
+    file_path: { type: string(255), notnull: true, comment: "Đường dẫn file"}
+    massage_id: { type: integer, comment: "Cơ sở"}
+    priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: ko hiển thị, 1: hiển thị)" }
+
+adMassageComment:
+  #connection: doctrine
+  tableName: ad_massage_comment
+  actAs:
+    Timestampable: ~
+  columns:
+    massage_id: { type: integer, comment: "Cơ sở"}
+    comment: { type: string(1000), comment: "Nội dung comment" }
+    is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái hiển thị (0: ko hiển thị, 1: hiển thị)" }
+#Bang order
+AdOrder:
+  #connection: doctrine
+  tableName: ad_order
+  actAs:
+    Timestampable: ~
+  columns:
+    title: { type: string(255), notnull: false, comment: "Tên sản phẩm" }
+    customer_name: { type: string(255), notnull: true, comment: "Tên khách hàng" }
+    customer_phone: { type: string(255), notnull: true, comment: "Số điện thoại" }
+    customer_address: { type: string(255), notnull: true, comment: "Địa chỉ" }
+    price: { type: integer(10), comment: "Giá sản phẩm"}
+    body: { type: clob, comment: "Nội dung" }
+    status: { type: integer(5), notnull: true, comment: "Trạng thái xử lý" }

@@ -1,0 +1,134 @@
+table {
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+
+}
+th.col-stt{
+    width: 40px;
+}
+.bordered{
+    width: 638px;
+    margin: 10px;
+}
+.bordered td{
+text-align:left;
+}
+.bordered {
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+}
+.bordered tr:hover {
+    background: #fbf8e9;
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+.specifications-info td{
+    border: 1px solid #ddd;
+}
+
+.bordered td, .bordered th {
+    border-left: 1px solid #f1f1f1;
+    padding: 0px;
+    text-align: left;
+}
+
+.bordered th{
+    color: #fff;
+    font-weight: normal;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+.container-fluid  table  td,
+.specifications-info td{
+	padding: 5px 10px;
+    color: #58595b;
+}
+.news-tel-main .bordered td{
+    padding: 5px 0px;
+    text-align: center;
+    color: #58595b;
+}
+.box-article-detail .bordered td{
+    text-align: center;
+}
+
+ .bordered-selfcare td,
+ .box-article-detail .bordered td{
+     padding: 10px 0px;
+
+     color: #58595b;
+ }
+ tr.tr-bold td{
+     font-weight: bold;
+ }
+.bordered-info td{
+    padding: 10px 12px;
+    text-align: left;
+    color: #58595b;
+    font-size: 13px;
+}
+
+.bordered td{
+    line-height: 20px;
+    padding: 10px;
+}
+.bordered-selfcare th,
+.box-article-detail .bordered th{
+    height: 35px;
+    line-height: 17px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+td.txt-center{
+    text-align: center;
+}
+.specifications-info th.th-colspan,
+.bordered th.th-colspan{
+    padding: 8px 0px;
+    background-color: #acacac;
+}
+.bordered th.td-8{
+    width:56px;
+}
+.bordered th.th-border{
+    border-left:1px solid #f9f9f9;
+}
+.bordered th.td-1{
+    width:32px;
+    border: none;
+}
+.bordered th.td-2{
+    width:68px;
+}
+.bordered th.td-5{
+    width:65px;
+}
+.bordered th.td-6{
+    width:65px;
+}
+.bordered th.td-7{
+    width:65px;
+}
+.bordered th.td-tk{
+    width:75px;
+    background-color: #fff;
+    color: #404041;
+    padding: 4px 0px;
+    border-bottom:1px solid #ddd;
+}
+.bordered tr:nth-child(2n) td{
+    background-color: #f9f9f9;
+}
+.bordered th {
+    background-color: #e1f8ff;
+    color: #231f20;
+    font-weight: bold;
+}
+.bordered td:first-child, .bordered th:first-child {
+    border-left: none;
+}

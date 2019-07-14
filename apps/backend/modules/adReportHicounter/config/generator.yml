@@ -1,0 +1,26 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdReportHicounter
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_report_hicounter
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Thống kê lượt xem bài trong chuyên mục
+      filter:
+        class: AdReportHicounterFilter
+        display: [category_id]
+        fields:
+          category_id: {label: Chuyên mục}
+      form:    ~
+      edit:    ~
+      new:     ~

@@ -1,0 +1,39 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdPersonal
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_personal
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        full_name: {label: Họ tên}
+        birthday: {label: Ngày sinh}
+        sex: {label: Giới tính}
+        phone_number: {label: Điện thoại}
+        email: {label: Email}
+        address: {label: Địa chỉ}
+        introduction: {label: Giới thiệu}
+      list:
+        display: [full_name, birthday, sex, phone_number, email, address, introduction ]
+        title: Danh sách hội viên
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [full_name, phone_number, email]
+        class: adManagePersonalFilter
+      form:
+        class: AdManagePersonalForm
+        display: [full_name, birthday, sex, phone_number, email, address, introduction ]
+      edit:
+        title: Chỉnh sửa thông tin hội viên
+      new:
+        title: Thêm mới thông tin hội viên

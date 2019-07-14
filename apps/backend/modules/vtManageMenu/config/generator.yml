@@ -1,0 +1,47 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VtpMenu
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vtp_menu
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: { label: Tên menu}
+        parent_id: { label: Menu cha}
+        description: { label: Mô tả}
+        image_path: { label: Ảnh minh họa}
+        link: { label: Đường dẫn}
+        priority: { label: Thứ tự hiển thị}
+        is_active: { label: Trạng thái}
+      list:
+        title: Danh sách Menu
+        display: [image_path, name, description, is_active, priority]
+        actions:
+          _new: {label: Thêm mới}
+        object_actions:
+          _edit: ~
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        class: vtManageMenuFormAdmin
+        display: [name, parent_id, description, image_path, link, type_link, link_content,page, link_text, priority, is_active]
+        fields:
+          name: {label: Tên Menu*}
+          priority: {label: Vị trí*}
+          type_link: {label: Kiểu liên kết}
+          link_content: {label: Bài viết nội dung}
+          page: {label: Trang }
+          link_text: {label: Link liên kết}
+      edit:
+        title: Chỉnh sửa menu
+      new:
+        title: Thêm mới menu

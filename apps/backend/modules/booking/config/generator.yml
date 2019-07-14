@@ -1,0 +1,41 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           Booking
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          booking
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        full_name: {label: "Họ tên"}
+        phone: {label: "SĐT"}
+        email: {label: "Email"}
+        category_id: {label: "Căn"}
+        product_id: {label: "Phòng"}
+        from_time: {label: "Từ ngày"}
+        to_time: {label: "Đến ngày"}
+        number_person: {label: "Số người"}
+        number_room: {label: "Số phòng"}
+        is_check: {label: "Trạng thái"}
+      list:
+        display: [full_name, phone, category_id, product_id, is_check]
+        title: Danh sánh ảnh phòng
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [full_name, phone]
+      form:
+        display: [full_name, phone, email, category_id, product_id, from_time, to_time, number_person, number_room, is_check]
+        class: BookingAdminForm
+      edit:
+        title: Chỉnh sửa đơn hàng
+      new:
+        title: Thêm mới đơn hàng

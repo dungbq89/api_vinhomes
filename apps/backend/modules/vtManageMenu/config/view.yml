@@ -1,0 +1,13 @@
+## YAML Template.
+---
+indexSuccess:
+  metas:
+    title: Danh sách Menu
+newSuccess:
+  metas:
+    title: Thêm mới Menu
+  javascripts:    [show-hide-menu.js]
+editSuccess:
+  metas:
+    title: Chỉnh sửa Menu
+  javascripts:    [show-hide-menu.js]

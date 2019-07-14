@@ -1,0 +1,37 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdLink
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_link
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: Tên liên kết}
+        link: {label: Link}
+        type: {label: Kiểu liên kết}
+        priority: {label: Thứ tự hiển thị}
+        is_active: {label: Trạng thái}
+      list:
+        title: Danh sách liên kết
+        display: [name, type, link, priority, is_active]
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+        class: adLinkFiltersAdmin
+      form:
+        class: adLinkAdminForm
+        display: [name, link, priority,is_active]
+      edit:
+        title: Chỉnh sửa liên kết
+      new:
+        title: Thêm mới liên kết

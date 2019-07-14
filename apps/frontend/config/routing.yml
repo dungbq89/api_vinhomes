@@ -1,0 +1,38 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+#ajax load video
+ajax_load_list_item:
+  url: /load-item
+  param: {module: pageHome, action: ajaxLoadListItem}
+#trang gioi thieu
+introduction:
+  url: /gioi-thieu
+  param: {module: pageIntroduction, action: index}
+#trang chuyen muc san pham
+products:
+  url: /san-pham/:slug
+  param: {module: pageProduct, action: index}
+detail_item:
+  url: /chi-tiet/:slug
+  param: {module: pageProduct, action: detail}
+#dat hang
+detail_project:
+  url: /du-an/:slug
+  param: {module: pageHome, action: detail}
+
+# default rules
+homepage:
+  url:   /:location
+#  param: { module: pageHome, action: index }
+  param: { module: pageHome, action: index, location: ''}
+  requirements: { sf_method: get }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

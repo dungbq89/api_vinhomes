@@ -1,0 +1,15 @@
+maps:
+  enabled: true
+  lifetime: 3000
+student:
+  enabled: true
+  lifetime: 600
+teacher:
+  enabled: true
+  lifetime: 600
+slide:
+  enabled: true
+  lifetime: 600
+activities:
+  enabled: true
+  lifetime: 600

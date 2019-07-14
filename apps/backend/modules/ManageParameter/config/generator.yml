@@ -1,0 +1,35 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           Parameter
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          parameter
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên"}
+        is_active: {label: "Trạng thái"}
+        priority: {label: "Sắp sếp"}
+        cat_id: {label: "Danh mục"}
+      list:
+        display: [name, is_active]
+        title: Danh sách thuộc tính
+      filter:
+        class: ParameterFormFilterAdmin
+        display: [name, cat_id, is_active]
+      form:
+        class: ParameterFormAdmin
+        display: [name, cat_id,priority, is_active]
+      edit:
+        title: Cập nhập thuộc tính
+      new:
+        title: Thêm mới thuộc tính
+      show:    ~
+      revert:  ~

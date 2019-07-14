@@ -1,0 +1,8 @@
+## YAML Template.
+---
+default:
+  stylesheets:
+    - css_update.css
+indexSuccess:
+  metas:
+    title: Chuyên mục tin tức

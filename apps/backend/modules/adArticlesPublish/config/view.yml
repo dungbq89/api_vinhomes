@@ -1,0 +1,11 @@
+## YAML Template.
+---
+indexSuccess:
+  metas:
+    title: Danh sách bài viết đã đăng
+newSuccess:
+  metas:
+    title: Thêm mới bài viết tin tức
+editSuccess:
+  metas:
+    title: Chỉnh sửa bài viết tin tức

@@ -1,0 +1,62 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VtpCategory
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vtp_category
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: 
+        _list: {label: Quay trở lại danh sách}
+        _save: {label: Lưu}
+        _delete: {label: Xóa}
+        _edit: {label: Chi tiết}
+      fields: 
+        name: {label: Tên chuyên mục}
+        description: {label: Mô tả}
+        parent_id: {label: Chuyên mục cha}
+        priority: {label: vị trí}
+        is_active: { label: Trạng thái}
+        link: { label: Đường dẫn}
+        type: { label: Loại}
+#        meta: {label: Nội dung thẻ Description}
+#        keywords: {label: Nội dung thẻ Keyword}
+      list:
+        title: Danh sách chuyên mục tin tức
+        fields:
+          image_path:
+          label: Ảnh đại diện
+          is_partial: true
+        display: [image_path, name, description, is_active, priority]
+#        sort: position
+#        table_method: 
+#        fields:
+#          name: {label: Tên chuyên mục}
+#          description: {label: Mô tả}
+        actions:
+          _new: {label: Thêm mới}
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:    
+        class: vtpCategoryAdminFormFilter
+        display: [name]
+      form:
+        class: vtpCategoryAdminForm
+        fields: 
+          name: {label: Tên chuyên mục*}         
+          priority: {label: Vị trí*}
+          image_path: {label: Ảnh đại diện}
+          permission: { label: Phân quyền *}
+        display: [name, parent_id, description, image_path, link,type, priority, is_active, permission, slug]
+#        display: [name, parent_id, description, meta, keywords, image_path, link, priority, is_active, permission, slug]
+      edit:
+        title: Chỉnh sửa chuyên mục
+      new:
+        title: Thêm mới chuyên mục

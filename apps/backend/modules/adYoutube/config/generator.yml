@@ -1,0 +1,38 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdYoutube
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_youtube
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: {label: "Tên video"}
+        description: {label: "Mô tả video"}
+        body: {label: "Nội dung video"}
+        link: {label: "Đường dẫn youtube"}
+        image: {label: "Ảnh đại diện"}
+        priority: {label: "Thứ tự ưu tiên"}
+        is_active: {label: "Trạng thái"}
+      list:
+        display: [image, name, priority, is_active]
+        title: Danh sách video
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        display: [name, image, link, description, body, priority, is_active]
+        class: adYoutubeFormAdmin
+      edit:
+        title: Chỉnh sửa video
+      new:
+        title: Thêm mới video

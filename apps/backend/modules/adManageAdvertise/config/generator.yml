@@ -1,0 +1,42 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdAdvertise
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_advertise
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        name: { label: Tên Banner}
+        description: { label: Mô tả}
+        location: { label: Vị trí}
+        view_type: { label: Kiểu hiển thị}
+        amount: { label: Số lượng ảnh}
+        width: { label: Độ rộng}
+        height: { label: Chiều cao}
+        is_active: { label: Trạng thái}
+      list:
+        title: Danh sách Banner quảng cáo
+        display: [name, view_type, amount, width, height, is_active]
+        max_per_page: 10
+        object_actions:
+          _delete: ~
+      filter:
+        display: [name]
+      form:
+        class: adManageAdvertisesFormAdmin
+        display: [name, description, view_type, amount, width, height, location_list, is_active ]
+        fields:
+          name: { label: Tên Banner *}
+          location_list: { label: Danh sách vị trí}
+      edit:
+        title: Chỉnh sửa Banner quảng cáo
+      new:
+        title: Thêm mới Banner quảng cáo

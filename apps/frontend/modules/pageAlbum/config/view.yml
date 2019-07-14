@@ -1,0 +1,8 @@
+## YAML Template.
+---
+indexSuccess:
+  metas:
+    title: Album - Hội nhà báo
+  javascripts:
+    - jquery.bxslider.min.js
+    - lightslider.js

@@ -1,0 +1,14 @@
+## YAML Template.
+---
+indexSuccess:
+  metas:
+    title: Chain
+chainDetailSuccess:
+  stylesheets:
+    - /highslide/highslide.css
+    - /css/flexslider.css
+  javascripts:
+    - /highslide/highslide-with-gallery.js
+    - /js/jquery.flexslider.js
+    - /js/jquery.easing.js
+    - /js/jquery.mousewheel.js

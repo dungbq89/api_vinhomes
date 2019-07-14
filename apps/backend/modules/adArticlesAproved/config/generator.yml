@@ -1,0 +1,41 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdArticle
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_article_adArticlesAproved
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title: {label: Tiêu đề}
+        alttitle: {label: Tiêu đề rút gọn}
+        header: {label: Tóm tắt}
+        body: {label: Nội dung}
+        image_path: {label: Hình ảnh}
+        is_hot: {label: Hot}
+        priority: {label: Thứ tự}
+        is_active: {label: Trạng thái}
+        category_id: {label: Chuyên mục}
+        attributes: {label: Thuộc tính}
+        published_time: {label: Thời gian đăng}
+        expiredate_time: {label: Thời gian hết}
+        author: {label: Tác giả}
+        other_link: {label: Link liên quan}
+        updated_by: {label: Người duyệt}
+      list:
+        title: Danh sách bài viết đã duyệt
+        display: [image_path, title,is_hot,priority,updated_by, is_active]
+        object_actions:
+          _edit: {label: Chi tiết}
+      filter:
+        class: adArticlesApprovedFilter
+      form:    ~
+      edit:    ~
+      new:     ~

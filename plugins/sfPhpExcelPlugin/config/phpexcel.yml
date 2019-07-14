@@ -1,0 +1,8 @@
+all:
+  meta:
+    creator:      abc xyz
+    title:        asdsa
+    subject:      dsad
+    description:  dsad
+    keywords:     dsad
+    category:     cdsa

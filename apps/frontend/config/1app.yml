@@ -1,0 +1,14 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  cat_id: 2
+  footer_id: 12
+  image_default:
+    image_default: '/img/image_default.png'
+    image_hot: '/img/image_hot.png'
+    image_92_55: '/img/image_92_55.jpg'
+    image_75_70: '/img/image_75_70.png'
+    image_150_100: '/img/image_150_100.png'
+    image_125_80: '/img/image_125_80.jpg'

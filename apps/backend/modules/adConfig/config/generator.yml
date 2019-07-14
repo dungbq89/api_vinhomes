@@ -1,0 +1,34 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdConfig
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_config
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        config_key: {label: "Key"}
+        config_val: {label: "Value"}
+        is_active: {label: "Trạng thái"}
+      list:
+        display: [config_key, config_val, is_active]
+        title: Quản lý cấu hình
+        object_actions:
+          _edit: {label: Chi tiết}
+          _delete: ~
+      filter:
+        display: [config_key, config_val]
+      form:
+        display: [config_key, config_val, is_active]
+        class: adConfigFormAdmin
+      edit:
+        title: Chỉnh sửa cấu hình
+      new:
+        title: Thêm mới cấu hình

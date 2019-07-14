@@ -1,0 +1,35 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           AdAdvertiseImage
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ad_advertise_image
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        file_path: { label: File đính kèm *}
+        advertise_id: { label: Banner - Quảng cáo}
+        is_active: { label: Trạng thái}
+        created_by: { label: Người tạo}
+        created_at: { label: Ngày tạo}
+        priority: {label: Thứ tự hiển thị}
+        link: {label: Đường dẫn}
+      list:
+        object_actions:
+          _delete: ~
+        display: [file_path, is_active, priority, created_by, created_at]
+      filter:  ~
+      form:
+        class: adManageAdvertiseImageFormAdmin
+        display: [ file_path, priority, link, is_active]
+      edit:
+        title: Chỉnh sửa hình ảnh
+      new:
+        title: Thêm mới hình ảnh
