@@ -2,7 +2,7 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn: 'mysql:host=163.44.207.198;dbname=vinhomesriverside'
+      dsn: 'mysql:host=163.44.207.198;dbname=api_vinhomes'
       username: dev
       password: abc@1234!
       attributes: { default_table_charset: utf8, default_table_collate: utf8_general_ci }
