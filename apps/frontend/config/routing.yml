@@ -2,24 +2,13 @@
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
 #ajax load video
-ajax_load_list_item:
-  url: /load-item
-  param: {module: pageHome, action: ajaxLoadListItem}
-#trang gioi thieu
-introduction:
-  url: /gioi-thieu
-  param: {module: pageIntroduction, action: index}
-#trang chuyen muc san pham
-products:
-  url: /san-pham/:slug
-  param: {module: pageProduct, action: index}
-detail_item:
-  url: /chi-tiet/:slug
-  param: {module: pageProduct, action: detail}
-#dat hang
-detail_project:
-  url: /du-an/:slug
-  param: {module: pageHome, action: detail}
+crawNews:
+  url: /crawNews
+  param: {module: pageHome, action: crawNews}
+
+getHomeData:
+  url: /api/getHomeData
+  param: {module: pageHome, action: getHomeData}
 
 # default rules
 homepage:

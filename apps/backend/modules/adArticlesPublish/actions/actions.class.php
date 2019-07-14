@@ -35,25 +35,7 @@ class adArticlesPublishActions extends autoAdArticlesPublishActions
         $id = $user->getGuardUser()->getId();
         $query->andWhere('is_active=?',  VtCommonEnum::NUMBER_TWO);
         $query->andWhere('lang=?',sfContext::getInstance()->getUser()->getCulture());
-        //Nếu user có cả 2 quyền Editor và Approved
-        if(!$user->isSuperAdmin() && !$user->hasCredential('admin')){
-            //Nếu user có cả 2 quyền Editor và Public
-            if($user->hasCredential('news_editor') && $user->hasCredential('news_public')){
-                $query->andWhere('(created_by=? or updated_by=?)',array($id, $id));
-            }
-            //Nếu là user có quyền Public
-            elseif($user->hasCredential('news_public')){
-                $query->andWhere('updated_by=?',$id);
-            }
-            //Nếu user có quyền Editor
-            elseif($user->hasCredential('news_editor')){
-                $query->andWhere('created_by=?',$id);
-            }
-            //Điều kiện hiển thị chuyên mục theo quyền
-            $arrPer = AdCategoryPermissionTable::getPermissionByUserId($id);
-            $arrCat=AdCategoryPermissionTable::getCatgoryIdByArrPermission($arrPer);
-            $query->andWhereIn('category_id', $arrCat);
-        }
+
         $query->orderBy('priority asc');
 
         $pages = ceil($query->count() / $this->getMaxPerPage());

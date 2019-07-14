@@ -38,4 +38,12 @@ class AdHocVienTable extends Doctrine_Table
         $pager->init();
         return $pager;
     }
+
+    public static function getNewsByDesc($desc)
+    {
+        return AdHocVienTable::getInstance()->createQuery()
+            ->where('description =?', $desc)
+            ->fetchOne();
+    }
+
 }

@@ -26,54 +26,45 @@ Doctrine_Manager::getInstance()->bindComponent('AdArticle', 'doctrine');
  * @property string $lang
  * @property string $slug
  * @property integer $category_id
- * @property AdCategory $AdArticleCategory
- * @property Doctrine_Collection $ArticlesRelated
- * @property Doctrine_Collection $RelatedArticles
  * 
- * @method string              getTitle()             Returns the current record's "title" value
- * @method string              getAlttitle()          Returns the current record's "alttitle" value
- * @method clob                getHeader()            Returns the current record's "header" value
- * @method clob                getBody()              Returns the current record's "body" value
- * @method string              getImagePath()         Returns the current record's "image_path" value
- * @method integer             getAttributes()        Returns the current record's "attributes" value
- * @method integer             getHitCount()          Returns the current record's "hit_count" value
- * @method integer             getPriority()          Returns the current record's "priority" value
- * @method timestamp           getPublishedTime()     Returns the current record's "published_time" value
- * @method timestamp           getExpiredateTime()    Returns the current record's "expiredate_time" value
- * @method string              getMeta()              Returns the current record's "meta" value
- * @method string              getKeywords()          Returns the current record's "keywords" value
- * @method string              getAuthor()            Returns the current record's "author" value
- * @method clob                getOtherLink()         Returns the current record's "other_link" value
- * @method integer             getIsActive()          Returns the current record's "is_active" value
- * @method boolean             getIsHot()             Returns the current record's "is_hot" value
- * @method string              getLang()              Returns the current record's "lang" value
- * @method string              getSlug()              Returns the current record's "slug" value
- * @method integer             getCategoryId()        Returns the current record's "category_id" value
- * @method AdCategory          getAdArticleCategory() Returns the current record's "AdArticleCategory" value
- * @method Doctrine_Collection getArticlesRelated()   Returns the current record's "ArticlesRelated" collection
- * @method Doctrine_Collection getRelatedArticles()   Returns the current record's "RelatedArticles" collection
- * @method AdArticle           setTitle()             Sets the current record's "title" value
- * @method AdArticle           setAlttitle()          Sets the current record's "alttitle" value
- * @method AdArticle           setHeader()            Sets the current record's "header" value
- * @method AdArticle           setBody()              Sets the current record's "body" value
- * @method AdArticle           setImagePath()         Sets the current record's "image_path" value
- * @method AdArticle           setAttributes()        Sets the current record's "attributes" value
- * @method AdArticle           setHitCount()          Sets the current record's "hit_count" value
- * @method AdArticle           setPriority()          Sets the current record's "priority" value
- * @method AdArticle           setPublishedTime()     Sets the current record's "published_time" value
- * @method AdArticle           setExpiredateTime()    Sets the current record's "expiredate_time" value
- * @method AdArticle           setMeta()              Sets the current record's "meta" value
- * @method AdArticle           setKeywords()          Sets the current record's "keywords" value
- * @method AdArticle           setAuthor()            Sets the current record's "author" value
- * @method AdArticle           setOtherLink()         Sets the current record's "other_link" value
- * @method AdArticle           setIsActive()          Sets the current record's "is_active" value
- * @method AdArticle           setIsHot()             Sets the current record's "is_hot" value
- * @method AdArticle           setLang()              Sets the current record's "lang" value
- * @method AdArticle           setSlug()              Sets the current record's "slug" value
- * @method AdArticle           setCategoryId()        Sets the current record's "category_id" value
- * @method AdArticle           setAdArticleCategory() Sets the current record's "AdArticleCategory" value
- * @method AdArticle           setArticlesRelated()   Sets the current record's "ArticlesRelated" collection
- * @method AdArticle           setRelatedArticles()   Sets the current record's "RelatedArticles" collection
+ * @method string    getTitle()           Returns the current record's "title" value
+ * @method string    getAlttitle()        Returns the current record's "alttitle" value
+ * @method clob      getHeader()          Returns the current record's "header" value
+ * @method clob      getBody()            Returns the current record's "body" value
+ * @method string    getImagePath()       Returns the current record's "image_path" value
+ * @method integer   getAttributes()      Returns the current record's "attributes" value
+ * @method integer   getHitCount()        Returns the current record's "hit_count" value
+ * @method integer   getPriority()        Returns the current record's "priority" value
+ * @method timestamp getPublishedTime()   Returns the current record's "published_time" value
+ * @method timestamp getExpiredateTime()  Returns the current record's "expiredate_time" value
+ * @method string    getMeta()            Returns the current record's "meta" value
+ * @method string    getKeywords()        Returns the current record's "keywords" value
+ * @method string    getAuthor()          Returns the current record's "author" value
+ * @method clob      getOtherLink()       Returns the current record's "other_link" value
+ * @method integer   getIsActive()        Returns the current record's "is_active" value
+ * @method boolean   getIsHot()           Returns the current record's "is_hot" value
+ * @method string    getLang()            Returns the current record's "lang" value
+ * @method string    getSlug()            Returns the current record's "slug" value
+ * @method integer   getCategoryId()      Returns the current record's "category_id" value
+ * @method AdArticle setTitle()           Sets the current record's "title" value
+ * @method AdArticle setAlttitle()        Sets the current record's "alttitle" value
+ * @method AdArticle setHeader()          Sets the current record's "header" value
+ * @method AdArticle setBody()            Sets the current record's "body" value
+ * @method AdArticle setImagePath()       Sets the current record's "image_path" value
+ * @method AdArticle setAttributes()      Sets the current record's "attributes" value
+ * @method AdArticle setHitCount()        Sets the current record's "hit_count" value
+ * @method AdArticle setPriority()        Sets the current record's "priority" value
+ * @method AdArticle setPublishedTime()   Sets the current record's "published_time" value
+ * @method AdArticle setExpiredateTime()  Sets the current record's "expiredate_time" value
+ * @method AdArticle setMeta()            Sets the current record's "meta" value
+ * @method AdArticle setKeywords()        Sets the current record's "keywords" value
+ * @method AdArticle setAuthor()          Sets the current record's "author" value
+ * @method AdArticle setOtherLink()       Sets the current record's "other_link" value
+ * @method AdArticle setIsActive()        Sets the current record's "is_active" value
+ * @method AdArticle setIsHot()           Sets the current record's "is_hot" value
+ * @method AdArticle setLang()            Sets the current record's "lang" value
+ * @method AdArticle setSlug()            Sets the current record's "slug" value
+ * @method AdArticle setCategoryId()      Sets the current record's "category_id" value
  * 
  * @package    symfony
  * @subpackage model
@@ -190,23 +181,7 @@ abstract class BaseAdArticle extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('AdCategory as AdArticleCategory', array(
-             'local' => 'category_id',
-             'foreign' => 'id'));
-
-        $this->hasMany('AdArticle as ArticlesRelated', array(
-             'refClass' => 'AdArticlesRelated',
-             'local' => 'id',
-             'foreign' => 'article_id'));
-
-        $this->hasMany('AdArticle as RelatedArticles', array(
-             'refClass' => 'AdArticlesRelated',
-             'local' => 'article_id',
-             'foreign' => 'id'));
-
-        $vtblameable0 = new Doctrine_Template_VtBlameable();
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($vtblameable0);
         $this->actAs($timestampable0);
     }
 }

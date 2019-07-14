@@ -32,7 +32,7 @@ generator:
         updated_by: {label: Người đăng}
       list:
         title: Danh sách bài viết đã đăng
-        display: [image_path, title,is_hot,priority,updated_by, is_active]
+        display: [image_path, title,is_hot,priority,is_active]
         object_actions:
           _edit: {label: Chi tiết}
       filter:

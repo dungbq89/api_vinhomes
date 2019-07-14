@@ -23,5 +23,4 @@
             }
       ?>
   </td>    
-  <td class="sf_admin_foreignkey sf_admin_list_td_created_by" field="created_by"><?php echo  VtHelper::truncate($ad_article->getUpdatedBy(), 50, '...', true)  ?></td>
   <td class="sf_admin_foreignkey sf_admin_list_td_update_at" field="published_time" style="text-align: center; white-space: nowrap"><?php echo  date('d-m-Y H:i:s',  strtotime($ad_article->published_time))  ?></td>

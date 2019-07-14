@@ -154,7 +154,7 @@ class AdArticleTable extends Doctrine_Table
     public static function getArticlePublish($parentId = null)
     {
         $query = self::getActiveArticleQuery()
-            ->innerJoin("a.AdArticleCategory c ON c.id = a.category_id")
+//            ->innerJoin("a.AdArticleCategory c ON c.id = a.category_id")
             ->andWhere(($parentId != '') ? 'parent_id=?' : '(parent_id=? or parent_id is null)', $parentId);
         return $query->execute();
     }

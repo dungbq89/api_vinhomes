@@ -22,7 +22,6 @@ Doctrine_Manager::getInstance()->bindComponent('AdCategory', 'doctrine');
  * @property AdCategory $AdParentCategory
  * @property AdCategoryPermission $AdCatPermission
  * @property Doctrine_Collection $ParentCategory
- * @property Doctrine_Collection $ArticleCategory
  * 
  * @method string               getName()             Returns the current record's "name" value
  * @method clob                 getDescription()      Returns the current record's "description" value
@@ -39,7 +38,6 @@ Doctrine_Manager::getInstance()->bindComponent('AdCategory', 'doctrine');
  * @method AdCategory           getAdParentCategory() Returns the current record's "AdParentCategory" value
  * @method AdCategoryPermission getAdCatPermission()  Returns the current record's "AdCatPermission" value
  * @method Doctrine_Collection  getParentCategory()   Returns the current record's "ParentCategory" collection
- * @method Doctrine_Collection  getArticleCategory()  Returns the current record's "ArticleCategory" collection
  * @method AdCategory           setName()             Sets the current record's "name" value
  * @method AdCategory           setDescription()      Sets the current record's "description" value
  * @method AdCategory           setImagePath()        Sets the current record's "image_path" value
@@ -55,7 +53,6 @@ Doctrine_Manager::getInstance()->bindComponent('AdCategory', 'doctrine');
  * @method AdCategory           setAdParentCategory() Sets the current record's "AdParentCategory" value
  * @method AdCategory           setAdCatPermission()  Sets the current record's "AdCatPermission" value
  * @method AdCategory           setParentCategory()   Sets the current record's "ParentCategory" collection
- * @method AdCategory           setArticleCategory()  Sets the current record's "ArticleCategory" collection
  * 
  * @package    symfony
  * @subpackage model
@@ -149,10 +146,6 @@ abstract class BaseAdCategory extends sfDoctrineRecord
         $this->hasMany('AdCategory as ParentCategory', array(
              'local' => 'id',
              'foreign' => 'parent_id'));
-
-        $this->hasMany('AdArticle as ArticleCategory', array(
-             'local' => 'id',
-             'foreign' => 'category_id'));
 
         $vtblameable0 = new Doctrine_Template_VtBlameable();
         $timestampable0 = new Doctrine_Template_Timestampable();

@@ -17,17 +17,9 @@ all:
         Phân hệ Tin tức:
           credentials: [[admin,news_editor,news_approved,news_public, ctv]]
           dropdown:
-            Quản lý tin đợi duyệt:
+            Quản lý tin tức:
               credentials: [[admin,news_editor,news_approved,news_public, ctv]]
-              route: ad_article
-              icon: text.png
-            Quản lý tin đợi đăng:
-              credentials: [[admin,news_editor,news_approved,news_public, ctv]]
-              route: ad_article_adArticlesAproved
-              icon: text.png
-            Quản lý tin đã đăng:
-              credentials: [[admin,news_editor,news_approved,news_public, ctv]]
-              route: ad_article_adArticlesPublish
+              route: ad_hoc_vien
               icon: text.png
         Phân hệ khác:
           credentials: [[admin,subAdmin, ctv]]

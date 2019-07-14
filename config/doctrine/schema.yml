@@ -63,7 +63,7 @@ AdArticle:
   #connection: doctrine
   tableName: ad_article
   actAs:
-    VtBlameable: ~
+#    VtBlameable: ~
     Timestampable: ~
   columns:
     title: { type: string(512), notnull: true, comment: "Tiêu đề bài viết" }
@@ -85,15 +85,7 @@ AdArticle:
     lang: {  type: string(10), notnull: true, comment: "Đa ngôn ngữ" }
     slug: { type: string(255), unique: true, notnull: true, comment: "chuyển đổi url"}
     category_id: { type: integer(8), comment: "Id của danh mục tin tức" }
-  relations:
-    AdArticleCategory: { class: AdCategory, local: category_id, type: one, foreignAlias: ArticleCategory }
-    ArticlesRelated:
-      class: AdArticle
-      foreignAlias: RelatedArticles
-      refClass: AdArticlesRelated
-      local: id
-      foreign: article_id
-#Bảng  tin tức liên quan
+
 AdArticlesRelated:
   #connection: doctrine
   tableName: ad_article_related
