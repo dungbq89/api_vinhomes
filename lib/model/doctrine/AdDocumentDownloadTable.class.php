@@ -47,4 +47,19 @@ class AdDocumentDownloadTable extends Doctrine_Table
         $pager->init();
         return $pager;
     }
+
+    public static function getDocByDesc($desc)
+    {
+        return  AdDocumentDownloadTable::getInstance()->createQuery()
+            ->where('description=?', $desc)
+            ->fetchArray();
+    }
+
+    public static function getDocuments($limit)
+    {
+        return  AdDocumentDownloadTable::getInstance()->createQuery()
+            ->orderBy('priority DESC')
+            ->limit($limit)
+            ->fetchArray();
+    }
 }

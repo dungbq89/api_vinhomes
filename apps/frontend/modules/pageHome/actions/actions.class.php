@@ -49,6 +49,55 @@ class pageHomeActions extends sfActions
         return $this->renderText(json_encode($data));
     }
 
+
+    public function executeGetMedia(sfWebRequest $request)
+    {
+        $this->setLayout(false);
+        $this->setTemplate(false);
+        header('Content-Type: application/json');
+        if($request->getMethod() != 'GET'){
+            $data['errorCode'] = 3;
+            $data['message'] = 'Phương thức không hợp lệ';
+            $data['data'] = array();
+            $this->renderText(json_encode($data));
+        }
+        $videos = AdYoutubeTable::getVideos(10);
+        $arrVideos = array();
+        if($videos && count($videos) > 0){
+            foreach ($videos as $item){
+                $arr = array();
+                $arr['id'] = $item['id'];
+                $arr['title'] = $item['name'];
+                $arr['link'] = $item['link'];
+                $arr['image'] = $item['link'];
+                $arrVideos[] = $arr;
+            }
+        }
+
+        $documents = AdDocumentDownloadTable::getDocuments(5);
+        $arrDocs = array();
+        if($documents && count($documents) > 0){
+            foreach ($documents as $item){
+                $arr = array();
+                $arr['id'] = $item['id'];
+                $arr['title'] = $item['name'];
+                $arr['link'] = $item['link'];
+                $arrDocs[] = $arr;
+            }
+        }
+
+        $resData = array(
+            "album" => array(),
+            "videos" => $arrVideos,
+            "documents" => $arrDocs
+        );
+        $data['errorCode'] = 0;
+        $data['message'] = 'Thành công';
+        $data['data'] = $resData;
+        return $this->renderText(json_encode($data));
+    }
+
+
     public function executeCrawNews(sfWebRequest $request)
     {
         $this->setLayout(false);
@@ -75,13 +124,66 @@ class pageHomeActions extends sfActions
                         $article->save();
                         $count++;
                     }catch (Exception $e){
-                        var_dump($e->getMessage());die;
                     }
 
                 }
             }
         }
-        echo ('Update thành công '.$count. ' tin tức');
+        var_dump('Update thành công '.$count. ' tin tức');die;
+    }
+
+    public function executeCrawVideo(sfWebRequest $request){
+        $this->setLayout(false);
+        $url = 'http://178.128.86.192:4200/api/v1/hotdata';
+        $data = $this->curlGet($url);
+        $count = 0;
+        if ($data) {
+            $response = $data->data->videos;
+            foreach ($response as $item) {
+                $videoCheck = AdYoutubeTable::getYoutubeByDesc($item->_id);
+                if (!$videoCheck) {
+                    try{
+                        $article = new AdYoutube();
+                        $article->setName($item->name);
+                        $article->setBody($item->name);
+                        $article->setIsActive(1);
+                        $article->setPriority(10);
+                        $article->setImage($item->link);
+                        $article->setDescription($item->_id);
+                        $article->setLink($item->link);
+                        $article->save();
+                        $count++;
+                    }catch (Exception $e){
+
+                    }
+
+                }
+            }
+
+            $responseDoc = $data->data->documents;
+            foreach ($responseDoc as $item) {
+                $videoCheck = AdDocumentDownloadTable::getDocByDesc($item->_id);
+                if (!$videoCheck) {
+                    try{
+                        $article = new AdDocumentDownload();
+                        $article->setName($item->name);
+                        $article->setBody($item->name);
+                        $article->setIsActive(1);
+                        $article->setPriority(10);
+                        $article->setImage($item->link);
+                        $article->setDescription($item->_id);
+                        $article->setLink($item->link);
+                        $article->setCategoryId(1);
+                        $article->save();
+                        $count++;
+                    }catch (Exception $e){
+
+                    }
+
+                }
+            }
+        }
+        var_dump('Update thành công '.$count. ' tin tức');die;
     }
 
     public function curlGet($url)

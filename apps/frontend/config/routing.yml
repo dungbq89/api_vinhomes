@@ -5,10 +5,17 @@
 crawNews:
   url: /crawNews
   param: {module: pageHome, action: crawNews}
+crawVideo:
+  url: /crawVideo
+  param: {module: pageHome, action: crawVideo}
 
 getHomeData:
   url: /api/getHomeData
   param: {module: pageHome, action: getHomeData}
+
+getMedia:
+  url: /api/getMedia
+  param: {module: pageHome, action: getMedia}
 
 # default rules
 homepage:

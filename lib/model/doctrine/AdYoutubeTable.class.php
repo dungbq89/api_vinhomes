@@ -57,4 +57,19 @@ class AdYoutubeTable extends Doctrine_Table
         $pager->init();
         return $pager;
     }
+
+    public static function getYoutubeByDesc($desc)
+    {
+        return  AdYoutubeTable::getInstance()->createQuery()
+            ->where('description=?', $desc)
+            ->fetchArray();
+    }
+
+    public static function getVideos($limit)
+    {
+        return  AdYoutubeTable::getInstance()->createQuery()
+            ->orderBy('priority DESC')
+            ->limit($limit)
+            ->fetchArray();
+    }
 }
