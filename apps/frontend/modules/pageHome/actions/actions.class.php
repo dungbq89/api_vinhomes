@@ -20,7 +20,7 @@ class pageHomeActions extends sfActions
         $this->setLayout(false);
         $this->setTemplate(false);
         header('Content-Type: application/json');
-        if($request->getMethod() != 'GET'){
+        if ($request->getMethod() != 'GET') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
             $data['data'] = array();
@@ -28,13 +28,13 @@ class pageHomeActions extends sfActions
         }
         $news = AdHocVienTable::getAllStudent();
         $arrNews = array();
-        if($news && count($news) > 0){
-            foreach ($news as $item){
+        if ($news && count($news) > 0) {
+            foreach ($news as $item) {
                 $arr = array();
                 $arr['id'] = $item['id'];
                 $arr['title'] = $item['name'];
                 $arr['description'] = $item['name'];
-                $arr['image'] = sfConfig::get('app_domain').'uploads/' . sfConfig::get('app_article_images') . $item['image'];
+                $arr['image'] = sfConfig::get('app_domain') . 'uploads/' . sfConfig::get('app_article_images') . $item['image'];
                 $arr['content'] = $item['body'];
                 $arrNews[] = $arr;
             }
@@ -55,7 +55,7 @@ class pageHomeActions extends sfActions
         $this->setLayout(false);
         $this->setTemplate(false);
         header('Content-Type: application/json');
-        if($request->getMethod() != 'GET'){
+        if ($request->getMethod() != 'GET') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
             $data['data'] = array();
@@ -63,8 +63,8 @@ class pageHomeActions extends sfActions
         }
         $videos = AdYoutubeTable::getVideos(10);
         $arrVideos = array();
-        if($videos && count($videos) > 0){
-            foreach ($videos as $item){
+        if ($videos && count($videos) > 0) {
+            foreach ($videos as $item) {
                 $arr = array();
                 $arr['id'] = $item['id'];
                 $arr['title'] = $item['name'];
@@ -76,8 +76,8 @@ class pageHomeActions extends sfActions
 
         $documents = AdDocumentDownloadTable::getDocuments(5);
         $arrDocs = array();
-        if($documents && count($documents) > 0){
-            foreach ($documents as $item){
+        if ($documents && count($documents) > 0) {
+            foreach ($documents as $item) {
                 $arr = array();
                 $arr['id'] = $item['id'];
                 $arr['title'] = $item['name'];
@@ -97,11 +97,74 @@ class pageHomeActions extends sfActions
         return $this->renderText(json_encode($data));
     }
 
+    /*
+     * API dat han
+     */
+    public function executeOrder(sfWebRequest $request)
+    {
+        $this->setLayout(false);
+        $this->setTemplate(false);
+        header('Content-Type: application/json');
+        if ($request->getMethod() != 'POST') {
+            $data['errorCode'] = 3;
+            $data['message'] = 'Phương thức không hợp lệ';
+            $data['data'] = array();
+            return $this->renderText(json_encode($data));
+        }
+        $name = trim($request->getParameter('name', null));
+        $phone = trim($request->getParameter('phone'));
+        $email = trim($request->getParameter('email'));
+        $requirements = trim($request->getParameter('requirements'));
+        if (strlen($requirements) >= 255) {
+            $data['errorCode'] = 4;
+            $data['message'] = 'Thông tin đầu vào không hợp lệ';
+            $data['data'] = array();
+            return $this->renderText(json_encode($data));
+        }
+        if ($name == '') {
+            $data['errorCode'] = 5;
+            $data['message'] = 'Nhập thiếu Họ và tên';
+            $data['data'] = array();
+            return $this->renderText(json_encode($data));
+        }
+        if ($phone == '') {
+            $data['errorCode'] = 6;
+            $data['message'] = 'Nhập thiếu Số điện thoại';
+            $data['data'] = array();
+            return $this->renderText(json_encode($data));
+        }
+        if ($email == '') {
+            $data['errorCode'] = 7;
+            $data['message'] = 'Nhập thiếu email';
+            $data['data'] = array();
+            return $this->renderText(json_encode($data));
+        }
+        try {
+            $feedBack = new AdFeedBack();
+            $feedBack->setName($name);
+            $feedBack->setEmail($email);
+            $feedBack->setPhone($phone);
+            $feedBack->setTitle($requirements);
+            $feedBack->setMessage($requirements);
+            $feedBack->setIsActive(0);
+            $feedBack->setLang('vi');
+            $feedBack->save();
+            $mess = 'Liên hệ thành công';
+            $errCode = 0;
+        } catch (Exception $exception) {
+            $errCode = 10;
+            $mess = 'Đặt mua không thành công';
+        }
+        $data['errorCode'] = $errCode;
+        $data['message'] = $mess;
+        $data['data'] = array();
+        return $this->renderText(json_encode($data));
+    }
 
     public function executeCrawNews(sfWebRequest $request)
     {
         $this->setLayout(false);
-        $folderRoot = sfConfig::get("sf_upload_dir") . '/' . sfConfig::get('app_article_images').'/';
+        $folderRoot = sfConfig::get("sf_upload_dir") . '/' . sfConfig::get('app_article_images') . '/';
         $url = 'http://178.128.86.192:4200/api/v1/news?page=1';
         $data = $this->curlGet($url);
         $count = 0;
@@ -110,29 +173,31 @@ class pageHomeActions extends sfActions
             foreach ($response as $item) {
                 $articleCheck = AdHocVienTable::getNewsByDesc($item->_id);
                 if (!$articleCheck) {
-                    try{
+                    try {
                         $article = new AdHocVien();
                         $article->setName($item->title);
                         $article->setBody($item->content);
                         //save image to server
-                        $imageName = $item->_id.'.jpg';
-                        $this->saveImage($item->thumbnail, $folderRoot.$imageName);
-                        $article->setImage('/'.$imageName);
+                        $imageName = $item->_id . '.jpg';
+                        $this->saveImage($item->thumbnail, $folderRoot . $imageName);
+                        $article->setImage('/' . $imageName);
                         $article->setIsActive(1);
                         $article->setPriority(10);
                         $article->setDescription($item->_id);
                         $article->save();
                         $count++;
-                    }catch (Exception $e){
+                    } catch (Exception $e) {
                     }
 
                 }
             }
         }
-        var_dump('Update thành công '.$count. ' tin tức');die;
+        var_dump('Update thành công ' . $count . ' tin tức');
+        die;
     }
 
-    public function executeCrawVideo(sfWebRequest $request){
+    public function executeCrawVideo(sfWebRequest $request)
+    {
         $this->setLayout(false);
         $url = 'http://178.128.86.192:4200/api/v1/hotdata';
         $data = $this->curlGet($url);
@@ -142,7 +207,7 @@ class pageHomeActions extends sfActions
             foreach ($response as $item) {
                 $videoCheck = AdYoutubeTable::getYoutubeByDesc($item->_id);
                 if (!$videoCheck) {
-                    try{
+                    try {
                         $article = new AdYoutube();
                         $article->setName($item->name);
                         $article->setBody($item->name);
@@ -153,7 +218,7 @@ class pageHomeActions extends sfActions
                         $article->setLink($item->link);
                         $article->save();
                         $count++;
-                    }catch (Exception $e){
+                    } catch (Exception $e) {
 
                     }
 
@@ -164,7 +229,7 @@ class pageHomeActions extends sfActions
             foreach ($responseDoc as $item) {
                 $videoCheck = AdDocumentDownloadTable::getDocByDesc($item->_id);
                 if (!$videoCheck) {
-                    try{
+                    try {
                         $article = new AdDocumentDownload();
                         $article->setName($item->name);
                         $article->setBody($item->name);
@@ -176,14 +241,15 @@ class pageHomeActions extends sfActions
                         $article->setCategoryId(1);
                         $article->save();
                         $count++;
-                    }catch (Exception $e){
+                    } catch (Exception $e) {
 
                     }
 
                 }
             }
         }
-        var_dump('Update thành công '.$count. ' tin tức');die;
+        var_dump('Update thành công ' . $count . ' tin tức');
+        die;
     }
 
     public function curlGet($url)

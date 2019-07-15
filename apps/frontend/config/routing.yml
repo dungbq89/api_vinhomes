@@ -17,6 +17,10 @@ getMedia:
   url: /api/getMedia
   param: {module: pageHome, action: getMedia}
 
+getMedia:
+  url: /api/order
+  param: {module: pageHome, action: order}
+
 # default rules
 homepage:
   url:   /:location
