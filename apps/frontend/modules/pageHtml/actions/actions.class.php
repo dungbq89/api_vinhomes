@@ -19,4 +19,9 @@ class pageHtmlActions extends sfActions
     {
 
     }
+
+    public function executeBorrowing(sfWebRequest $request)
+    {
+
+    }
 }

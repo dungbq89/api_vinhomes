@@ -17,13 +17,17 @@ getMedia:
   url: /api/getMedia
   param: {module: pageHome, action: getMedia}
 
-getMedia:
+order:
   url: /api/order
   param: {module: pageHome, action: order}
 
 introduction:
   url: /introduction
   param: {module: pageHtml, action: introduction}
+
+borrowing:
+  url: /borrowing
+  param: {module: pageHtml, action: borrowing}
 
 # default rules
 homepage:

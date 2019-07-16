@@ -17,14 +17,14 @@ class pageHomeActions extends sfActions
 
     public function executeGetHomeData(sfWebRequest $request)
     {
+        header("Content-Type: application/json; charset=UTF-8");
         $this->setLayout(false);
         $this->setTemplate(false);
-        header('Content-Type: application/json');
         if ($request->getMethod() != 'GET') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
             $data['data'] = array();
-            $this->renderText(json_encode($data));
+            return $this->renderText(json_encode($data));
         }
         $news = AdHocVienTable::getAllStudent();
         $arrNews = array();
