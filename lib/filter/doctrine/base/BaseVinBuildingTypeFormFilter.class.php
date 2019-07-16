@@ -21,6 +21,8 @@ abstract class BaseVinBuildingTypeFormFilter extends BaseFormFilterDoctrine
       'type'              => new sfWidgetFormFilterInput(),
       'apartment_type_id' => new sfWidgetFormFilterInput(),
       'apartment_cat'     => new sfWidgetFormFilterInput(),
+      'is_hot'            => new sfWidgetFormFilterInput(),
+      'attr'              => new sfWidgetFormFilterInput(),
       'created_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
     ));
@@ -34,6 +36,8 @@ abstract class BaseVinBuildingTypeFormFilter extends BaseFormFilterDoctrine
       'type'              => new sfValidatorPass(array('required' => false)),
       'apartment_type_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'apartment_cat'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'is_hot'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'attr'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
     ));
@@ -64,6 +68,8 @@ abstract class BaseVinBuildingTypeFormFilter extends BaseFormFilterDoctrine
       'type'              => 'Text',
       'apartment_type_id' => 'Number',
       'apartment_cat'     => 'Number',
+      'is_hot'            => 'Number',
+      'attr'              => 'Number',
       'created_at'        => 'Date',
       'updated_at'        => 'Date',
     );

@@ -9,6 +9,9 @@ crawVideo:
   url: /crawVideo
   param: {module: pageHome, action: crawVideo}
 
+getProducts:
+  url: /api/getProducts
+  param: {module: pageHome, action: getProducts}
 getHomeData:
   url: /api/getHomeData
   param: {module: pageHome, action: getHomeData}

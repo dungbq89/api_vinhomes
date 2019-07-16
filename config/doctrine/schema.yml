@@ -623,6 +623,7 @@ VinApartmentCate:
     name: { type: string(255), notnull: false, comment: "name" }
     vin_model: { type: string(255), notnull: false, comment: "ApartmentCategory, floorsCategory" }
     type: { type: string(255), notnull: false, comment: "model" }
+    priority: { type: integer(3), notnull: false, comment: "model" }
 VinApartmentType:
   tableName: vin_apartment_type
   actAs:
@@ -637,12 +638,14 @@ VinApartmentType:
     bad_room: { type: string(255), notnull: false, comment: "model" }
     bath_room: { type: string(255), notnull: false, comment: "model" }
     kitchen_room: { type: string(255), notnull: false, comment: "model" }
+    balcony: { type: string(255), notnull: false, comment: "model" }
     description: { type: string(255), notnull: false, comment: "model" }
     heart_wall: { type: string(255), notnull: false, comment: "model" }
     clear_span: { type: string(255), notnull: false, comment: "model" }
     vin_model: { type: string(255), notnull: false, comment: "model" }
     parent_type: { type: string(255), notnull: false, comment: "model" }
     apartment_cat:  { type: integer(22), notnull: false, comment: "model" }
+    priority: { type: integer(3), notnull: false, comment: "model" }
 
 VinBuildingType:
   tableName: vin_building_type
@@ -658,6 +661,8 @@ VinBuildingType:
     type: { type: string(255), notnull: false, comment: "model" }
     apartment_type_id: { type: integer(22), notnull: false, comment: "model" }
     apartment_cat: { type: integer(22), notnull: false, comment: "model" }
+    is_hot: { type: integer(3), notnull: false, comment: "model" }
+    attr: { type: integer(22), notnull: false, comment: "model" }
 
 VinProductImage:
   #connection: doctrine

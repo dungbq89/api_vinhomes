@@ -15,6 +15,8 @@ Doctrine_Manager::getInstance()->bindComponent('VinBuildingType', 'doctrine');
  * @property string $type
  * @property integer $apartment_type_id
  * @property integer $apartment_cat
+ * @property integer $is_hot
+ * @property integer $attr
  * 
  * @method string          getVinKey()            Returns the current record's "vin_key" value
  * @method string          getName()              Returns the current record's "name" value
@@ -24,6 +26,8 @@ Doctrine_Manager::getInstance()->bindComponent('VinBuildingType', 'doctrine');
  * @method string          getType()              Returns the current record's "type" value
  * @method integer         getApartmentTypeId()   Returns the current record's "apartment_type_id" value
  * @method integer         getApartmentCat()      Returns the current record's "apartment_cat" value
+ * @method integer         getIsHot()             Returns the current record's "is_hot" value
+ * @method integer         getAttr()              Returns the current record's "attr" value
  * @method VinBuildingType setVinKey()            Sets the current record's "vin_key" value
  * @method VinBuildingType setName()              Sets the current record's "name" value
  * @method VinBuildingType setClearSpan()         Sets the current record's "clear_span" value
@@ -32,6 +36,8 @@ Doctrine_Manager::getInstance()->bindComponent('VinBuildingType', 'doctrine');
  * @method VinBuildingType setType()              Sets the current record's "type" value
  * @method VinBuildingType setApartmentTypeId()   Sets the current record's "apartment_type_id" value
  * @method VinBuildingType setApartmentCat()      Sets the current record's "apartment_cat" value
+ * @method VinBuildingType setIsHot()             Sets the current record's "is_hot" value
+ * @method VinBuildingType setAttr()              Sets the current record's "attr" value
  * 
  * @package    symfony
  * @subpackage model
@@ -86,6 +92,18 @@ abstract class BaseVinBuildingType extends sfDoctrineRecord
              'length' => 22,
              ));
         $this->hasColumn('apartment_cat', 'integer', 22, array(
+             'type' => 'integer',
+             'notnull' => false,
+             'comment' => 'model',
+             'length' => 22,
+             ));
+        $this->hasColumn('is_hot', 'integer', 3, array(
+             'type' => 'integer',
+             'notnull' => false,
+             'comment' => 'model',
+             'length' => 3,
+             ));
+        $this->hasColumn('attr', 'integer', 22, array(
              'type' => 'integer',
              'notnull' => false,
              'comment' => 'model',

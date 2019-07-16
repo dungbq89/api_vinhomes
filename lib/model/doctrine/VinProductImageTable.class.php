@@ -16,4 +16,8 @@ class VinProductImageTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('VinProductImage');
     }
+
+    public function getAllImageByApartmentTypeId($id){
+        return $this->createQuery()->andWhere('product_id = ?', $id)->orderBy('groups asc')->execute();
+    }
 }

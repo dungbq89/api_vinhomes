@@ -15,12 +15,14 @@ Doctrine_Manager::getInstance()->bindComponent('VinApartmentType', 'doctrine');
  * @property string $bad_room
  * @property string $bath_room
  * @property string $kitchen_room
+ * @property string $balcony
  * @property string $description
  * @property string $heart_wall
  * @property string $clear_span
  * @property string $vin_model
  * @property string $parent_type
  * @property integer $apartment_cat
+ * @property integer $priority
  * 
  * @method string           getVinKey()                 Returns the current record's "vin_key" value
  * @method string           getNameType()               Returns the current record's "name_type" value
@@ -30,12 +32,14 @@ Doctrine_Manager::getInstance()->bindComponent('VinApartmentType', 'doctrine');
  * @method string           getBadRoom()                Returns the current record's "bad_room" value
  * @method string           getBathRoom()               Returns the current record's "bath_room" value
  * @method string           getKitchenRoom()            Returns the current record's "kitchen_room" value
+ * @method string           getBalcony()                Returns the current record's "balcony" value
  * @method string           getDescription()            Returns the current record's "description" value
  * @method string           getHeartWall()              Returns the current record's "heart_wall" value
  * @method string           getClearSpan()              Returns the current record's "clear_span" value
  * @method string           getVinModel()               Returns the current record's "vin_model" value
  * @method string           getParentType()             Returns the current record's "parent_type" value
  * @method integer          getApartmentCat()           Returns the current record's "apartment_cat" value
+ * @method integer          getPriority()               Returns the current record's "priority" value
  * @method VinApartmentType setVinKey()                 Sets the current record's "vin_key" value
  * @method VinApartmentType setNameType()               Sets the current record's "name_type" value
  * @method VinApartmentType setFeaturedImage()          Sets the current record's "featured_image" value
@@ -44,12 +48,14 @@ Doctrine_Manager::getInstance()->bindComponent('VinApartmentType', 'doctrine');
  * @method VinApartmentType setBadRoom()                Sets the current record's "bad_room" value
  * @method VinApartmentType setBathRoom()               Sets the current record's "bath_room" value
  * @method VinApartmentType setKitchenRoom()            Sets the current record's "kitchen_room" value
+ * @method VinApartmentType setBalcony()                Sets the current record's "balcony" value
  * @method VinApartmentType setDescription()            Sets the current record's "description" value
  * @method VinApartmentType setHeartWall()              Sets the current record's "heart_wall" value
  * @method VinApartmentType setClearSpan()              Sets the current record's "clear_span" value
  * @method VinApartmentType setVinModel()               Sets the current record's "vin_model" value
  * @method VinApartmentType setParentType()             Sets the current record's "parent_type" value
  * @method VinApartmentType setApartmentCat()           Sets the current record's "apartment_cat" value
+ * @method VinApartmentType setPriority()               Sets the current record's "priority" value
  * 
  * @package    symfony
  * @subpackage model
@@ -109,6 +115,12 @@ abstract class BaseVinApartmentType extends sfDoctrineRecord
              'comment' => 'model',
              'length' => 255,
              ));
+        $this->hasColumn('balcony', 'string', 255, array(
+             'type' => 'string',
+             'notnull' => false,
+             'comment' => 'model',
+             'length' => 255,
+             ));
         $this->hasColumn('description', 'string', 255, array(
              'type' => 'string',
              'notnull' => false,
@@ -144,6 +156,12 @@ abstract class BaseVinApartmentType extends sfDoctrineRecord
              'notnull' => false,
              'comment' => 'model',
              'length' => 22,
+             ));
+        $this->hasColumn('priority', 'integer', 3, array(
+             'type' => 'integer',
+             'notnull' => false,
+             'comment' => 'model',
+             'length' => 3,
              ));
     }
 

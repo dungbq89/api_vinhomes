@@ -15,11 +15,79 @@ class pageHomeActions extends sfActions
 
     }
 
+    public function executeGetProducts(sfWebRequest $request)
+    {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
+        // lay danh sach cat
+        $listApamentCat = VinApartmentCateTable::getInstance()->getAllApartmentCategory();
+        $arrCat = null;
+        foreach ($listApamentCat as $objCat) {
+            // lay danh sach apamentType
+            $listApamentType = $objCat->getObjApartmentType();
+            $image360 = null;
+            $arrImage = null;
+            $imageWark = null;
+            $itemArpament = null;
+            foreach ($listApamentType as $objApartmentType) {
+                if ($objApartmentType) {
+                    $allImage = $objApartmentType->getAllImage();
+                    foreach ($allImage as $itImage) {
+                        if ($itImage->groups == '1') {
+                            $image360 = $itImage->file_path;
+                        }
+                        if ($itImage->groups == '1') {
+                            $imageWark = $itImage->file_path;
+                        }
+                        if ($itImage->groups == '3') {
+                            $arrImage[] = $itImage->file_path;
+                        }
+                        if ($itImage->groups == '4') {
+                            $arrImage[] = $itImage->file_path;
+                        }
+                    }
+                    $itemArpament[] = [
+                        'id' => $objApartmentType->id,
+                        'name' => 'Căn hộ mẫu ' . $objApartmentType->parent_type,
+                        'nameType' => $objApartmentType->name_type,
+                        'building' => null,
+                        'image' => $objApartmentType ? $objApartmentType->featured_image : null,
+                        'description' => $objApartmentType ? $objApartmentType->description : $objApartmentType->name_type,
+                        'bedroom' => $objApartmentType ? $objApartmentType->bad_room . " phòng ngủ" : null,
+                        'bathroom' => $objApartmentType ? $objApartmentType->bath_room . " phòng tắm" : null,
+                        'kitchen' => $objApartmentType ? $objApartmentType->kitchen_room . " phòng bếp" : null,
+                        'balcony' => $objApartmentType ? $objApartmentType->balcony . " ban công" : null,
+                        'image360' => $image360,
+                        'linkWark' => $imageWark,
+                        'acreage' => [
+                            [
+                                'title' => 'Diện tích tim tường',
+                                'value' => $objApartmentType->heart_wall,
+                            ],
+                            [
+                                'title' => 'Diện tích thông thủy',
+                                'value' => $objApartmentType->clear_span,
+                            ],
+                        ],
+                        'images' => $arrImage
+                    ];
+                }
+            }
+
+            $item = [
+                'categoryName' => $objCat->name,
+                'items' => $itemArpament
+            ];
+            $arrCat[] = $item;
+        }
+        $arrReturn['errorCode'] = 0;
+        $arrReturn['message'] = 'Thành công';
+        $arrReturn['data'] = $arrCat;
+        return $this->renderText(json_encode($arrReturn));
+    }
+
     public function executeGetHomeData(sfWebRequest $request)
     {
-        header("Content-Type: application/json; charset=UTF-8");
-        $this->setLayout(false);
-        $this->setTemplate(false);
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
         if ($request->getMethod() != 'GET') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
@@ -41,12 +109,73 @@ class pageHomeActions extends sfActions
         }
         $resData = array(
             "news" => $arrNews,
-            "favorite_hourse" => array()
+            "favorite_hourse" => self::getFavoriteHouse()
         );
+
         $data['errorCode'] = 0;
         $data['message'] = 'Thành công';
         $data['data'] = $resData;
+
         return $this->renderText(json_encode($data));
+    }
+
+    function getFavoriteHouse()
+    {
+        $arrBuilding = null;
+        $listBuilding = VinBuildingTypeTable::getInstance()->getListBuildingHot();
+        if (!empty($listBuilding)) {
+
+            foreach ($listBuilding as $building) {
+                $objApartmentCat = $building->getObjApartmentCat();
+                $objApartmentType = $building->getObjApartmentType();
+                $image360 = null;
+                $arrImage = null;
+                $imageWark = null;
+                if ($objApartmentType) {
+                    $allImage = $objApartmentType->getAllImage();
+                    foreach ($allImage as $itImage) {
+                        if ($itImage->groups == '1') {
+                            $image360 = $itImage->file_path;
+                        }
+                        if ($itImage->groups == '1') {
+                            $imageWark = $itImage->file_path;
+                        }
+                        if ($itImage->groups == '3') {
+                            $arrImage[] = $itImage->file_path;
+                        }
+                        if ($itImage->groups == '4') {
+                            $arrImage[] = $itImage->file_path;
+                        }
+                    }
+                }
+                $item = [
+                    'id' => $building->id,
+                    'name' => 'Căn hộ ' . $building->name,
+                    'building' => $objApartmentCat ? 'Tòa ' . $objApartmentCat->name : null,
+                    'image' => $objApartmentType ? $objApartmentType->featured_image : $building->image,
+                    'description' => $objApartmentType ? $objApartmentType->description : $objApartmentType->name_type,
+                    'bedroom' => $objApartmentType ? $objApartmentType->bad_room . " phòng ngủ" : null,
+                    'bathroom' => $objApartmentType ? $objApartmentType->bath_room . " phòng tắm" : null,
+                    'kitchen' => $objApartmentType ? $objApartmentType->kitchen_room . " phòng bếp" : null,
+                    'balcony' => $objApartmentType ? $objApartmentType->balcony . " ban công" : null,
+                    'image360' => $image360,
+                    'linkWark' => $imageWark,
+                    'acreage' => [
+                        [
+                            'title' => 'Diện tích tim tường',
+                            'value' => $building->heart_wall,
+                        ],
+                        [
+                            'title' => 'Diện tích thông thủy',
+                            'value' => $building->clear_span,
+                        ],
+                    ],
+                    'images' => $arrImage
+                ];
+                $arrBuilding[] = $item;
+            }
+        }
+        return $arrBuilding;
     }
 
 
