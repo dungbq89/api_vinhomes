@@ -9,6 +9,9 @@ crawVideo:
   url: /crawVideo
   param: {module: pageHome, action: crawVideo}
 
+getProducts:
+  url: /api/getProducts
+  param: {module: pageHome, action: getProducts}
 getHomeData:
   url: /api/getHomeData
   param: {module: pageHome, action: getHomeData}
@@ -16,6 +19,18 @@ getHomeData:
 getMedia:
   url: /api/getMedia
   param: {module: pageHome, action: getMedia}
+
+order:
+  url: /api/order
+  param: {module: pageHome, action: order}
+
+introduction:
+  url: /introduction
+  param: {module: pageHtml, action: introduction}
+
+borrowing:
+  url: /borrowing
+  param: {module: pageHtml, action: borrowing}
 
 # default rules
 homepage:

@@ -12,82 +12,145 @@ class pageHomeActions extends sfActions
 {
     public function executeIndex(sfWebRequest $request)
     {
-
+//        self::apartmentCat();
+//        self::apartment_type();
+//        self::building_type();
+        die('1');
     }
 
-    public function executeGetProducts(sfWebRequest $request)
+    function building_type()
     {
-        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
-        // lay danh sach cat
-        $listApamentCat = VinApartmentCateTable::getInstance()->getAllApartmentCategory();
-        $arrCat = null;
-        foreach ($listApamentCat as $objCat) {
-            // lay danh sach apamentType
-            $listApamentType = $objCat->getObjApartmentType();
-            $image360 = null;
-            $arrImage = null;
-            $imageWark = null;
-            $itemArpament = null;
-            foreach ($listApamentType as $objApartmentType) {
-                if ($objApartmentType) {
-                    $allImage = $objApartmentType->getAllImage();
-                    foreach ($allImage as $itImage) {
-                        if ($itImage->groups == '1') {
-                            $image360 = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '1') {
-                            $imageWark = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '3') {
-                            $arrImage[] = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '4') {
-                            $arrImage[] = $itImage->file_path;
-                        }
-                    }
-                    $itemArpament[] = [
-                        'id' => $objApartmentType->id,
-                        'name' => 'Căn hộ mẫu ' . $objApartmentType->parent_type,
-                        'nameType' => $objApartmentType->name_type,
-                        'building' => null,
-                        'image' => $objApartmentType ? $objApartmentType->featured_image : null,
-                        'description' => $objApartmentType ? $objApartmentType->description : $objApartmentType->name_type,
-                        'bedroom' => $objApartmentType ? $objApartmentType->bad_room . " phòng ngủ" : null,
-                        'bathroom' => $objApartmentType ? $objApartmentType->bath_room . " phòng tắm" : null,
-                        'kitchen' => $objApartmentType ? $objApartmentType->kitchen_room . " phòng bếp" : null,
-                        'balcony' => $objApartmentType ? $objApartmentType->balcony . " ban công" : null,
-                        'image360' => $image360,
-                        'linkWark' => $imageWark,
-                        'acreage' => [
-                            [
-                                'title' => 'Diện tích tim tường',
-                                'value' => $objApartmentType->heart_wall,
-                            ],
-                            [
-                                'title' => 'Diện tích thông thủy',
-                                'value' => $objApartmentType->clear_span,
-                            ],
-                        ],
-                        'images' => $arrImage
-                    ];
-                }
+        $building_type = json_decode(file_get_contents('http://178.128.86.192/VinCity/building_type.json'), true);
+        $apartment_type = VinApartmentTypeTable::getInstance()->findAll();
+        $arrApartmentType = [];
+        foreach ($apartment_type as $item) {
+            $arrApartmentType[md5($item->vin_key)] = $item->id;
+        }
+        foreach ($building_type as $build) {
+            $objCat = new VinApartmentCate();
+            $objCat->setCode($build['key']);
+            $objCat->setName($build['name']);
+            $objCat->setVinModel('floorsCategory');
+            $objCat->setType($build['type']);
+            $objCat->save();
+            $idCat = $objCat->getId();
+            foreach ($build['floors'][0] as $it) {
+                $objBuilding = new VinBuildingType();
+                $objBuilding->setVinKey($it['key']);
+                $objBuilding->setName($it['name']);
+                $objBuilding->setClearSpan($it['clearSpan']);
+                $objBuilding->setHeartWall($it['heartWall']);
+                $objBuilding->setType($it['type']);
+                $objBuilding->setImage($it['image']);
+                $objBuilding->setApartmentTypeId($arrApartmentType[md5($it['type'])]);
+                $objBuilding->setApartmentCat($idCat);
+                $objBuilding->save();
             }
 
-            $item = [
-                'categoryName' => $objCat->name,
-                'items' => $itemArpament
-            ];
-            $arrCat[] = $item;
         }
-        $arrReturn['errorCode'] = 0;
-        $arrReturn['message'] = 'Thành công';
-        $arrReturn['data'] = $arrCat;
-        return $this->renderText(json_encode($arrReturn));
+    }
+
+    function apartment_type()
+    {
+        $arrApartmentType = json_decode(file_get_contents('http://178.128.86.192/VinCity/apartment_type.json'), true);
+        $arrHot = json_decode(file_get_contents('http://178.128.86.192:4200/api/v1/hotdata'), true);
+        $apartmentFavorites = [];
+        foreach ($arrHot['data']['apartmentFavorites'] as $hot) {
+            $apartmentFavorites[md5($hot['nameType'])] = $hot;
+        }
+        foreach ($arrApartmentType as $type) {
+            $nameType = md5($type['nameType']);
+            $item = !empty($apartmentFavorites[$nameType]) ? $apartmentFavorites[$nameType] : false;
+
+            $obj = new VinApartmentType();
+            $obj->setVinKey($type['key']);
+            $obj->setNameType($type['nameType']);
+            $obj->setFeaturedImage($item !== false ? $item['featuredImage'] : $type['featuredImage']);
+            $obj->setStandardTransferFile($type['standardTransferFile']);
+            $obj->setGroundApartmentFile($type['groundApartmentFile']);
+            $obj->setBadRoom($type['badRoom']);
+            $obj->setBathRoom($type['bathRoom']);
+            $obj->setKitchenRoom($type['kitchenRoom']);
+            $obj->setDescription($type['description']);
+            $obj->setHeartWall($type['heartWall']);
+            $obj->setClearSpan($type['clearSpan']);
+            $obj->setVinModel($type['model']);
+            $obj->setParentType($type['parentType']);
+            $obj->save();
+            $id = $obj->getId();
+            // them vao bang image
+            $imagesGround = $item ? $item['imagesGround'] : $type['imagesGround'];
+            $imagesFurniture = $item ? $item['imagesFurniture'] : $type['imagesFurniture'];
+            $images360 = $item ? $item['images360'] : $type['images360'];
+            // VinProductImage
+            // images360 anh 360 1 // anh walk 2
+            foreach ($images360 as $it1) {
+                if ($it1['name'] == '360') {
+//                    $arrName = explode('/', $it1);
+//                    $_name = str_replace('.jpg', '', $arrName[count($arrName)]);
+                    $objImage = new VinProductImage();
+                    $objImage->setFilePath($it1['link']);
+                    $objImage->setProductId($id);
+                    $objImage->setType(2);
+                    $objImage->setGroups(1);
+                    $objImage->save();
+                }
+                if ($it1['name'] == 'Walk Through') {
+//                    $arrName = explode('/', $it1);
+//                    $_name = str_replace('.jpg', '', $arrName[count($arrName)]);
+                    $objImage = new VinProductImage();
+                    $objImage->setFilePath($it1['link']);
+                    $objImage->setProductId($id);
+                    $objImage->setType(2);
+                    $objImage->setGroups(2);
+                    $objImage->save();
+                }
+            }
+            // anh thiet ke 3 imagesGround
+            foreach ($imagesGround as $it1) {
+//                $arrName = explode('/', $it1);
+//                $_name = str_replace('.jpg', '', $arrName[count($arrName)]);
+                // VinProductImage
+                $objImage = new VinProductImage();
+                $objImage->setFilePath($it1);
+                $objImage->setProductId($id);
+                $objImage->setType(2);
+                $objImage->setGroups(3);
+                $objImage->save();
+            }
+            // anh can ho 4 imagesFurniture
+            foreach ($imagesFurniture as $it1) {
+//                $arrName = explode('/', $it1);
+//                $_name = str_replace('.jpg', '', $arrName[count($arrName)]);
+                // VinProductImage
+                $objImage = new VinProductImage();
+                $objImage->setFilePath($it1);
+                $objImage->setProductId($id);
+                $objImage->setType(2);
+                $objImage->setGroups(4);
+                $objImage->save();
+            }
+        }
+    }
+
+    function apartmentCat()
+    {
+        $arrApartmentCat = json_decode(file_get_contents('http://178.128.86.192/VinCity/apartment_cate.json'), true);
+        foreach ($arrApartmentCat as $cat) {
+            $obj = new VinApartmentCate();
+            $obj->setCode($cat['code']);
+            $obj->setName($cat['name']);
+            $obj->setVinModel($cat['model']);
+            $obj->save();
+        }
+        die;
     }
 
     public function executeGetHomeData(sfWebRequest $request)
     {
-        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
+        header("Content-Type: application/json; charset=UTF-8");
+        $this->setLayout(false);
+        $this->setTemplate(false);
         if ($request->getMethod() != 'GET') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
@@ -109,73 +172,12 @@ class pageHomeActions extends sfActions
         }
         $resData = array(
             "news" => $arrNews,
-            "favorite_hourse" => self::getFavoriteHouse()
+            "favorite_hourse" => array()
         );
-
         $data['errorCode'] = 0;
         $data['message'] = 'Thành công';
         $data['data'] = $resData;
-
         return $this->renderText(json_encode($data));
-    }
-
-    function getFavoriteHouse()
-    {
-        $arrBuilding = null;
-        $listBuilding = VinBuildingTypeTable::getInstance()->getListBuildingHot();
-        if (!empty($listBuilding)) {
-
-            foreach ($listBuilding as $building) {
-                $objApartmentCat = $building->getObjApartmentCat();
-                $objApartmentType = $building->getObjApartmentType();
-                $image360 = null;
-                $arrImage = null;
-                $imageWark = null;
-                if ($objApartmentType) {
-                    $allImage = $objApartmentType->getAllImage();
-                    foreach ($allImage as $itImage) {
-                        if ($itImage->groups == '1') {
-                            $image360 = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '1') {
-                            $imageWark = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '3') {
-                            $arrImage[] = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '4') {
-                            $arrImage[] = $itImage->file_path;
-                        }
-                    }
-                }
-                $item = [
-                    'id' => $building->id,
-                    'name' => 'Căn hộ ' . $building->name,
-                    'building' => $objApartmentCat ? 'Tòa ' . $objApartmentCat->name : null,
-                    'image' => $objApartmentType ? $objApartmentType->featured_image : $building->image,
-                    'description' => $objApartmentType ? $objApartmentType->description : $objApartmentType->name_type,
-                    'bedroom' => $objApartmentType ? $objApartmentType->bad_room . " phòng ngủ" : null,
-                    'bathroom' => $objApartmentType ? $objApartmentType->bath_room . " phòng tắm" : null,
-                    'kitchen' => $objApartmentType ? $objApartmentType->kitchen_room . " phòng bếp" : null,
-                    'balcony' => $objApartmentType ? $objApartmentType->balcony . " ban công" : null,
-                    'image360' => $image360,
-                    'linkWark' => $imageWark,
-                    'acreage' => [
-                        [
-                            'title' => 'Diện tích tim tường',
-                            'value' => $building->heart_wall,
-                        ],
-                        [
-                            'title' => 'Diện tích thông thủy',
-                            'value' => $building->clear_span,
-                        ],
-                    ],
-                    'images' => $arrImage
-                ];
-                $arrBuilding[] = $item;
-            }
-        }
-        return $arrBuilding;
     }
 
 
