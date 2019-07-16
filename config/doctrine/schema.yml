@@ -612,3 +612,63 @@ AdOrder:
     price: { type: integer(10), comment: "Giá sản phẩm"}
     body: { type: clob, comment: "Nội dung" }
     status: { type: integer(5), notnull: true, comment: "Trạng thái xử lý" }
+
+VinApartmentCate:
+  tableName: vin_apartment_cate
+  actAs:
+#    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    code: { type: string(255), notnull: false, comment: "code,key" }
+    name: { type: string(255), notnull: false, comment: "name" }
+    vin_model: { type: string(255), notnull: false, comment: "ApartmentCategory, floorsCategory" }
+    type: { type: string(255), notnull: false, comment: "model" }
+VinApartmentType:
+  tableName: vin_apartment_type
+  actAs:
+#    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    vin_key: { type: string(255), notnull: false, comment: "ma" }
+    name_type: { type: string(255), notnull: false, comment: "name" }
+    featured_image: { type: string(255), notnull: false, comment: "model" }
+    standard_transfer_file: { type: string(255), notnull: false, comment: "model" }
+    ground_apartment_file: { type: string(255), notnull: false, comment: "model" }
+    bad_room: { type: string(255), notnull: false, comment: "model" }
+    bath_room: { type: string(255), notnull: false, comment: "model" }
+    kitchen_room: { type: string(255), notnull: false, comment: "model" }
+    description: { type: string(255), notnull: false, comment: "model" }
+    heart_wall: { type: string(255), notnull: false, comment: "model" }
+    clear_span: { type: string(255), notnull: false, comment: "model" }
+    vin_model: { type: string(255), notnull: false, comment: "model" }
+    parent_type: { type: string(255), notnull: false, comment: "model" }
+    apartment_cat:  { type: integer(22), notnull: false, comment: "model" }
+
+VinBuildingType:
+  tableName: vin_building_type
+  actAs:
+#    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    vin_key: { type: string(255), notnull: false, comment: "code,key" }
+    name: { type: string(255), notnull: false, comment: "name" }
+    clear_span: { type: string(255), notnull: false, comment: "ApartmentCategory, floorsCategory" }
+    heart_wall: { type: string(255), notnull: false, comment: "ApartmentCategory, floorsCategory" }
+    image: { type: string(255), notnull: false, comment: "ApartmentCategory, floorsCategory" }
+    type: { type: string(255), notnull: false, comment: "model" }
+    apartment_type_id: { type: integer(22), notnull: false, comment: "model" }
+    apartment_cat: { type: integer(22), notnull: false, comment: "model" }
+
+VinProductImage:
+  #connection: doctrine
+  tableName: vin_products_image
+  actAs:
+#    VtBlameable: ~
+    Timestampable: ~
+  columns:
+    file_path: { type: string(255), notnull: false, comment: "Đường dẫn file"}
+    product_id: { type: integer, comment: "sản phẩm thiết bị"}
+    extension: { type: string(200), comment: "phần mở rộng của file"}
+    priority: { type: integer(5), notnull: false, comment: "Độ ưu tiên hiển thị" }
+    type: { type: integer(5), notnull: false, comment: "1: thu muc, 2 link" }
+    groups: { type: integer(5), notnull: false, comment: "1: 360, 2: walk, 3: thiet ke, 4: anh demo" }
