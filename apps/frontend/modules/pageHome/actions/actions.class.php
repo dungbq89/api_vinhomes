@@ -181,9 +181,9 @@ class pageHomeActions extends sfActions
 
     public function executeGetMedia(sfWebRequest $request)
     {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
         $this->setLayout(false);
         $this->setTemplate(false);
-        header('Content-Type: application/json');
         if ($request->getMethod() != 'GET') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
@@ -215,8 +215,16 @@ class pageHomeActions extends sfActions
             }
         }
 
+        $albums = AdPhotoTable::getAllPhotos(10);
+        $arrPhotos = array();
+        if ($albums && count($albums) > 0) {
+            foreach ($albums as $item) {
+                $arrPhotos[] = $item['file_path'];
+            }
+        }
+
         $resData = array(
-            "album" => array(),
+            "album" => $arrPhotos,
             "videos" => $arrVideos,
             "documents" => $arrDocs
         );
@@ -231,9 +239,9 @@ class pageHomeActions extends sfActions
      */
     public function executeOrder(sfWebRequest $request)
     {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
         $this->setLayout(false);
         $this->setTemplate(false);
-        header('Content-Type: application/json');
         if ($request->getMethod() != 'POST') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
@@ -396,4 +404,70 @@ class pageHomeActions extends sfActions
         fwrite($fp, $content);
         fclose($fp);
     }
+
+    public function executeGetLibrary(sfWebRequest $request)
+    {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
+        $this->setLayout(false);
+        $this->setTemplate(false);
+        if ($request->getMethod() != 'GET') {
+            $data['errorCode'] = 3;
+            $data['message'] = 'Phương thức không hợp lệ';
+            $data['data'] = array();
+            $this->renderText(json_encode($data));
+        }
+        $videos = AdYoutubeTable::getVideos(10);
+        $arrVideos = array();
+        if ($videos && count($videos) > 0) {
+            foreach ($videos as $item) {
+                $arr = array();
+                $arr['id'] = $item['id'];
+                $arr['title'] = $item['name'];
+                $arr['link'] = $item['link'];
+                $arr['image'] = $item['link'];
+                $arrVideos[] = $arr;
+            }
+        }
+
+        $documents = AdDocumentDownloadTable::getDocuments(5);
+        $arrDocs = array();
+        if ($documents && count($documents) > 0) {
+            foreach ($documents as $item) {
+                $arr = array();
+                $arr['id'] = $item['id'];
+                $arr['title'] = $item['name'];
+                $arr['link'] = $item['link'];
+                $arrDocs[] = $arr;
+            }
+        }
+        $listAlbum = AdAlbumTable::getAllAlbum()->fetchArray();
+        $arrAlbum = array();
+        if($listAlbum){
+            foreach ($listAlbum as $album){
+                $arr = array();
+                $arrPhotos = array();
+                $arr['category'] = $album['name'];
+                $listPhotos = AdPhotoTable::getPhotoByAlbumId($album['id'])->fetchArray();
+                if($listPhotos){
+                    foreach ($listPhotos as $item) {
+                        $arrPhotos[] = $item['file_path'];
+                    }
+                }
+                $arr['images'] = $arrPhotos;
+                $arrAlbum[] = $arr;
+            }
+        }
+
+
+        $resData = array(
+            "videos" => $arrVideos,
+            "album" => $arrAlbum,
+            "documents" => $arrDocs
+        );
+        $data['errorCode'] = 0;
+        $data['message'] = 'Thành công';
+        $data['data'] = $resData;
+        return $this->renderText(json_encode($data));
+    }
+
 }

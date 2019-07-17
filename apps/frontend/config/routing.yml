@@ -1,6 +1,12 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
+getLibrary:
+  url: /api/getLibrary
+  param: {module: pageHome, action: getLibrary}
+crawAlbum:
+  url: /crawAlbum
+  param: {module: pageHtml, action: crawAlbum}
 #ajax load video
 crawNews:
   url: /crawNews

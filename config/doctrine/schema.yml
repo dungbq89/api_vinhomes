@@ -170,7 +170,6 @@ AdAdvertiseLocation:
 AdAlbum:
   tableName: ad_album
   actAs:
-    VtBlameable: ~
     Timestampable: ~
   columns:
     name: { type: string(255), notnull: true, comment: "Tên Album" }
@@ -186,7 +185,6 @@ AdPhoto:
   #connection: doctrine
   tableName: ad_album_photo
   actAs:
-    VtBlameable: ~
     Timestampable: ~
   columns:
     name: { type: string(255), notnull: true, comment: "Tên photo" }
@@ -196,8 +194,6 @@ AdPhoto:
     priority: { type: integer(5), notnull: true, comment: "Độ ưu tiên hiển thị" }
     is_active: { type: boolean, notnull: true, default: false, comment: "Trạng thái 0=chưa sử dụng, 1= sử dụng"}
     is_default: { type: boolean, notnull: true, default: false, comment: "Ảnh đại diện cho Album" }
-  relations:
-    AdAlbumPhoto: { class: AdAlbum, local: album_id, type: one, foreignAlias: AlbumPhoto }
 #Module quản lý video
 AdVideo:
   tableName: ad_video
