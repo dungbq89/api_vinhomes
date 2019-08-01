@@ -17,12 +17,34 @@ class VinApartmentCateTable extends Doctrine_Table
         return Doctrine_Core::getTable('VinApartmentCate');
     }
 
-    public function getAllApartmentCategory()
+    public function getAllApartmentCategory($vinModel = 'ApartmentCategory')
     {
         $q = $this->createQuery()
-            ->andWhere('vin_model = ?', 'ApartmentCategory')
+            ->andWhere('vin_model = ?', $vinModel)
             ->orderBy('priority asc');
         return $q->execute();
     }
+
+    public function getAllApartmentCategoryByParent($parent, $vinModel = false)
+    {
+        $q = $this->createQuery()
+            ->andWhere('parent = ?', $parent);
+        if ($vinModel) {
+            $q->andWhere('vin_model = ?', $vinModel);
+        };
+        $q->orderBy('priority asc');
+        return $q->execute();
+    }
+    public function getAllFloor($parent, $vinModel = false)
+    {
+        $q = $this->createQuery()
+            ->andWhere('parent = ?', $parent);
+        if ($vinModel) {
+            $q->andWhere('vin_model = ?', $vinModel);
+        };
+        $q->orderBy('priority asc')->groupBy('type');
+        return $q->execute();
+    }
+
 
 }

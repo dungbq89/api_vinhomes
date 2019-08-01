@@ -17,6 +17,7 @@ Doctrine_Manager::getInstance()->bindComponent('VinBuildingType', 'doctrine');
  * @property integer $apartment_cat
  * @property integer $is_hot
  * @property integer $attr
+ * @property integer $isView
  * 
  * @method string          getVinKey()            Returns the current record's "vin_key" value
  * @method string          getName()              Returns the current record's "name" value
@@ -28,6 +29,7 @@ Doctrine_Manager::getInstance()->bindComponent('VinBuildingType', 'doctrine');
  * @method integer         getApartmentCat()      Returns the current record's "apartment_cat" value
  * @method integer         getIsHot()             Returns the current record's "is_hot" value
  * @method integer         getAttr()              Returns the current record's "attr" value
+ * @method integer         getIsView()            Returns the current record's "isView" value
  * @method VinBuildingType setVinKey()            Sets the current record's "vin_key" value
  * @method VinBuildingType setName()              Sets the current record's "name" value
  * @method VinBuildingType setClearSpan()         Sets the current record's "clear_span" value
@@ -38,6 +40,7 @@ Doctrine_Manager::getInstance()->bindComponent('VinBuildingType', 'doctrine');
  * @method VinBuildingType setApartmentCat()      Sets the current record's "apartment_cat" value
  * @method VinBuildingType setIsHot()             Sets the current record's "is_hot" value
  * @method VinBuildingType setAttr()              Sets the current record's "attr" value
+ * @method VinBuildingType setIsView()            Sets the current record's "isView" value
  * 
  * @package    symfony
  * @subpackage model
@@ -108,6 +111,12 @@ abstract class BaseVinBuildingType extends sfDoctrineRecord
              'notnull' => false,
              'comment' => 'model',
              'length' => 22,
+             ));
+        $this->hasColumn('isView', 'integer', 3, array(
+             'type' => 'integer',
+             'notnull' => false,
+             'comment' => 'model',
+             'length' => 3,
              ));
     }
 

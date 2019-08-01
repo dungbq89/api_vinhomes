@@ -27,4 +27,13 @@ class VinBuildingTypeTable extends Doctrine_Table
             ->orderBy('name');
         return $q->execute();
     }
+
+    public function getListBuildingByCat($cat, $limit = 5)
+    {
+        $q = $this->createQuery()
+            ->andWhereIn('apartment_cat', $cat)
+            ->limit($limit)
+            ->orderBy('name');
+        return $q->execute();
+    }
 }

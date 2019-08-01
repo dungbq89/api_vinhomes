@@ -620,6 +620,7 @@ VinApartmentCate:
     vin_model: { type: string(255), notnull: false, comment: "ApartmentCategory, floorsCategory" }
     type: { type: string(255), notnull: false, comment: "model" }
     priority: { type: integer(3), notnull: false, comment: "model" }
+    parent: { type: integer(22), notnull: false, comment: "parent" }
 VinApartmentType:
   tableName: vin_apartment_type
   actAs:
@@ -659,6 +660,7 @@ VinBuildingType:
     apartment_cat: { type: integer(22), notnull: false, comment: "model" }
     is_hot: { type: integer(3), notnull: false, comment: "model" }
     attr: { type: integer(22), notnull: false, comment: "model" }
+    isView: { type: integer(3), notnull: false, comment: "model" }
 
 VinProductImage:
   #connection: doctrine

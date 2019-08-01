@@ -26,6 +26,7 @@ abstract class BaseVinBuildingTypeForm extends BaseFormDoctrine
       'apartment_cat'     => new sfWidgetFormInputText(),
       'is_hot'            => new sfWidgetFormInputText(),
       'attr'              => new sfWidgetFormInputText(),
+      'isView'            => new sfWidgetFormInputText(),
       'created_at'        => new sfWidgetFormDateTime(),
       'updated_at'        => new sfWidgetFormDateTime(),
     ));
@@ -42,6 +43,7 @@ abstract class BaseVinBuildingTypeForm extends BaseFormDoctrine
       'apartment_cat'     => new sfValidatorInteger(array('required' => false)),
       'is_hot'            => new sfValidatorInteger(array('required' => false)),
       'attr'              => new sfValidatorInteger(array('required' => false)),
+      'isView'            => new sfValidatorInteger(array('required' => false)),
       'created_at'        => new sfValidatorDateTime(),
       'updated_at'        => new sfValidatorDateTime(),
     ));
