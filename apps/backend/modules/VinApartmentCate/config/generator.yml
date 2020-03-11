@@ -1,0 +1,36 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VinApartmentCate
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vin_apartment_cate
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        code: {label: "Mã danh mục"}
+        name: {label: "Tên danh mục"}
+        vin_model: {label: "Loại danh mục"}
+        parent: {label: "Danh mục cha"}
+        type: {label: "Loại căn hộ"}
+        priority: {label: "Sắp sếp"}
+      list:
+        title: "Quản lý tòa nhà/Phân khu"
+      filter:
+        class: VinApartmentCateFormFilterAdmin
+        display: [vin_model, parent]
+      form:
+        display: [code, name, vin_model, parent, type, priority]
+        class: VinApartmentCateFormAdmin
+      edit:
+        title: "Cập nhập tòa nhà/Phân khu"
+      new:
+        title: "Thêm mới tòa nhà/Phân khu"
+      show:    ~
+      revert:  ~

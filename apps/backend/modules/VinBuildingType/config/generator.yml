@@ -1,0 +1,39 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VinBuildingType
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vin_building_type
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        vin_key: {label: "Mã phòng"}
+        name: {label: "Tên phòng"}
+        clear_span: {label: "Khoảng trống"}
+        heart_wall: {label: "Tim tường"}
+#        image: {label: "Ảnh"}
+        type: {label: "Loại phòng"}
+        aparment_cat: {label: "Loại căn hộ"}
+#        aparment_cat: {label: "Loại căn hộ"}
+        is_hot: {label: "Căn hot"}
+        is_view: {label: "Có view"}
+      list:
+        title: "Quản lý căn hộ"
+      filter:
+        display: [name, type, apartment_cat]
+      form:
+        display: [vin_key, name, clear_span, heart_wall, type, aparment_cat, is_hot, isView]
+#        display: [vin_key, name, clear_span, heart_wall, image, type, aparment_cat, aparment_type_id, is_hot, isView]
+      edit:
+        title: "Cập nhập căn hộ"
+      new:
+        title: "Thêm mới căn hộ"
+      show:    ~
+      revert:  ~

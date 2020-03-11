@@ -35,6 +35,7 @@ class VinApartmentCateTable extends Doctrine_Table
         $q->orderBy('priority asc');
         return $q->execute();
     }
+
     public function getAllFloor($parent, $vinModel = false)
     {
         $q = $this->createQuery()
@@ -46,5 +47,17 @@ class VinApartmentCateTable extends Doctrine_Table
         return $q->execute();
     }
 
+    public function getAllApartmentCat($parent = false, $vinModel = false)
+    {
+        $q = $this->createQuery();
+        if ($parent) {
+            $q = $q->andWhere('parent = ?', $parent);
+        }
+        if ($vinModel) {
+            $q = $q->andWhere('vin_model = ?', $vinModel);
+        }
+        $q = $q->orderBy('priority asc');
+        return $q->execute();
+    }
 
 }

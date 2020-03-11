@@ -31,7 +31,7 @@ class pageHomeActions extends sfActions
             $imageCat = null;
             foreach ($listApamentType as $objApartmentType) {
                 if ($objApartmentType) {
-                    if ($imageCat == null) {
+                    if($imageCat == null){
                         $imageCat = $objApartmentType->featured_image;
                     }
                     $allImage = $objApartmentType->getAllImage();
@@ -99,6 +99,7 @@ class pageHomeActions extends sfActions
             $data['data'] = array();
             return $this->renderText(json_encode($data));
         }
+
         $news = AdHocVienTable::getAllStudent();
         $arrNews = array();
         if ($news && count($news) > 0) {
@@ -108,14 +109,24 @@ class pageHomeActions extends sfActions
                 $arr['title'] = $item['name'];
                 $arr['description'] = $item['name'];
                 $arr['image'] = sfConfig::get('app_domain') . 'uploads/' . sfConfig::get('app_article_images') . $item['image'];
-                $arr['content'] = $item['body'];
+                $arr['content'] = str_replace('src="/','src="'.sfConfig::get('app_domain'),$item['body']);
                 $arrNews[] = $arr;
             }
         }
+        $listAllConfig = AdConfigTable::getAllConfig();
+        $listConfig = array();
+        if ($listAllConfig) {
+            foreach ($listAllConfig as $val) {
+                $listConfig[$val['config_key']] = $val['config_val'];
+            }
+        }
+        $imgExperience = $listConfig['anh_trai_nghiem'];
         $resData = array(
             "news" => $arrNews,
-            "favorite_hourse" => self::getFavoriteHouse()
+            "favorite_hourse" => self::getFavoriteHouse(),
+            'img_experience' => $imgExperience ? $imgExperience : 'http://vhsland.vn/wp-content/uploads/2018/07/p.jpg'
         );
+
 
         $data['errorCode'] = 0;
         $data['message'] = 'Thành công';
@@ -187,6 +198,7 @@ class pageHomeActions extends sfActions
         return $item;
     }
 
+
     public function executeGetMedia(sfWebRequest $request)
     {
         $this->getResponse()->setHttpHeader('Content-type', 'application/json');
@@ -227,7 +239,8 @@ class pageHomeActions extends sfActions
         $arrPhotos = array();
         if ($albums && count($albums) > 0) {
             foreach ($albums as $item) {
-                $arrPhotos[] = $item['file_path'];
+                $path = sfConfig::get('app_url_media_file') . '/' . sfConfig::get('app_album_images') . $item['file_path'];
+                $arrPhotos[] = $path;
             }
         }
 
@@ -256,10 +269,17 @@ class pageHomeActions extends sfActions
             $data['data'] = array();
             return $this->renderText(json_encode($data));
         }
-        $name = trim($request->getParameter('name', null));
+        $name = trim($request->getParameter('name'));
         $phone = trim($request->getParameter('phone'));
         $email = trim($request->getParameter('email'));
         $requirements = trim($request->getParameter('requirements'));
+        $arr = array(
+            'name' => $name,
+            'phone' => $phone,
+            'email' => $email,
+            'requirements' => $requirements
+        );
+        self::logs("API order: ".json_encode($arr));
         if (strlen($requirements) >= 255) {
             $data['errorCode'] = 4;
             $data['message'] = 'Thông tin đầu vào không hợp lệ';
@@ -278,12 +298,12 @@ class pageHomeActions extends sfActions
             $data['data'] = array();
             return $this->renderText(json_encode($data));
         }
-        if ($email == '') {
-            $data['errorCode'] = 7;
-            $data['message'] = 'Nhập thiếu email';
-            $data['data'] = array();
-            return $this->renderText(json_encode($data));
-        }
+//        if ($email == '') {
+//            $data['errorCode'] = 7;
+//            $data['message'] = 'Nhập thiếu email';
+//            $data['data'] = array();
+//            return $this->renderText(json_encode($data));
+//        }
         try {
             $feedBack = new AdFeedBack();
             $feedBack->setName($name);
@@ -458,7 +478,8 @@ class pageHomeActions extends sfActions
                 $listPhotos = AdPhotoTable::getPhotoByAlbumId($album['id'])->fetchArray();
                 if ($listPhotos) {
                     foreach ($listPhotos as $item) {
-                        $arrPhotos[] = $item['file_path'];
+                        $path = sfConfig::get('app_url_media_file') . '/' . sfConfig::get('app_album_images') . $item['file_path'];
+                        $arrPhotos[] = $path;
                     }
                 }
                 $arr['images'] = $arrPhotos;

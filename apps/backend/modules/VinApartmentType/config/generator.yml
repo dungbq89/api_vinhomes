@@ -1,0 +1,31 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VinApartmentType
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vin_apartment_type
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: "Quản lý danh mục phòng"
+        display: [=vin_key, name_type, bad_room, bath_room, kitchen_room]
+      filter:
+        display: [name_type]
+      form:
+        class: VinApartmentTypeFormAdmin
+        display: [vin_key, name_type, featured_image, standard_transfer_file, bad_room, bath_room, kitchen_room, description, heart_wall, clear_span, vin_model, balcony, apartment_cat, priority]
+#        display: [vin_key, name_type, featured_image, standard_transfer_file, ground_apartment_file, bad_room, bath_room, kitchen_room, description, heart_wall, clear_span, vin_model, parent_type, balcony, apartment_cat, priority]
+      edit:
+        title: "Cập nhập danh mục phòng"
+      new:
+        title: "Thêm mới danh mục phòng"
+      show:    ~
+      revert:  ~

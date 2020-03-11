@@ -21,6 +21,29 @@ all:
               credentials: [[admin,news_editor,news_approved,news_public, ctv]]
               route: ad_hoc_vien
               icon: text.png
+            Quản lý video:
+              credentials: [[admin,news_editor,news_approved,news_public, ctv]]
+              route: ad_youtube
+              icon: text.png
+        Quản lý căn hộ:
+          credentials: [[admin,building]]
+          dropdown:
+            Quản lý danh mục căn hộ/phân khu:
+              credentials: [[admin,building]]
+              route: vin_apartment_cate
+              icon: text.png
+            Quản lý loại phòng:
+              credentials: [[admin,building]]
+              route: vin_apartment_type
+              icon: text.png
+            Quản lý căn hộ:
+              credentials: [[admin,building]]
+              route: vin_building_type
+              icon: text.png
+            Quản lý ảnh căn hộ:
+              credentials: [[admin,building]]
+              route: vin_product_image
+              icon: text.png
         Phân hệ khác:
           credentials: [[admin,subAdmin, ctv]]
           dropdown:
@@ -28,9 +51,9 @@ all:
               credentials: [[admin]]
               route: vtp_category
               icon: squares36.png
-            Quản lý menu:
+            Quản lý Album:
               credentials: [[admin]]
-              route: vtp_menu
+              route: ad_album
               icon: squares36.png
             Quản lý nội dung:
               credentials: [[admin,subAdmin]]
