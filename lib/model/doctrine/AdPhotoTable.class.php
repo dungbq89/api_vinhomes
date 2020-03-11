@@ -23,4 +23,12 @@ class AdPhotoTable extends Doctrine_Table
             ->where('album_id=?',$albumId)
             ->andwhere('is_active=1');
     }
+
+    public static function getAllPhotos($limit)
+    {
+        return AdPhotoTable::getInstance()->createQuery()
+            ->where('is_active=1')
+            ->limit($limit)
+            ->fetchArray();
+    }
 }

@@ -25,8 +25,6 @@ abstract class BaseAdAlbumForm extends BaseFormDoctrine
       'image_path'  => new sfWidgetFormInputText(),
       'lang'        => new sfWidgetFormInputText(),
       'slug'        => new sfWidgetFormInputText(),
-      'created_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => true)),
-      'updated_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => true)),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
     ));
@@ -42,8 +40,6 @@ abstract class BaseAdAlbumForm extends BaseFormDoctrine
       'image_path'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'lang'        => new sfValidatorString(array('max_length' => 10)),
       'slug'        => new sfValidatorString(array('max_length' => 255)),
-      'created_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'required' => false)),
-      'updated_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'required' => false)),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),
     ));

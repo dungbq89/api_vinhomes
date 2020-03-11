@@ -28,8 +28,12 @@ class pageHomeActions extends sfActions
             $arrImage = null;
             $imageWark = null;
             $itemArpament = null;
+            $imageCat = null;
             foreach ($listApamentType as $objApartmentType) {
                 if ($objApartmentType) {
+                    if ($imageCat == null) {
+                        $imageCat = $objApartmentType->featured_image;
+                    }
                     $allImage = $objApartmentType->getAllImage();
                     foreach ($allImage as $itImage) {
                         if ($itImage->groups == '1') {
@@ -75,6 +79,7 @@ class pageHomeActions extends sfActions
 
             $item = [
                 'categoryName' => $objCat->name,
+                'image' => $imageCat,
                 'items' => $itemArpament
             ];
             $arrCat[] = $item;
@@ -124,66 +129,69 @@ class pageHomeActions extends sfActions
         $arrBuilding = null;
         $listBuilding = VinBuildingTypeTable::getInstance()->getListBuildingHot();
         if (!empty($listBuilding)) {
-
             foreach ($listBuilding as $building) {
-                $objApartmentCat = $building->getObjApartmentCat();
-                $objApartmentType = $building->getObjApartmentType();
-                $image360 = null;
-                $arrImage = null;
-                $imageWark = null;
-                if ($objApartmentType) {
-                    $allImage = $objApartmentType->getAllImage();
-                    foreach ($allImage as $itImage) {
-                        if ($itImage->groups == '1') {
-                            $image360 = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '1') {
-                            $imageWark = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '3') {
-                            $arrImage[] = $itImage->file_path;
-                        }
-                        if ($itImage->groups == '4') {
-                            $arrImage[] = $itImage->file_path;
-                        }
-                    }
-                }
-                $item = [
-                    'id' => $building->id,
-                    'name' => 'Căn hộ ' . $building->name,
-                    'building' => $objApartmentCat ? 'Tòa ' . $objApartmentCat->name : null,
-                    'image' => $objApartmentType ? $objApartmentType->featured_image : $building->image,
-                    'description' => $objApartmentType ? $objApartmentType->description : $objApartmentType->name_type,
-                    'bedroom' => $objApartmentType ? $objApartmentType->bad_room . " phòng ngủ" : null,
-                    'bathroom' => $objApartmentType ? $objApartmentType->bath_room . " phòng tắm" : null,
-                    'kitchen' => $objApartmentType ? $objApartmentType->kitchen_room . " phòng bếp" : null,
-                    'balcony' => $objApartmentType ? $objApartmentType->balcony . " ban công" : null,
-                    'image360' => $image360,
-                    'linkWark' => $imageWark,
-                    'acreage' => [
-                        [
-                            'title' => 'Diện tích tim tường',
-                            'value' => $building->heart_wall,
-                        ],
-                        [
-                            'title' => 'Diện tích thông thủy',
-                            'value' => $building->clear_span,
-                        ],
-                    ],
-                    'images' => $arrImage
-                ];
-                $arrBuilding[] = $item;
+                $arrBuilding[] = self::buidingItem($building);
             }
         }
         return $arrBuilding;
     }
 
+    public function buidingItem($building)
+    {
+        $objApartmentCat = $building->getObjApartmentCat();
+        $objApartmentType = $building->getObjApartmentType();
+        $image360 = null;
+        $arrImage = null;
+        $imageWark = null;
+        if ($objApartmentType) {
+            $allImage = $objApartmentType->getAllImage();
+            foreach ($allImage as $itImage) {
+                if ($itImage->groups == '1') {
+                    $image360 = $itImage->file_path;
+                }
+                if ($itImage->groups == '1') {
+                    $imageWark = $itImage->file_path;
+                }
+                if ($itImage->groups == '3') {
+                    $arrImage[] = $itImage->file_path;
+                }
+                if ($itImage->groups == '4') {
+                    $arrImage[] = $itImage->file_path;
+                }
+            }
+        }
+        $item = [
+            'id' => $building->id,
+            'name' => 'Căn hộ ' . $building->name,
+            'building' => $objApartmentCat ? 'Tòa ' . $objApartmentCat->name : null,
+            'image' => $objApartmentType ? $objApartmentType->featured_image : $building->image,
+            'description' => $objApartmentType ? $objApartmentType->description : $objApartmentType->name_type,
+            'bedroom' => $objApartmentType ? $objApartmentType->bad_room . " phòng ngủ" : null,
+            'bathroom' => $objApartmentType ? $objApartmentType->bath_room . " phòng tắm" : null,
+            'kitchen' => $objApartmentType ? $objApartmentType->kitchen_room . " phòng bếp" : null,
+            'balcony' => $objApartmentType ? $objApartmentType->balcony . " ban công" : null,
+            'image360' => $image360,
+            'linkWark' => $imageWark,
+            'acreage' => [
+                [
+                    'title' => 'Diện tích tim tường',
+                    'value' => $building->heart_wall,
+                ],
+                [
+                    'title' => 'Diện tích thông thủy',
+                    'value' => $building->clear_span,
+                ],
+            ],
+            'images' => $arrImage
+        ];
+        return $item;
+    }
 
     public function executeGetMedia(sfWebRequest $request)
     {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
         $this->setLayout(false);
         $this->setTemplate(false);
-        header('Content-Type: application/json');
         if ($request->getMethod() != 'GET') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
@@ -215,8 +223,16 @@ class pageHomeActions extends sfActions
             }
         }
 
+        $albums = AdPhotoTable::getAllPhotos(10);
+        $arrPhotos = array();
+        if ($albums && count($albums) > 0) {
+            foreach ($albums as $item) {
+                $arrPhotos[] = $item['file_path'];
+            }
+        }
+
         $resData = array(
-            "album" => array(),
+            "album" => $arrPhotos,
             "videos" => $arrVideos,
             "documents" => $arrDocs
         );
@@ -231,9 +247,9 @@ class pageHomeActions extends sfActions
      */
     public function executeOrder(sfWebRequest $request)
     {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
         $this->setLayout(false);
         $this->setTemplate(false);
-        header('Content-Type: application/json');
         if ($request->getMethod() != 'POST') {
             $data['errorCode'] = 3;
             $data['message'] = 'Phương thức không hợp lệ';
@@ -396,4 +412,167 @@ class pageHomeActions extends sfActions
         fwrite($fp, $content);
         fclose($fp);
     }
+
+    public function executeGetLibrary(sfWebRequest $request)
+    {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
+        $this->setLayout(false);
+        $this->setTemplate(false);
+        if ($request->getMethod() != 'GET') {
+            $data['errorCode'] = 3;
+            $data['message'] = 'Phương thức không hợp lệ';
+            $data['data'] = array();
+            $this->renderText(json_encode($data));
+        }
+        $videos = AdYoutubeTable::getVideos(10);
+        $arrVideos = array();
+        if ($videos && count($videos) > 0) {
+            foreach ($videos as $item) {
+                $arr = array();
+                $arr['id'] = $item['id'];
+                $arr['title'] = $item['name'];
+                $arr['link'] = $item['link'];
+                $arr['image'] = $item['link'];
+                $arrVideos[] = $arr;
+            }
+        }
+
+        $documents = AdDocumentDownloadTable::getDocuments(5);
+        $arrDocs = array();
+        if ($documents && count($documents) > 0) {
+            foreach ($documents as $item) {
+                $arr = array();
+                $arr['id'] = $item['id'];
+                $arr['title'] = $item['name'];
+                $arr['link'] = $item['link'];
+                $arrDocs[] = $arr;
+            }
+        }
+        $listAlbum = AdAlbumTable::getAllAlbum()->fetchArray();
+        $arrAlbum = array();
+        if ($listAlbum) {
+            foreach ($listAlbum as $album) {
+                $arr = array();
+                $arrPhotos = array();
+                $arr['category'] = $album['name'];
+                $listPhotos = AdPhotoTable::getPhotoByAlbumId($album['id'])->fetchArray();
+                if ($listPhotos) {
+                    foreach ($listPhotos as $item) {
+                        $arrPhotos[] = $item['file_path'];
+                    }
+                }
+                $arr['images'] = $arrPhotos;
+                $arrAlbum[] = $arr;
+            }
+        }
+
+
+        $resData = array(
+            "videos" => $arrVideos,
+            "album" => $arrAlbum,
+            "documents" => $arrDocs
+        );
+        $data['errorCode'] = 0;
+        $data['message'] = 'Thành công';
+        $data['data'] = $resData;
+        return $this->renderText(json_encode($data));
+    }
+
+    public function executeGetSubDivision(sfWebRequest $request)
+    {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
+        // lay danh floor cat: toa dang l, z...
+        $listFloors = VinApartmentCateTable::getInstance()->getAllApartmentCategory('floorsCategory');
+        $arrFloors = [];
+        $arrFloorsType = [];
+        $arrFloorsParent = [];
+        if ($listFloors && count($listFloors) > 0) {
+            foreach ($listFloors as $objFloors) {
+                $arrFloorsType[$objFloors->parent][$objFloors->type][] = $objFloors->id;
+                $arrFloorsParent[$objFloors->parent][$objFloors->type] = [
+                    'name' => sprintf('Tòa dạng %s', $objFloors->type),
+                    'type' => $objFloors->type,
+                    'building' => null,
+                ];
+//                $arrFloors[$objFloors->parent][$objFloors->id] = [
+//                    'id' => $objFloors->id,
+//                    'code' => !empty($objFloors->code) ? $objFloors->code : null,
+//                    'name' => !empty($objFloors->name) ? $objFloors->name : null,
+//                    'type' => !empty($objFloors->type) ? $objFloors->type : null,
+//                ];
+            }
+        }
+        foreach ($arrFloorsParent as $parent => $floors) {
+            foreach ($floors as $floor) {
+                $ids = !empty($arrFloorsType[$parent][$floor['type']]) ? $arrFloorsType[$parent][$floor['type']] : null;
+                if ($ids) {
+                    // lay danh asch toa nha
+                    $listBuilding = VinBuildingTypeTable::getInstance()->getListBuildingByCat($ids, 1000);
+                    if ($listBuilding && count($listBuilding) > 0) {
+                        $arrBuilding = null;
+                        foreach ($listBuilding as $building) {
+                            $arrBuilding[] = [
+                                'id' => $building->id,
+                                'name' => !empty($building->name) ? $building->name : null,
+                                'isView' => !empty($building->isView) ? $building->isView : 0,
+                            ];
+                        }
+                        $arrFloorsParent[$parent][$floor['type']]['building'] = $arrBuilding;
+                    }
+                }
+            }
+        }
+
+        // lay danh sach toan nha: the park
+        $listZone = VinApartmentCateTable::getInstance()->getAllApartmentCategory('zoneCategory');
+        $arrZone = [];
+        if ($listZone && count($listZone) > 0) {
+            foreach ($listZone as $objZone) {
+                $itFloors = !empty($arrFloorsParent[$objZone->id]) ? array_values($arrFloorsParent[$objZone->id]) : null;
+                $arrZone[$objZone->parent][$objZone->id] = [
+                    'id' => $objZone->id,
+                    'code' => !empty($objZone->code) ? $objZone->code : null,
+                    'name' => !empty($objZone->name) ? $objZone->name : null,
+                    'floors' => $itFloors,
+                ];
+            }
+        }
+
+        // lay danh sach phan khu: cao tang, thap tang
+        $listSubDivision = VinApartmentCateTable::getInstance()->getAllApartmentCategory('subdivisionCategory');
+        $arrSubDivision = null;
+        if ($listSubDivision && count($listSubDivision) > 0) {
+            foreach ($listSubDivision as $objSubDivision) {
+                $itSubDivision = !empty($arrZone[$objSubDivision->id]) ? array_values($arrZone[$objSubDivision->id]) : null;
+                $item = [
+                    'id' => $objSubDivision->id,
+                    'code' => $objSubDivision->code,
+                    'name' => $objSubDivision->name,
+                    'subDivision' => $itSubDivision,
+                ];
+                $arrSubDivision[] = $item;
+            }
+        }
+        $data['errorCode'] = 0;
+        $data['message'] = 'Thành công';
+        $data['data'] = $arrSubDivision;
+        return $this->renderText(json_encode($data));
+    }
+
+
+    public function executeGetProductDetail(sfWebRequest $request)
+    {
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
+        $product = null;
+        $id = $request->getParameter('id');
+        $objBuilding = VinBuildingTypeTable::getInstance()->findOneBy('id', $id);
+        if ($objBuilding && count($objBuilding) > 0) {
+            $product = self::buidingItem($objBuilding);
+        }
+        $data['errorCode'] = 0;
+        $data['message'] = 'Thành công';
+        $data['data'] = $product;
+        return $this->renderText(json_encode($data));
+    }
+
 }

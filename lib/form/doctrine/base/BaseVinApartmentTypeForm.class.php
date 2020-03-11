@@ -31,6 +31,7 @@ abstract class BaseVinApartmentTypeForm extends BaseFormDoctrine
       'vin_model'              => new sfWidgetFormInputText(),
       'parent_type'            => new sfWidgetFormInputText(),
       'apartment_cat'          => new sfWidgetFormInputText(),
+      'priority'               => new sfWidgetFormInputText(),
       'created_at'             => new sfWidgetFormDateTime(),
       'updated_at'             => new sfWidgetFormDateTime(),
     ));
@@ -52,6 +53,7 @@ abstract class BaseVinApartmentTypeForm extends BaseFormDoctrine
       'vin_model'              => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'parent_type'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'apartment_cat'          => new sfValidatorInteger(array('required' => false)),
+      'priority'               => new sfValidatorInteger(array('required' => false)),
       'created_at'             => new sfValidatorDateTime(),
       'updated_at'             => new sfValidatorDateTime(),
     ));

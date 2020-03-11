@@ -12,17 +12,20 @@ Doctrine_Manager::getInstance()->bindComponent('VinApartmentCate', 'doctrine');
  * @property string $vin_model
  * @property string $type
  * @property integer $priority
+ * @property integer $parent
  * 
  * @method string           getCode()      Returns the current record's "code" value
  * @method string           getName()      Returns the current record's "name" value
  * @method string           getVinModel()  Returns the current record's "vin_model" value
  * @method string           getType()      Returns the current record's "type" value
  * @method integer          getPriority()  Returns the current record's "priority" value
+ * @method integer          getParent()    Returns the current record's "parent" value
  * @method VinApartmentCate setCode()      Sets the current record's "code" value
  * @method VinApartmentCate setName()      Sets the current record's "name" value
  * @method VinApartmentCate setVinModel()  Sets the current record's "vin_model" value
  * @method VinApartmentCate setType()      Sets the current record's "type" value
  * @method VinApartmentCate setPriority()  Sets the current record's "priority" value
+ * @method VinApartmentCate setParent()    Sets the current record's "parent" value
  * 
  * @package    symfony
  * @subpackage model
@@ -63,6 +66,12 @@ abstract class BaseVinApartmentCate extends sfDoctrineRecord
              'notnull' => false,
              'comment' => 'model',
              'length' => 3,
+             ));
+        $this->hasColumn('parent', 'integer', 22, array(
+             'type' => 'integer',
+             'notnull' => false,
+             'comment' => 'parent',
+             'length' => 22,
              ));
     }
 

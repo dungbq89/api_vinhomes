@@ -16,28 +16,25 @@ Doctrine_Manager::getInstance()->bindComponent('AdAlbum', 'doctrine');
  * @property string $image_path
  * @property string $lang
  * @property string $slug
- * @property Doctrine_Collection $AlbumPhoto
  * 
- * @method string              getName()        Returns the current record's "name" value
- * @method string              getDescription() Returns the current record's "description" value
- * @method timestamp           getEventDate()   Returns the current record's "event_date" value
- * @method integer             getPriority()    Returns the current record's "priority" value
- * @method boolean             getIsActive()    Returns the current record's "is_active" value
- * @method boolean             getIsDefault()   Returns the current record's "is_default" value
- * @method string              getImagePath()   Returns the current record's "image_path" value
- * @method string              getLang()        Returns the current record's "lang" value
- * @method string              getSlug()        Returns the current record's "slug" value
- * @method Doctrine_Collection getAlbumPhoto()  Returns the current record's "AlbumPhoto" collection
- * @method AdAlbum             setName()        Sets the current record's "name" value
- * @method AdAlbum             setDescription() Sets the current record's "description" value
- * @method AdAlbum             setEventDate()   Sets the current record's "event_date" value
- * @method AdAlbum             setPriority()    Sets the current record's "priority" value
- * @method AdAlbum             setIsActive()    Sets the current record's "is_active" value
- * @method AdAlbum             setIsDefault()   Sets the current record's "is_default" value
- * @method AdAlbum             setImagePath()   Sets the current record's "image_path" value
- * @method AdAlbum             setLang()        Sets the current record's "lang" value
- * @method AdAlbum             setSlug()        Sets the current record's "slug" value
- * @method AdAlbum             setAlbumPhoto()  Sets the current record's "AlbumPhoto" collection
+ * @method string    getName()        Returns the current record's "name" value
+ * @method string    getDescription() Returns the current record's "description" value
+ * @method timestamp getEventDate()   Returns the current record's "event_date" value
+ * @method integer   getPriority()    Returns the current record's "priority" value
+ * @method boolean   getIsActive()    Returns the current record's "is_active" value
+ * @method boolean   getIsDefault()   Returns the current record's "is_default" value
+ * @method string    getImagePath()   Returns the current record's "image_path" value
+ * @method string    getLang()        Returns the current record's "lang" value
+ * @method string    getSlug()        Returns the current record's "slug" value
+ * @method AdAlbum   setName()        Sets the current record's "name" value
+ * @method AdAlbum   setDescription() Sets the current record's "description" value
+ * @method AdAlbum   setEventDate()   Sets the current record's "event_date" value
+ * @method AdAlbum   setPriority()    Sets the current record's "priority" value
+ * @method AdAlbum   setIsActive()    Sets the current record's "is_active" value
+ * @method AdAlbum   setIsDefault()   Sets the current record's "is_default" value
+ * @method AdAlbum   setImagePath()   Sets the current record's "image_path" value
+ * @method AdAlbum   setLang()        Sets the current record's "lang" value
+ * @method AdAlbum   setSlug()        Sets the current record's "slug" value
  * 
  * @package    symfony
  * @subpackage model
@@ -108,13 +105,7 @@ abstract class BaseAdAlbum extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('AdPhoto as AlbumPhoto', array(
-             'local' => 'id',
-             'foreign' => 'album_id'));
-
-        $vtblameable0 = new Doctrine_Template_VtBlameable();
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($vtblameable0);
         $this->actAs($timestampable0);
     }
 }

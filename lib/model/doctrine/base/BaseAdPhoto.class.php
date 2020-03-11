@@ -14,24 +14,21 @@ Doctrine_Manager::getInstance()->bindComponent('AdPhoto', 'doctrine');
  * @property integer $priority
  * @property boolean $is_active
  * @property boolean $is_default
- * @property AdAlbum $AdAlbumPhoto
  * 
- * @method string  getName()         Returns the current record's "name" value
- * @method string  getFilePath()     Returns the current record's "file_path" value
- * @method integer getAlbumId()      Returns the current record's "album_id" value
- * @method string  getExtension()    Returns the current record's "extension" value
- * @method integer getPriority()     Returns the current record's "priority" value
- * @method boolean getIsActive()     Returns the current record's "is_active" value
- * @method boolean getIsDefault()    Returns the current record's "is_default" value
- * @method AdAlbum getAdAlbumPhoto() Returns the current record's "AdAlbumPhoto" value
- * @method AdPhoto setName()         Sets the current record's "name" value
- * @method AdPhoto setFilePath()     Sets the current record's "file_path" value
- * @method AdPhoto setAlbumId()      Sets the current record's "album_id" value
- * @method AdPhoto setExtension()    Sets the current record's "extension" value
- * @method AdPhoto setPriority()     Sets the current record's "priority" value
- * @method AdPhoto setIsActive()     Sets the current record's "is_active" value
- * @method AdPhoto setIsDefault()    Sets the current record's "is_default" value
- * @method AdPhoto setAdAlbumPhoto() Sets the current record's "AdAlbumPhoto" value
+ * @method string  getName()       Returns the current record's "name" value
+ * @method string  getFilePath()   Returns the current record's "file_path" value
+ * @method integer getAlbumId()    Returns the current record's "album_id" value
+ * @method string  getExtension()  Returns the current record's "extension" value
+ * @method integer getPriority()   Returns the current record's "priority" value
+ * @method boolean getIsActive()   Returns the current record's "is_active" value
+ * @method boolean getIsDefault()  Returns the current record's "is_default" value
+ * @method AdPhoto setName()       Sets the current record's "name" value
+ * @method AdPhoto setFilePath()   Sets the current record's "file_path" value
+ * @method AdPhoto setAlbumId()    Sets the current record's "album_id" value
+ * @method AdPhoto setExtension()  Sets the current record's "extension" value
+ * @method AdPhoto setPriority()   Sets the current record's "priority" value
+ * @method AdPhoto setIsActive()   Sets the current record's "is_active" value
+ * @method AdPhoto setIsDefault()  Sets the current record's "is_default" value
  * 
  * @package    symfony
  * @subpackage model
@@ -87,13 +84,7 @@ abstract class BaseAdPhoto extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('AdAlbum as AdAlbumPhoto', array(
-             'local' => 'album_id',
-             'foreign' => 'id'));
-
-        $vtblameable0 = new Doctrine_Template_VtBlameable();
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($vtblameable0);
         $this->actAs($timestampable0);
     }
 }
