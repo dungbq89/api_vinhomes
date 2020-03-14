@@ -15,7 +15,7 @@ class VinHelper
             'ApartmentCategory' => 'Căn hộ (Ví dụ: 1 P. Ngủ, 3 P. Ngủ ..)',
             'floorsCategory' => 'Tòa nhà (Ví dụ: L1, L2...)',
             'zoneCategory' => 'Khu nhà (Ví dụ: Hải âu, The park)',
-            'subdivisionCategory' => 'Loại tòa nhà (Ví dụ: Cao tầng, thấp tầng, ..)',
+            'subdivisionCategory' => 'Phân khu (Ví dụ: Cao tầng, thấp tầng, ..)',
         ];
         if ($key) {
             return isset($arrModel[$key]) ? $arrModel[$key] : '';
@@ -30,6 +30,18 @@ class VinHelper
         if ($listCat) {
             foreach ($listCat as $cat) {
                 $arrCat[$cat->id] = sprintf('%s - %s', $cat->name, VinHelper::getVinModel($cat->vin_model));
+            }
+        }
+        return $arrCat;
+    }
+
+    public static function getParentAparmentType()
+    {
+        $listCat = VinApartmentTypeTable::getInstance()->getAllApartmentType();
+        $arrCat = ['0' => 'Chọn danh mục'];
+        if ($listCat) {
+            foreach ($listCat as $cat) {
+                $arrCat[$cat->id] = sprintf('%s', $cat->name_type);
             }
         }
         return $arrCat;
@@ -53,12 +65,32 @@ class VinHelper
 
     const doamin = 'admin.vinhanoi.com';
 
-    public static function getImage($image)
+    public static function getImage($image, $prefix = false)
     {
-        if (strlen($image) > strlen(str_replace(self::doamin, '', $image))) {
-            // anh upload tu sev
+        if (substr($image, 0, 4) == 'http') {
             return $image;
         }
-        return $image;
+        if ($prefix) {
+            return sprintf('%s/%s/%s', sfConfig::get('app_url_media_file'), $prefix, $image);
+        }
+        return sprintf('%s/%s', sfConfig::get('app_url_media_file'), $image);
+//        if (strlen($image) > strlen(str_replace(self::doamin, '', $image))) {
+//            // anh upload tu sev
+//            return $image;
+//        }
+//        return $image;
+    }
+
+    public static function getImageGroup($id = false)
+    {
+        // 1: 360, 2: walk, 3: thiet ke, 4: anh demo
+        $arrGroup = [
+            '1' => '360',
+            '2' => 'Walk',
+            '3' => 'Ảnh thiết kế',
+            '4' => 'Ảnh demo',
+        ];
+        if ($id) return !empty($arrGroup[$id]) ? $arrGroup[$id] : '';
+        return $arrGroup;
     }
 }

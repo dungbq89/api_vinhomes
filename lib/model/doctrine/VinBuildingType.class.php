@@ -27,4 +27,23 @@ class VinBuildingType extends BaseVinBuildingType
         }
         return false;
     }
+
+
+    public function getApartmentCatName()
+    {
+        if ($this->apartment_cat) {
+            $obj = VinApartmentCateTable::getInstance()->findOneBy('id', $this->apartment_cat);
+            return !empty($obj) ? $obj->name : '';
+        }
+        return '';
+    }
+
+    public function getApartmentTypeIdName()
+    {
+        if ($this->apartment_type_id) {
+            $obj = VinApartmentTypeTable::getInstance()->findOneBy('id', $this->apartment_type_id);
+            return !empty($obj) ? $obj->name_type : '';
+        }
+        return '';
+    }
 }

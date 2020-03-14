@@ -20,17 +20,23 @@ generator:
         heart_wall: {label: "Tim tường"}
 #        image: {label: "Ảnh"}
         type: {label: "Loại phòng"}
-        aparment_cat: {label: "Loại căn hộ"}
+        apartment_cat: {label: "Loại tòa nhà"}
+        apartment_cat_name: {label: "Loại tòa nhà"}
+        apartment_type_id: {label: "Loại phòng"}
+        apartment_type_id_name: {label: "Loại phòng"}
 #        aparment_cat: {label: "Loại căn hộ"}
         is_hot: {label: "Căn hot"}
         is_view: {label: "Có view"}
       list:
         title: "Quản lý căn hộ"
+        display: [name, clear_span, heart_wall, apartment_cat_name, apartment_type_id_name, is_hot]
       filter:
-        display: [name, type, apartment_cat]
+        display: [name, apartment_cat, apartment_type_id, is_hot]
+        class: VinBuildingTypeFormFilterAdmin
       form:
-        display: [vin_key, name, clear_span, heart_wall, type, aparment_cat, is_hot, isView]
-#        display: [vin_key, name, clear_span, heart_wall, image, type, aparment_cat, aparment_type_id, is_hot, isView]
+        class: VinBuildingTypeFormAdmin
+        display: [vin_key, name, clear_span, heart_wall, apartment_cat, apartment_type_id, is_hot, isView]
+#        display: [vin_key, name, clear_span, heart_wall, image, type, aparment_cat, apartment_type_id, is_hot, isView]
       edit:
         title: "Cập nhập căn hộ"
       new:

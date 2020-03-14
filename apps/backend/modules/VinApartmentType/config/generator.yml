@@ -13,10 +13,16 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
+      fields:
+        name_type: {label: "Tên căn hộ"}
+        apartment_cat: {label: "Căn hộ"}
+        apartment_cat_name: {label: "Căn hộ"}
+        bad_room: {label: "Phòng ngủ"}
+        bath_room: {label: "Phòng tắm"}
+        kitchen_room: {label: "Phòng ăn"}
       list:
-        title: "Quản lý danh mục phòng"
-        display: [=vin_key, name_type, bad_room, bath_room, kitchen_room]
+        title: "Quản lý danh mục căn hộ"
+        display: [=name_type,apartment_cat_name, bad_room, bath_room, kitchen_room]
       filter:
         display: [name_type]
       form:

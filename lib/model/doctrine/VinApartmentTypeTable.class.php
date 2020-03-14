@@ -24,4 +24,11 @@ class VinApartmentTypeTable extends Doctrine_Table
             ->orderBy('priority asc')
             ->execute();
     }
+
+    public function getAllApartmentType()
+    {
+        return $this->createQuery()
+            ->orderBy('priority asc')
+            ->execute();
+    }
 }

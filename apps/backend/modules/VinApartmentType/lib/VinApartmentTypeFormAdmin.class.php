@@ -24,7 +24,7 @@ class VinApartmentTypeFormAdmin extends BaseVinApartmentTypeForm
                 'is_image' => true,
                 'edit_mode' => !$this->isNew(),
                 'template' => '<div>%file%<br/>%input%</div>',
-            )),
+            ), array('width' => 100, 'height' => 100)),
             'standard_transfer_file' => new sfWidgetFormInputFileEditable(array(
                 'label' => ' ',
                 'file_src' => $this->getObject()->getStandardTransferFile(),
@@ -62,7 +62,7 @@ class VinApartmentTypeFormAdmin extends BaseVinApartmentTypeForm
                 )),
             'standard_transfer_file' => new sfValidatorFile(
                 array(
-                    'validated_file_class' => 'sfResizeMediumThumbnailImage',
+//                    'validated_file_class' => 'sfResizeMediumThumbnailImage',
                     'max_size' => sfConfig::get('app_image_maxsize', 999999),
                     'mime_types' => array(
                         'application/pdf',

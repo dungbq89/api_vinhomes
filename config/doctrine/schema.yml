@@ -658,9 +658,9 @@ VinBuildingType:
     type: { type: string(255), notnull: false, comment: "model" }
     apartment_type_id: { type: integer(22), notnull: false, comment: "model" }
     apartment_cat: { type: integer(22), notnull: false, comment: "model" }
-    is_hot: { type: integer(3), notnull: false, comment: "model" }
+    is_hot: { type: boolean, notnull: true, default: false, comment: "model" }
     attr: { type: integer(22), notnull: false, comment: "model" }
-    isView: { type: integer(3), notnull: false, comment: "model" }
+    isView: { type: boolean, notnull: true, default: false, comment: "model" }
 
 VinProductImage:
   #connection: doctrine

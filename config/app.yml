@@ -27,12 +27,12 @@ all:
   image_default: 'http://luonchiengion.com/images/default.jpg'
   image_default_video_default: 'http://luonchiengion.com/images/default.jpg'
   upload_media_file: "/root/apps/project/vinhomesriverside/web/uploads"
-  url_media_file: http://luonchiengion.com/uploads
+  url_media_file: http://localhost:5866/uploads
   url_media_default_file: http://luonchiengion.com/images/default-image.jpg
   image_default: http://luonchiengion.com/images/default-image.jpg
   #upload_media_file: /uploads
 
-  url_media_file: /uploads
+#  url_media_file: /uploads
   
   ckeditor:
     basePath: /js/ckeditor

@@ -17,11 +17,14 @@ generator:
         code: {label: "Mã danh mục"}
         name: {label: "Tên danh mục"}
         vin_model: {label: "Loại danh mục"}
+        vin_model_name: {label: "Loại danh mục"}
         parent: {label: "Danh mục cha"}
-        type: {label: "Loại căn hộ"}
+        parent_name: {label: "Danh mục cha"}
+        type: {label: "Dạng tòa nhà", help: "Tòa dạng Z, L, U"}
         priority: {label: "Sắp sếp"}
       list:
         title: "Quản lý tòa nhà/Phân khu"
+        display: [code, name, vin_model_name, parent_name, type, priority]
       filter:
         class: VinApartmentCateFormFilterAdmin
         display: [vin_model, parent]
