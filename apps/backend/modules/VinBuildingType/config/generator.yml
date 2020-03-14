@@ -18,7 +18,7 @@ generator:
         name: {label: "Tên phòng"}
         clear_span: {label: "Khoảng trống"}
         heart_wall: {label: "Tim tường"}
-#        image: {label: "Ảnh"}
+        image: {label: "Ảnh"}
         type: {label: "Loại phòng"}
         apartment_cat: {label: "Loại tòa nhà"}
         apartment_cat_name: {label: "Loại tòa nhà"}
@@ -35,7 +35,7 @@ generator:
         class: VinBuildingTypeFormFilterAdmin
       form:
         class: VinBuildingTypeFormAdmin
-        display: [vin_key, name, clear_span, heart_wall, apartment_cat, apartment_type_id, is_hot, isView]
+        display: [vin_key, name,image, clear_span, heart_wall, apartment_cat, apartment_type_id, is_hot, isView]
 #        display: [vin_key, name, clear_span, heart_wall, image, type, aparment_cat, apartment_type_id, is_hot, isView]
       edit:
         title: "Cập nhập căn hộ"

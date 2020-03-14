@@ -26,8 +26,9 @@ class VinBuildingTypeActions extends autoVinBuildingTypeActions
                 $apartmentType = VinApartmentTypeTable::getInstance()->findOneById($vin_building_type->apartment_type_id);
                 if ($apartmentType) {
                     $vin_building_type->setType($apartmentType->vin_key);
-                    $vin_building_type->save();
                 }
+                $vin_building_type->setImage(VinHelper::getImage($vin_building_type->image, 'building_image'));
+                $vin_building_type->save();
             } catch (Doctrine_Validator_Exception $e) {
 
                 $errorStack = $form->getObject()->getErrorStack();

@@ -33,6 +33,13 @@ class VinBuildingTypeFormAdmin extends BaseVinBuildingTypeForm
                 'expanded' => false)),
             'is_hot' => new sfWidgetFormInputCheckbox(),
             'isView' => new sfWidgetFormInputCheckbox(),
+            'image' => new sfWidgetFormInputFileEditable(array(
+                'label' => ' ',
+                'file_src' => $this->getObject()->getImage(),
+                'is_image' => true,
+                'edit_mode' => !$this->isNew(),
+                'template' => '<div>%file%<br/>%input%</div>',
+            ), array('width' => 100, 'height' => 100)),
         ));
         $this->setDefault('is_hot', 0);
         $this->setDefault('isView', 0);
@@ -50,6 +57,14 @@ class VinBuildingTypeFormAdmin extends BaseVinBuildingTypeForm
                 array('invalid' => $i18n->__('Category required.'))),
             'is_hot' => new sfValidatorBoolean(array('required' => false)),
             'isView' => new sfValidatorBoolean(array('required' => false)),
+            'image' => new sfValidatorFile(
+                array(
+                    'validated_file_class' => 'sfResizeMediumThumbnailImage',
+                    'max_size' => sfConfig::get('app_image_maxsize', 999999),
+                    'mime_types' => array('image/jpeg', 'image/jpg', 'image/png', 'image/gif'),
+                    'path' => sfConfig::get("sf_upload_dir") . '/building_image',
+                    'required' => false
+                )),
         ));
 
         $this->widgetSchema->setNameFormat('vin_building_type[%s]');
