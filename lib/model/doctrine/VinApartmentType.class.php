@@ -16,4 +16,13 @@ class VinApartmentType extends BaseVinApartmentType
     {
         return VinProductImageTable::getInstance()->getAllImageByApartmentTypeId($this->getId());
     }
+
+    public function getApartmentCatName()
+    {
+        if ($this->apartment_cat) {
+            $obj = VinApartmentCateTable::getInstance()->findOneById($this->apartment_cat);
+            return !empty($obj) ? $obj->name : '';
+        }
+        return '';
+    }
 }

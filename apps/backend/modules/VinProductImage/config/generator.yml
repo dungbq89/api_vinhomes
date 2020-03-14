@@ -1,0 +1,40 @@
+generator:
+  class: tmcTwitterBootstrapDoctrineGenerator
+  param:
+    model_class:           VinProductImage
+    theme:                 tmcTwitterBootstrap
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vin_product_image
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        file_path: {label: "ảnh"}
+        product_id: {label: "Căn hộ"}
+        product_id_name: {label: "Căn hộ"}
+        type: {label: "ảnh link"}
+        groups: {label: "Loại ảnh"}
+        groups_name: {label: "Loại ảnh"}
+        extension: {label: "Link ảnh", help: "Với link ảnh 360, walk"}
+        priority: {label: "Sắp sếp"}
+      list:
+        title: "Quản lý ảnh căn hộ"
+        display: [file_path, product_id_name, groups_name, priority]
+      filter:
+        display: [product_id]
+      form:
+        display: [file_path,extension, product_id, type, groups, priority]
+        class: VinProductImageFormAdmin
+#        display: [file_path, product_id, type, groups, priority]
+#        display: [vin_key, name, clear_span, heart_wall, image, type, aparment_cat, aparment_type_id, is_hot, isView]
+      edit:
+        title: "Cập nhập ảnh căn hộ"
+      new:
+        title: "Thêm mới ảnh căn hộ"
+      show:    ~
+      revert:  ~

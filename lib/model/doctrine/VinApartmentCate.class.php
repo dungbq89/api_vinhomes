@@ -16,4 +16,19 @@ class VinApartmentCate extends BaseVinApartmentCate
     {
         return VinApartmentTypeTable::getInstance()->getAllApartmentTypeByCat($this->getId());
     }
+
+    public function getVinModelName()
+    {
+        $arrCat = VinHelper::getVinModel();
+        return !empty($arrCat[$this->vin_model]) ? $arrCat[$this->vin_model] : '';
+    }
+
+    public function getParentName()
+    {
+        if ($this->parent && $this->parent != '') {
+            $obj = VinApartmentCateTable::getInstance()->findOneById($this->parent);
+            return !empty($obj) ? $obj->name : '';
+        }
+        return "";
+    }
 }

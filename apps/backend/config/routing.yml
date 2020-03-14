@@ -1,3 +1,39 @@
+vin_apartment_type:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VinApartmentType
+    module:               VinApartmentType
+    prefix_path:          /VinApartmentType
+    column:               id
+    with_wildcard_routes: true
+
+vin_product_image:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VinProductImage
+    module:               VinProductImage
+    prefix_path:          /VinProductImage
+    column:               id
+    with_wildcard_routes: true
+
+vin_building_type:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VinBuildingType
+    module:               VinBuildingType
+    prefix_path:          /VinBuildingType
+    column:               id
+    with_wildcard_routes: true
+
+vin_apartment_cate:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                VinApartmentCate
+    module:               VinApartmentCate
+    prefix_path:          /VinApartmentCate
+    column:               id
+    with_wildcard_routes: true
+
 ad_order:
   class: sfDoctrineRouteCollection
   options:
